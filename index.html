@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jet Lands (PVT) LTD | Premium Land Sales</title>
+    <meta name="description" content="Premium Land Plots near NSBM Green University. Homagama Tech City area.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Fallback if file missing -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏞️</text></svg>">
+
+    <!-- AOS Library CSS (Animations) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Abhaya+Libre:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary-color: #1b2631; /* Corporate Dark */
+            --primary-light: #2c3e50;
+            --accent-color: #27ae60; /* Nature Green */
+            --accent-dark: #1e8449;
+            --gold: #f1c40f;
+            --light-bg: #f4fcf6;
+            --white: #ffffff;
+            --text-main: #333333;
+            --text-light: #555555;
+            
+            --font-en: 'Inter', sans-serif;
+            --font-si: 'Abhaya Libre', serif;
+            
+            --shadow: 0 15px 35px rgba(0,0,0,0.08);
+            --gradient-overlay: linear-gradient(rgba(27, 38, 49, 0.75), rgba(39, 174, 96, 0.65));
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: var(--font-en); color: var(--text-main); line-height: 1.7; background-color: var(--white); overflow-x: hidden; width: 100%; }
+
+        /* Sinhala Typography */
+        body.lang-si { font-family: var(--font-si); }
+        body.lang-si h1, body.lang-si h2, body.lang-si h3, body.lang-si .btn { font-weight: 800; }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- LOADER --- */
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--white); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease-out, visibility 0.5s; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- HEADER --- */
+        header { background-color: var(--white); box-shadow: 0 4px 20px rgba(0,0,0,0.05); position: fixed; width: 100%; top: 0; z-index: 1000; height: 80px; display: flex; align-items: center; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary-color); text-transform: uppercase; line-height: 1.1; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--accent-color); font-size: 1.8rem; }
+        .logo span { color: var(--accent-color); font-size: 0.65em; display: block; font-weight: 700; letter-spacing: 1px;}
+
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { font-weight: 600; color: var(--primary-color); font-size: 0.95rem; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent-color); transition: 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+
+        .lang-btn { border: 2px solid var(--primary-color); padding: 6px 18px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; background: transparent; color: var(--primary-color); transition: 0.3s; display: flex; align-items: center; gap: 6px; }
+        .lang-btn:hover { background: var(--primary-color); color: white; }
+
+        .btn-contact { background: var(--primary-color); color: white !important; padding: 10px 25px !important; border-radius: 4px; transition: 0.3s !important; }
+        .btn-contact:hover { background: var(--accent-color); transform: translateY(-2px); }
+
+        .menu-toggle { display: none; font-size: 1.8rem; color: var(--primary-color); cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: var(--gradient-overlay), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+            height: 90vh; display: flex; align-items: center;
+            text-align: center; color: var(--white); padding-top: 80px;
+            position: relative;
+        }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 25px; line-height: 1.2; text-shadow: 0 4px 15px rgba(0,0,0,0.6); }
+        .hero-content p { font-size: 1.4rem; margin-bottom: 40px; font-weight: 300; max-width: 850px; margin-left: auto; margin-right: auto; color: #f1f1f1; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+        
+        .btn { padding: 15px 40px; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+        .btn-primary { background: var(--accent-color); color: white; box-shadow: 0 10px 20px rgba(39, 174, 96, 0.4); }
+        .btn-primary:hover { background: var(--accent-dark); transform: translateY(-3px); box-shadow: 0 15px 25px rgba(39, 174, 96, 0.6); }
+
+        /* --- SLIDER SECTION (New Added) --- */
+        .slider-section { padding: 60px 0 80px; background: white; overflow: hidden; }
+        .slider-wrapper { position: relative; width: 100%; margin-top: 40px; }
+        .slider-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .slide-card { min-width: 33.333%; padding: 15px; box-sizing: border-box; }
+        
+        .land-card {
+            background: white; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s; position: relative;
+        }
+        .land-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .land-img { height: 250px; width: 100%; object-fit: cover; transition: 0.5s; }
+        .land-card:hover .land-img { transform: scale(1.05); }
+        .land-info { padding: 20px; text-align: left; }
+        .land-tag { position: absolute; top: 15px; right: 15px; background: var(--accent-color); color: white; padding: 5px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; z-index: 2; }
+        
+        .slider-nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: white; border: none; width: 50px; height: 50px; border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15); cursor: pointer; z-index: 10;
+            color: var(--primary-color); font-size: 1.2rem; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .slider-nav-btn:hover { background: var(--primary-color); color: white; }
+        .prev-btn { left: 10px; } .next-btn { right: 10px; }
+
+        .btn-see-all {
+            margin-top: 40px; display: inline-flex; align-items: center; gap: 10px;
+            padding: 12px 35px; border: 2px solid var(--primary-color); color: var(--primary-color);
+            font-weight: 700; border-radius: 50px; transition: all 0.3s;
+        }
+        .btn-see-all:hover { background: var(--primary-color); color: white; gap: 15px; }
+
+        /* --- STANDARD SECTIONS --- */
+        section { padding: 100px 0; }
+        .bg-light { background-color: var(--light-bg); }
+        
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; line-height: 1.3; }
+        .section-header .line { width: 80px; height: 5px; background: var(--accent-color); margin: 0 auto 20px; border-radius: 2px; }
+        .section-header p { color: var(--text-light); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+
+        /* --- SECTION 01: FEATURES (CENTERED FOCUS) --- */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .feature-card { 
+            background: white; padding: 40px 30px; border-radius: 15px; box-shadow: var(--shadow); 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            border-bottom: 4px solid transparent; transition: 0.4s; height: 100%;
+        }
+        .feature-card:hover { transform: translateY(-10px); border-bottom-color: var(--accent-color); box-shadow: var(--card-hover); }
+        .feature-icon-box {
+            width: 80px; height: 80px; background: rgba(39, 174, 96, 0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: 0.3s;
+        }
+        .feature-card:hover .feature-icon-box { background: var(--accent-color); }
+        .feature-card:hover .feature-icon-box i { color: white; }
+        .feature-icon-box i { color: var(--accent-color); font-size: 2rem; transition: 0.3s; }
+        .feature-text h4 { font-size: 1.25rem; color: var(--primary-color); line-height: 1.4; margin-top: 10px; }
+        
+        /* --- INVESTMENT SECTION --- */
+        .inv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .inv-img img { border-radius: 20px; box-shadow: var(--shadow); width: 100%; }
+        .inv-content h2 { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 25px; line-height: 1.3; }
+        .inv-content p { font-size: 1.1rem; text-align: justify; color: var(--text-light); margin-bottom: 15px; }
+        
+        .highlight-box { 
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-color)); 
+            color: white; padding: 30px; border-radius: 15px; margin-top: 30px; 
+            box-shadow: 0 10px 30px rgba(44, 62, 80, 0.3); border-left: 6px solid var(--accent-color);
+        }
+        .highlight-box h3 { color: var(--accent-color); margin-bottom: 10px; font-size: 1.4rem; }
+        .highlight-box p { color: rgba(255,255,255,0.9); font-size: 1rem; margin-bottom: 0; }
+        
+        /* --- LOCATION SECTION --- */
+        .location-text-box { max-width: 900px; margin: 0 auto; }
+        .location-text-box p { text-align: justify; font-size: 1.15rem; margin-bottom: 25px; line-height: 1.8; color: var(--text-light); }
+        .emphasis-text { color: var(--primary-color); font-weight: 700; border-left: 4px solid var(--accent-color); padding-left: 20px; }
+
+        /* --- LIFESTYLE SECTION --- */
+        .lifestyle-bg { 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); 
+            background-size: cover; background-attachment: fixed; background-position: center;
+            color: white; text-align: center; padding: 150px 0;
+        }
+        .star-rating { margin-top: 30px; }
+        .star-rating i { color: var(--gold); font-size: 2rem; margin: 0 5px; animation: popIn 0.5s ease backwards; }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        
+        /* --- CALL TO ACTION --- */
+        .cta-container { max-width: 800px; margin: 0 auto; }
+        .cta-box { 
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-light)); 
+            padding: 60px 40px; text-align: center; color: white; border-radius: 20px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3); position: relative; overflow: hidden;
+        }
+        .cta-box::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(39, 174, 96, 0.2) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        
+        .cta-content { position: relative; z-index: 2; }
+        .phone-display { font-size: 3rem; font-weight: 800; margin: 25px 0; display: block; color: var(--accent-color); text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+        .phone-display:hover { color: white; transform: scale(1.05); }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+        }
+        .gallery-item {
+            position: relative; height: 250px; border-radius: 12px; overflow: hidden; cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: white; padding: 20px; transform: translateY(100%); transition: 0.3s;
+        }
+        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+
+        /* --- CORPORATE FOOTER --- */
+        footer { background: #151e26; color: #a0aab5; padding: 80px 0 0; font-size: 0.95rem; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 40px; margin-bottom: 60px; }
+        
+        .footer-about h3 { color: white; font-size: 1.5rem; margin-bottom: 20px; font-weight: 800; }
+        .footer-about p { line-height: 1.8; margin-bottom: 25px; }
+        
+        .footer-title { color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; position: relative; padding-bottom: 10px; }
+        .footer-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--accent-color); }
+        
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { transition: 0.3s; display: flex; align-items: center; }
+        .footer-links a::before { content: '\f105'; font-family: 'Font Awesome 5 Free'; font-weight: 900; margin-right: 10px; color: var(--accent-color); }
+        .footer-links a:hover { color: white; padding-left: 5px; }
+        
+        .contact-list li { display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-start; }
+        .contact-list i { color: var(--accent-color); font-size: 1.1rem; margin-top: 5px; }
+        
+        .social-links { display: flex; gap: 10px; }
+        .social-btn { 
+            width: 40px; height: 40px; background: rgba(255,255,255,0.1); 
+            display: flex; align-items: center; justify-content: center; 
+            border-radius: 50%; color: white; transition: 0.3s; 
+        }
+        .social-btn:hover { background: var(--accent-color); transform: translateY(-3px); }
+        
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 25px 0; background: #0e141a; text-align: center; }
+
+        /* --- FLOATING WHATSAPP BUTTON --- */
+        .wa-float { 
+            position: fixed; bottom: 30px; right: 30px; 
+            background: #25D366; color: white; width: 60px; height: 60px; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 32px; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); 
+            z-index: 2000; opacity: 0; pointer-events: none; transition: 0.4s ease;
+            border: 2px solid white;
+        }
+        .wa-float.visible { opacity: 1; pointer-events: auto; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+
+        /* --- RESPONSIVE & 250px FIX --- */
+        @media (max-width: 992px) {
+            .slide-card { min-width: 50%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; width: 100%; background: white; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .inv-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .slide-card { min-width: 100%; }
+            .slider-nav-btn { display: none; }
+        }
+
+        /* EMERGENCY FIX FOR 250px SCREENS */
+        @media screen and (max-width: 359px) {
+            .container { padding-left: 10px !important; padding-right: 10px !important; width: 100% !important; overflow-x: hidden !important; }
+            h1 { font-size: 1.8rem !important; line-height: 1.2 !important; }
+            h2 { font-size: 1.4rem !important; }
+            h3 { font-size: 1.2rem !important; }
+            p, .feature-text h4 { font-size: 0.9rem !important; }
+            .logo { font-size: 1rem !important; flex-direction: column; align-items: flex-start; }
+            .navbar { height: auto; min-height: 60px; padding: 10px !important; }
+            header { height: auto; position: absolute; }
+            .nav-links { top: 60px; }
+            .hero { padding-top: 80px; height: auto; padding-bottom: 50px; }
+            .hero-content p { font-size: 1rem !important; }
+            .btn { padding: 10px 20px; width: 100%; font-size: 0.9rem; margin-top: 10px; }
+            .features-grid, .inv-grid, .footer-grid, .gallery-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+            .wa-float { width: 45px; height: 45px; font-size: 24px; right: 10px; bottom: 20px; }
+            .phone-display { font-size: 1.8rem; }
+            .highlight-box, .feature-card, .cta-box { padding: 20px !important; }
+            .slider-section { padding: 30px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOADER -->
+    <div id="loader"><div class="spinner"></div></div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container navbar">
+            <div class="logo">
+                <i class="fas fa-mountain-sun"></i>
+                <div>JET LANDS<br><span>(PVT) LTD</span></div>
+            </div>
+            
+            <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#hero" data-en="Home" data-si="මුල් පිටුව">Home</a>
+                <a href="#features" data-en="Features" data-si="පහසුකම්">Features</a>
+                <a href="#investment" data-en="Investment" data-si="ආයෝජනය">Investment</a>
+                <a href="#location" data-en="Location" data-si="පිහිටීම">Location</a>
+                <a href="#gallery" data-en="Gallery" data-si="ගැලරිය">Gallery</a>
+                
+                <button class="lang-btn" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i> <span id="langText">SINHALA</span>
+                </button>
+
+                <a href="#contact" class="btn-contact" data-en="Contact Now" data-si="අමතන්න">Contact Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero">
+        <div class="container hero-content" data-aos="fade-up">
+            <h1 data-en="Do you want to own a land right next to the world-famous NSBM?" 
+                data-si="රටම දන්න NSBM එක ලඟින්ම ඉඩමක් ගන්න ඔයත් කැමතිද?">
+                Do you want to own a land right next to the world-famous NSBM?
+            </h1>
+            <p data-en="Don't think twice. Don't wait until prices go up—reserve your plot today." 
+               data-si="දෙපාරක් හිතන්න එපා. මිල ඉහළ යනකන් බලාගෙන ඉන්නේ නැතිව, ඔබගේ ඉඩම අදම වෙන්කරවාගන්න.">
+               Don't think twice. Don't wait until prices go up—reserve your plot today.
+            </p>
+            <a href="#contact" class="btn btn-primary">
+                <span data-en="Reserve Now" data-si="වෙන්කරවාගන්න">Reserve Now</span> 
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- SLIDING IMAGE SECTION (New) -->
+    <div class="slider-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-down">
+                <h2 data-en="Available Land Plots" data-si="අපගේ ඉඩම් කොටස්">Available Land Plots</h2>
+                <div class="line"></div>
+                <p data-en="Browse our premium selection of lands ready for investment." data-si="ආයෝජනය සඳහා සූදානම් අපගේ ඉඩම් කොටස්.">Browse our premium selection of lands ready for investment.</p>
+            </div>
+            <div class="slider-wrapper" data-aos="fade-up">
+                <button class="slider-nav-btn prev-btn" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-nav-btn next-btn" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="slider-track" id="sliderTrack">
+                    <!-- Cards -->
+                    <div class="slide-card"><div class="land-card"><span class="land-tag">Available</span><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="land-img" alt="Plot 1"><div class="land-info"><h3>Plot 01</h3><p>10 Perches - Paddy View</p></div></div></div>
+                    <div class="slide-card"><div class="land-card"><span class="land-tag" style="background:#e74c3c;">Sold</span><img src="https://images.unsplash.com/photo-1513063121585-63a3bf4fa4f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="land-img" alt="Plot 2"><div class="land-info"><h3>Plot 02</h3><p>12 Perches - Road Front</p></div></div></div>
+                    <div class="slide-card"><div class="land-card"><span class="land-tag">Available</span><img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="land-img" alt="Plot 3"><div class="land-info"><h3>Plot 03</h3><p>10 Perches - Nature View</p></div></div></div>
+                    <div class="slide-card"><div class="land-card"><span class="land-tag">Available</span><img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="land-img" alt="Plot 4"><div class="land-info"><h3>Plot 04</h3><p>15 Perches - Premium</p></div></div></div>
+                    <div class="slide-card"><div class="land-card"><span class="land-tag">Available</span><img src="https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="land-img" alt="Plot 5"><div class="land-info"><h3>Plot 05</h3><p>10 Perches - Flat Land</p></div></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <a href="#gallery" class="btn-see-all">
+                    <span data-en="See All Images" data-si="සියලුම ඡායාරූප බලන්න">See All Images</span> <i class="fas fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 01: FEATURES (CENTERED FOCUS) -->
+    <section id="features" class="bg-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="6 Super Luxury Residential Plots" data-si="සුන්දර වෙල් යායකට මායිම් වුණු සුපිරි නේවාසික බිම් කැබලි 06ක්">6 Super Luxury Residential Plots</h2>
+                <div class="line"></div>
+                <p data-en="Bordering a beautiful paddy field. With all facilities." data-si="සියළු පහසුකම් සහිතයි.">Bordering a beautiful paddy field. With all facilities.</p>
+            </div>
+            <div class="features-grid">
+                <!-- Using all 8 points from prompt - Centered Focus -->
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="0"><div class="feature-icon-box"><i class="fas fa-water"></i></div><div class="feature-text"><h4 data-en="Pipe-borne Water" data-si="නළ ජලය">Pipe-borne Water</h4></div></div>
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="100"><div class="feature-icon-box"><i class="fas fa-bolt"></i></div><div class="feature-text"><h4 data-en="Electricity" data-si="විදුලිය">Electricity</h4></div></div>
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="200"><div class="feature-icon-box"><i class="fas fa-file-signature"></i></div><div class="feature-text"><h4 data-en="Clear Deeds" data-si="නිරවුල් ඔප්පු">Clear Deeds</h4></div></div>
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="300"><div class="feature-icon-box"><i class="fas fa-dove"></i></div><div class="feature-text"><h4 data-en="Peaceful Environment" data-si="සුන්දර සාමකාමී වටපිටාව">Peaceful Environment</h4></div></div>
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="400"><div class="feature-icon-box"><i class="fas fa-hand-holding-usd"></i></div><div class="feature-text"><h4 data-en="Easy Bank Loans" data-si="පහසු බැංකු ණය">Easy Bank Loans</h4></div></div>
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="500"><div class="feature-icon-box"><i class="fas fa-road"></i></div><div class="feature-text"><h4 data-en="5 mins to Main Road" data-si="ප්‍රධාන පාරට විනාඩි 05යි">5 mins to Main Road</h4></div></div>
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="600"><div class="feature-icon-box"><i class="fas fa-university"></i></div><div class="feature-text"><h4 data-en="Close to NSBM & Mahinda Rajapaksa College" data-si="NSBM සහ මහින්ද රාජපක්ෂ විද්‍යාලයට ඉතාමත් සමීපයි">Close to NSBM & Mahinda Rajapaksa College</h4></div></div>
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="700"><div class="feature-icon-box"><i class="fas fa-car"></i></div><div class="feature-text"><h4 data-en="15 mins to Kottawa Highway" data-si="කොට්ටාව අධිවේගී පිවිසුමට විනාඩි 15යි">15 mins to Kottawa Highway</h4></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 02: INVESTMENT -->
+    <section id="investment">
+        <div class="container">
+            <div class="inv-grid">
+                <div class="inv-img" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059ee971?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Investment">
+                </div>
+                <div class="inv-content" data-aos="fade-left">
+                    <h2 data-en="The Best Way to Invest Your Money Safely" data-si="ඔබේ මුදල් සුරක්ෂිතව ආයෝජනයට හොඳම මාර්ගය">The Best Way to Invest Your Money Safely</h2>
+                    <p data-en="The value of money decreases over time, but the value of the land you buy increases day by day." data-si="කාලයත් එක්ක සල්ලි වල වටිනාකම අඩුවෙනවා. ඒත් ඔබ ගන්න ඉඩමක වටිනාකම දවසින් දවස වැඩිවෙනවා.">The value of money decreases over time, but the value of the land you buy increases day by day.</p>
+                    <div class="highlight-box">
+                        <h3 data-en="Homagama Tech City" data-si="හෝමාගම ටෙක් සිටි">Homagama Tech City</h3>
+                        <p data-en="Are you aware of the 'Homagama Tech City' project? Located near this project, the value of this land in 10 years will be unimaginable." data-si="ඔබ “හෝමාගම ටෙක් සිටි” ව්‍යාපෘතිය පිලිබඳ දැනුවත්ද? හෝමාගම ටෙක් සිටි ව්‍යාපෘතිය ආශ්‍රිතව පිහිටා ඇති මෙම ඉඩමේ වටිනාකම තව අවුරුදු 10කින් ඔබට සිතාගන්නවත් බැරිවෙයි.">Are you aware of the 'Homagama Tech City' project? Located near this project, the value of this land in 10 years will be unimaginable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 03: LOCATION -->
+    <section id="location" class="bg-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="A Space for You in the Best Place" data-si="පදිංචියට, ආයෝජනයට හොඳම තැනකින් ඔබටත් ඉඩක්...">A Space for You in the Best Place</h2>
+                <div class="line"></div>
+            </div>
+            <div class="location-text-box" data-aos="fade-up">
+                <p data-en="The area around NSBM Green University can be mentioned as a rapidly developing city in Sri Lanka. Several massive state and private economic projects, including housing schemes, are already underway in this area. Signs are already emerging that it will become an economic and social hub second to none in Sri Lanka's capital in the near future." data-si="ශ්‍රී ලංකාව තුල ඉතා සීග්‍රයෙන් සංවර්දනයට භාජනය වන ප්‍රදේශයක් ලෙස NSBM හරිත සරසවිය ආශ්‍රිත පුරවරය සඳහන් කල හැකිය. මේවන විටත් නිවාස යෝජනා ක්‍රම ඇතුළු රාජ්‍ය සහ පුද්ගලික දැවැන්ත ආර්ථිකමය ව්‍යාපෘති ගණනාවක් මෙම ප්‍රදේශයේ ක්‍රියාත්මක වෙමින් පවතී. නුදුරු අනාගතය තුල ශ්‍රී ලංකාවේ අගනුවරට නොදෙවෙනි ආර්ථික, සමාජීය මරමස්ථානයක් වීමේ ඉඟි මේවන විටත් පහළවෙමින් ඇත.">The area around NSBM Green University...</p>
+                <p class="emphasis-text" data-en="Did you know that land prices around NSBM Green University have skyrocketed in the last 5 years with the attention of local and foreign investors? Don't wait any longer in the face of rising prices, reserve your land today. This is the best time to invest." data-si="දෙස් විදෙස් ආයෝජකයන්ගේ අවධානය යොමුවීමත් සමඟ පසුගිය වසර 5 ඇතුළත NSBM හරිත සරසවිය අවට ඉඩම් වල මිල ඉතා සීග්‍රයෙන් ඉහළ ගිය බව ඔබ දන්නවාද?. දිනෙන් දින ඉහල යන මිලගණන් හමුවේ තවත් බලා නොසිට ඔබේ ඉඩම අදම වෙන්කරවා ගන්න. මේ ආයෝජනයට හොඳම කාලයයි.">Did you know that land prices around NSBM...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 04: LIFESTYLE -->
+    <section id="lifestyle" class="lifestyle-bg">
+        <div class="container" data-aos="zoom-in">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;" data-en="The Perfect Place for a High-Class Lifestyle" data-si="උසස් ජීවන රටාවකට ගැළපෙනම තැන">The Perfect Place for a High-Class Lifestyle</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 30px;" data-en="Are you a leading businessman? Or a high-profile professional like a Doctor, Lawyer, or Engineer? This is the best place to build your dream home on earth." data-si="ඔබ ප්‍රමුඛපෙල ව්‍යාපාරිකයෙක්ද? නැතිනම් වෛද්‍ය, නීතිඥ, ඉංජිනේරු වැනි ඉහළපෙළ වෘත්තීයවේදියෙක්ද? ඔබේ සොඳුරු කැදැල්ල මිහිතලය මත ගොඩනගන්නට මේ හොඳම තැනයි.">Are you a leading businessman? Or a high-profile professional...</p>
+            <div class="star-rating">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION (New before Footer) -->
+    <section id="gallery">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="Project Gallery" data-si="ඡායාරූප ගැලරිය">Project Gallery</h2>
+                <div class="line"></div>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Gallery 1"><div class="gallery-overlay"><h3 data-en="Greenery" data-si="හරිත වටපිටාව">Greenery</h3></div></div>
+                <div class="gallery-item" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1513063121585-63a3bf4fa4f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Gallery 2"><div class="gallery-overlay"><h3 data-en="Road Access" data-si="ප්‍රවේශ මාර්ග">Road Access</h3></div></div>
+                <div class="gallery-item" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Gallery 3"><div class="gallery-overlay"><h3 data-en="Wide Lands" data-si="පුළුල් ඉඩම්">Wide Lands</h3></div></div>
+                <div class="gallery-item" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Gallery 4"><div class="gallery-overlay"><h3 data-en="Scenery" data-si="දර්ශනීය පරිසරය">Scenery</h3></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 05: CALL TO ACTION -->
+    <section id="contact" style="background: var(--light-bg);">
+        <div class="container">
+            <div class="cta-container">
+                <div class="cta-box" data-aos="flip-up">
+                    <div class="cta-content">
+                        <h2 data-en="Be one of the 6 lucky owners" data-si="වාසනාවන්තයින් 06 දෙනෙකු අතරට ඔබත් එකතුවෙන්න">Be one of the 6 lucky owners</h2>
+                        <p style="font-size: 1.2rem; margin-top: 15px;" data-en="Reserve your land today. Call Now." data-si="ඔබේ ඉඩම අදම වෙන්කරවාගන්න දැන්ම අමතන්න">Reserve your land today. Call Now.</p>
+                        <a href="tel:0755229229" class="phone-display">0755 229 229</a>
+                        <a href="https://wa.me/94755229229" class="btn" style="background: white; color: var(--accent-color); font-weight: 800;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORPORATE FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <i class="fas fa-mountain-sun"></i>
+                        <div style="color: white;">JET LANDS<br><span style="color: var(--accent-color);"> (PVT) LTD</span></div>
+                    </div>
+                    <p data-en="We are a premium real estate company dedicated to providing high-value residential and investment lands in Sri Lanka's most developing areas." 
+                       data-si="අපි ශ්‍රී ලංකාවේ වේගයෙන්ම දියුණු වන ප්‍රදේශවලින් ඉහළ වටිනාකමක් සහිත නේවාසික සහ ආයෝජන ඉඩම් ලබා දීමට කැපවී සිටින ප්‍රමුඛතම දේපළ වෙළඳාම් සමාගමකි.">
+                       We are a premium real estate company dedicated to providing high-value residential lands.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/94755229229" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-title" data-en="Quick Links" data-si="ක්ෂණික සබැඳි">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#hero" data-en="Home" data-si="මුල් පිටුව">Home</a></li>
+                        <li><a href="#features" data-en="Features" data-si="පහසුකම්">Features</a></li>
+                        <li><a href="#investment" data-en="Investment" data-si="ආයෝජනය">Investment</a></li>
+                        <li><a href="#gallery" data-en="Gallery" data-si="ගැලරිය">Gallery</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-title" data-en="Our Services" data-si="සේවාවන්">Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" data-en="Land Sales" data-si="ඉඩම් විකිණීම">Land Sales</a></li>
+                        <li><a href="#" data-en="Land Development" data-si="ඉඩම් සංවර්ධනය">Land Development</a></li>
+                        <li><a href="#" data-en="Legal Support" data-si="නීතිමය සහාය">Legal Support</a></li>
+                        <li><a href="#" data-en="Bank Loans" data-si="බැංකු ණය">Bank Loans</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-title" data-en="Contact Us" data-si="අමතන්න">Contact Us</h4>
+                    <ul class="contact-list">
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-en="No 123, High Level Road, Homagama." data-si="නො. 123, හයිලෙවල් පාර, හෝමාගම.">No 123, High Level Road, Homagama.</span></li>
+                        <li><i class="fas fa-phone-alt"></i> <a href="tel:0755229229">0755 229 229</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@jetlands.lk">info@jetlands.lk</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 <strong>Jet Lands (PVT) LTD</strong>. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WIDGETS -->
+    <a href="https://wa.me/94755229229" class="wa-float" id="waButton" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init Animations
+        AOS.init({ offset: 50, duration: 800, once: true });
+
+        // Loader
+        window.onload = function() {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => { loader.style.visibility = 'hidden'; }, 500);
+            startAutoSlide(); // Start the slider
+        };
+
+        // Language Switcher Logic
+        let currentLang = 'en';
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'si' : 'en';
+            
+            // Toggle Class
+            if(currentLang === 'si') { 
+                document.body.classList.add('lang-si'); 
+                document.getElementById('langText').innerText = "ENGLISH"; 
+            } else { 
+                document.body.classList.remove('lang-si'); 
+                document.getElementById('langText').innerText = "SINHALA"; 
+            }
+
+            // Update Text
+            const elements = document.querySelectorAll(`[data-${currentLang}]`);
+            elements.forEach(el => { el.innerText = el.getAttribute(`data-${currentLang}`); });
+
+            // Close Mobile Menu
+            if (window.innerWidth <= 768) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+        }
+
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+
+        // Slider Logic
+        const track = document.getElementById('sliderTrack');
+        const cards = document.querySelectorAll('.slide-card');
+        let currentIndex = 0;
+        let cardsToShow = window.innerWidth > 992 ? 3 : (window.innerWidth > 600 ? 2 : 1);
+        let maxIndex = cards.length - cardsToShow;
+        let slideInterval;
+
+        window.addEventListener('resize', () => {
+            cardsToShow = window.innerWidth > 992 ? 3 : (window.innerWidth > 600 ? 2 : 1);
+            maxIndex = cards.length - cardsToShow;
+            updateSliderPosition();
+        });
+
+        function moveSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) { currentIndex = maxIndex; } else if (currentIndex > maxIndex) { currentIndex = 0; }
+            updateSliderPosition();
+            resetAutoSlide(); // Reset timer on manual click
+        }
+
+        function updateSliderPosition() {
+            const translateX = -(currentIndex * (100 / cardsToShow));
+            track.style.transform = `translateX(${translateX}%)`;
+        }
+
+        // Auto Slide Function
+        function startAutoSlide() {
+            slideInterval = setInterval(() => {
+                moveSlide(1);
+            }, 3000); // Change every 3 seconds
+        }
+
+        function resetAutoSlide() {
+            clearInterval(slideInterval);
+            startAutoSlide();
+        }
+
+        // WhatsApp Floating Button Scroll Logic (10% - 90%)
+        window.addEventListener('scroll', () => {
+            const waBtn = document.getElementById('waButton');
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+
+            if (scrollPercent > 10 && scrollPercent < 90) {
+                waBtn.classList.add('visible');
+            } else {
+                waBtn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
