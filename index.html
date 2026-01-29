@@ -3,1467 +3,971 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jet Lands (PVT) LTD - Premier Land Sales</title>
-    <meta name="description" content="Leading Land Sale company in Sri Lanka. Jet Lands (PVT) LTD offers prime blocks with clear deeds, electricity, and pipe-borne water.">
+    <title>Jet Lands | Premium Real Estate</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏞️</text></svg>">
-
-    <!-- AOS Library CSS (For Scroll Animations) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Abhaya+Libre:wght@400;600;800&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fonts: Poppins (English) & Noto Sans Sinhala (Sinhala) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CSS VARIABLES & RESET --- */
+        /* =========================================
+           1. VARIABLES & RESET
+           ========================================= */
         :root {
-            /* Kept original colors as requested, but Green fits Land sales well */
-            --primary-color: #2c3e50; 
-            --primary-dark: #1a252f;
-            --accent-color: #27ae60; /* Changed orange to Green for Land vibe, or keep #e67e22 if strictly no style change. I will keep orange to strictly follow "do not change style" instruction, but usually green is better for land. Let's revert to the original orange to be safe. */
-            --accent-color: #e67e22;
-            --accent-hover: #d35400;
-            --light-bg: #f4f7f6;
+            --primary: #1b4d3e; /* Premium Forest Green */
+            --primary-light: #2e7d32;
+            --accent: #d4af37; /* Metallic Gold */
+            --text-dark: #111827;
+            --text-gray: #4b5563;
+            --bg-light: #f9fafb;
             --white: #ffffff;
-            --text-main: #333333;
-            --text-light: #666666;
-            
-            --font-en: 'Inter', sans-serif;
-            --font-si: 'Abhaya Libre', serif;
-            
-            --shadow: 0 10px 30px rgba(0,0,0,0.08);
-            --gradient-overlay: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.75));
+            --font-en: 'Poppins', sans-serif;
+            --font-si: 'Noto Sans Sinhala', sans-serif;
+            --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden; 
-        }
-
+        
+        html { scroll-behavior: smooth; }
+        
         body {
             font-family: var(--font-en);
-            color: var(--text-main);
-            line-height: 1.6;
-            background-color: var(--white);
-            overflow-x: hidden;
-            width: 100%;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
-        /* Sinhala Mode Class */
-        body.lang-si { font-family: var(--font-si); }
-        body.lang-si h1, body.lang-si h2, body.lang-si h3, body.lang-si .btn { font-weight: 800; }
+        /* =========================================
+           2. LANGUAGE SWITCHING UTILITIES
+           ========================================= */
+        .lang-si { display: none; font-family: var(--font-si); }
+        .lang-en { display: block; }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
-        img { max-width: 100%; display: block; }
+        /* Active Sinhala Mode */
+        body.sinhala-mode .lang-si { display: block; }
+        body.sinhala-mode .lang-en { display: none; }
 
-        /* --- 1. LOADER --- */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--white); z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            transition: opacity 0.5s ease-out, visibility 0.5s;
-        }
-        .spinner {
-            width: 50px; height: 50px; border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--accent-color); border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* --- 2. PROMO BAR --- */
-        .promo-bar {
-            background: var(--accent-color); color: white;
-            text-align: center; padding: 8px 10px;
-            font-size: 0.9rem; font-weight: 600;
-            position: relative; z-index: 1002;
-            min-height: 38px;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        /* --- HEADER & NAV --- */
-        header {
-            background-color: var(--white);
+        /* =========================================
+           3. NAVIGATION BAR
+           ========================================= */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            position: fixed; width: 100%; top: 38px; z-index: 1000;
-            transition: top 0.1s;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        .navbar {
-            display: flex; justify-content: space-between; align-items: center; height: 80px;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .logo {
-            font-size: 1.5rem; font-weight: 800; color: var(--primary-color);
-            text-transform: uppercase; line-height: 1.1;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .logo i { color: var(--accent-color); font-size: 1.8rem; }
-        .logo span { color: var(--accent-color); font-size: 0.8em; display: block; font-weight: 600;}
+        .logo-container img { height: 45px; width: auto; }
 
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { font-weight: 600; color: var(--primary-color); font-size: 0.95rem; }
-        .nav-links a:hover { color: var(--accent-color); }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
 
         .lang-btn {
-            border: 2px solid var(--primary-color);
-            padding: 5px 15px; border-radius: 20px;
-            font-size: 0.8rem; font-weight: 700;
-            cursor: pointer; background: transparent;
-            color: var(--primary-color); transition: 0.3s;
-            display: flex; align-items: center; gap: 5px;
+            padding: 8px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--primary);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            text-transform: uppercase;
         }
-        .lang-btn:hover { background: var(--primary-color); color: white; }
 
-        .btn-contact {
-            background: var(--primary-color); color: white !important;
-            padding: 10px 25px !important; border-radius: 4px;
-            transition: 0.3s !important;
+        .lang-btn:hover {
+            background: var(--primary);
+            color: var(--white);
         }
-        .btn-contact:hover { background: var(--accent-color); transform: translateY(-2px); }
 
-        .menu-toggle { display: none; font-size: 1.8rem; color: var(--primary-color); cursor: pointer; }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            background-color: var(--primary-color);
-            background-size: cover; background-position: center;
-            height: 100vh; display: flex; align-items: center;
-            text-align: center; color: var(--white); padding-top: 118px;
+        /* =========================================
+           4. MODERN SPLIT HERO SECTION (FIX FOR PORTRAIT IMAGES)
+           ========================================= */
+        .split-hero {
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 90vh; /* Takes most of the screen */
+            background: #0d2b22; /* Dark Green bg */
             position: relative;
-            transition: background-image 1s ease-in-out; 
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4); 
+
+        /* Left Side: Text */
+        .hero-text-side {
+            flex: 1;
+            flex-basis: 50%; /* 50% width on desktop */
+            padding: 60px 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            color: var(--white);
+            z-index: 2;
+        }
+
+        .hero-text-side h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-align: left;
+            font-weight: 700;
+        }
+
+        .hero-text-side p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            text-align: left;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        /* Right Side: Image Slider */
+        .hero-image-side {
+            flex: 1;
+            flex-basis: 50%; /* 50% width on desktop */
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            min-height: 50vh; /* Ensure visibility on mobile */
+        }
+
+        .split-slide-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Fills the vertical box perfectly */
+            object-position: center top;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .split-slide-img.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .btn-main {
+            background: var(--accent);
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            border: none;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.6);
+        }
+
+        /* =========================================
+           5. SECTION 01: SLIDER WITH TYPING EFFECT
+           ========================================= */
+        .poster-section {
+            width: 100%;
+            height: 60vh;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .poster-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .poster-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .poster-slide img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             z-index: 1;
         }
 
-        .hero-content {
-            position: relative; z-index: 2;
-            transition: opacity 0.5s ease-in-out; 
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem; margin-bottom: 20px;
-            line-height: 1.2; text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-        .hero-content p {
-            font-size: 1.3rem; margin-bottom: 35px;
-            font-weight: 300; max-width: 800px; margin-left: auto; margin-right: auto;
-            color: #e0e0e0; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        }
-        .hero-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-        
-        .btn {
-            padding: 15px 35px; font-size: 1rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1px;
-            border-radius: 4px; border: 2px solid transparent; cursor: pointer;
-            transition: 0.3s; display: inline-block;
-        }
-        .btn-primary { background: var(--accent-color); color: white; }
-        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px); }
-        .btn-outline { border-color: white; color: white; background: transparent; }
-        .btn-outline:hover { background: white; color: var(--primary-color); }
-
-        /* --- SECTIONS --- */
-        section { padding: 80px 0; }
-        .bg-light { background-color: var(--light-bg); }
-
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 {
-            font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px;
-        }
-        .section-header .line {
-            width: 80px; height: 5px; background: var(--accent-color);
-            margin: 0 auto; border-radius: 2px;
-        }
-
-        /* --- SERVICES GRID --- */
-        .services-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px; padding: 0 10px;
-        }
-        .service-card {
-            background: white; padding: 40px 25px; text-align: center;
-            border-radius: 8px; box-shadow: var(--shadow);
-            transition: 0.3s; border-bottom: 4px solid transparent;
+        /* Dark Overlay for Readability */
+        .poster-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 2;
         }
-        .service-card:hover { transform: translateY(-10px); border-bottom-color: var(--accent-color); }
-        .service-icon {
-            font-size: 3rem; color: var(--accent-color); margin-bottom: 25px;
-        }
-        .service-card h3 {
-            font-size: 1.4rem; margin-bottom: 15px; color: var(--primary-color);
-        }
-        .service-card p { color: var(--text-light); font-size: 0.95rem; }
 
-        /* --- GALLERY --- */
-        .gallery-filter { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
-        .filter-btn {
-            background: transparent; border: 2px solid var(--primary-color);
-            color: var(--primary-color); padding: 8px 25px; border-radius: 30px;
-            cursor: pointer; font-weight: 700; transition: 0.3s;
+        .poster-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 20px;
+            max-width: 900px;
         }
-        .filter-btn.active, .filter-btn:hover { background: var(--primary-color); color: white; }
 
-        .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+        .typing-text {
+            font-family: var(--font-en);
+            color: var(--white);
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            border-right: 4px solid var(--accent); /* Cursor */
+            padding-right: 5px;
+            display: inline-block;
+            animation: blinkCursor 0.75s step-end infinite;
         }
-        .gallery-item {
-            position: relative; height: 280px; border-radius: 8px; overflow: hidden; cursor: pointer;
-        }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .gallery-item:hover img { transform: scale(1.1); }
-        .gallery-overlay {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            color: white; padding: 20px; transform: translateY(100%); transition: 0.3s;
-        }
-        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
 
-        /* --- CONTACT --- */
-        .contact-section { background: var(--primary-color); color: white; }
-        .contact-section h2 { color: white; }
-        .contact-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;
+        @keyframes blinkCursor {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--accent); }
         }
-        .info-box h3 { color: var(--accent-color); margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; display: inline-block;}
-        .info-item { display: flex; gap: 15px; margin-bottom: 20px; font-size: 1.1rem; }
-        .info-item i { color: var(--accent-color); margin-top: 5px; flex-shrink: 0; }
-        .info-item a { color: #ccc; word-break: break-all; } .info-item a:hover { color: white; }
+
+        /* =========================================
+           6. SECTION 02: FEATURES GRID
+           ========================================= */
+        .section-padding { padding: 80px 5%; }
         
-        .map-wrapper { height: 100%; min-height: 350px; border-radius: 8px; overflow: hidden; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
-        /* --- FOOTER --- */
-        .footer-title {
-            color: white; font-size: 1.2rem; font-weight: 700;
-            margin-bottom: 25px; position: relative; padding-bottom: 10px;
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
         }
-        .footer-title::after {
-            content: ''; position: absolute; bottom: 0; left: 0;
-            width: 40px; height: 3px; background: var(--accent-color);
-        }
-        .footer-links { list-style: none; padding: 0; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: #a0aab5; transition: 0.3s; display: inline-flex; align-items: center; }
-        .footer-links a::before {
-            content: '\f105'; font-family: 'Font Awesome 5 Free'; font-weight: 900;
-            margin-right: 8px; color: var(--accent-color); opacity: 0;
-            transform: translateX(-10px); transition: 0.3s;
-        }
-        .footer-links a:hover { color: white; padding-left: 5px; }
-        .footer-links a:hover::before { opacity: 1; transform: translateX(0); }
 
-        .contact-list li { display: flex; gap: 15px; margin-bottom: 20px; color: #a0aab5; align-items: flex-start; }
-        .contact-list i { color: var(--accent-color); font-size: 1.1rem; margin-top: 4px; }
-        .contact-list a { color: #a0aab5; transition: 0.3s; word-break: break-all; }
-        .contact-list a:hover { color: white; }
+        .section-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
 
-        .social-btn {
-            width: 40px; height: 40px; background: rgba(255,255,255,0.1);
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; color: white; transition: 0.3s;
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
         }
-        .social-btn:hover { background: var(--accent-color); transform: translateY(-3px); }
-        .facebook:hover { background: #3b5998; }
-        .whatsapp:hover { background: #25D366; }
-        .youtube:hover { background: #FF0000; }
 
-        #backToTop {
-            display: none; position: fixed; bottom: 30px; left: 30px; z-index: 99;
-            font-size: 1.2rem; border: none; outline: none;
-            background-color: var(--primary-color); color: white;
-            cursor: pointer; padding: 12px 15px; border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
-            transition: transform 0.4s ease, opacity 0.4s ease;
+        .feature-card {
+            background: var(--white);
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-card);
+            width: 280px;
+            text-align: center;
+            transition: 0.3s;
+            border-bottom: 4px solid transparent;
         }
-        #backToTop:hover { background-color: var(--accent-color); transform: translateY(-3px); }
 
-        /* --- WIDGETS --- */
-        .chat-widget { 
-            position: fixed; bottom: 30px; right: 30px; z-index: 2000; 
-            transition: transform 0.4s ease, opacity 0.4s ease;
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--accent);
         }
-        .chat-bubble {
-            background: var(--accent-color); color: white; width: 60px; height: 60px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 24px; cursor: pointer; box-shadow: 0 10px 20px rgba(230, 126, 34, 0.4);
-            transition: 0.3s; animation: pulse 2s infinite;
+
+        .icon-check {
+            color: var(--white);
+            background: var(--primary-light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
         }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(230, 126, 34, 0); } 100% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0); } }
+
+        .feature-text { font-weight: 600; color: var(--text-dark); }
+
+        /* =========================================
+           7. SECTION 03: PLOT SLIDER
+           ========================================= */
+        .slider-container {
+            background: var(--white);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .scrolling-wrapper {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 5% 40px;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+
+        .scrolling-wrapper::-webkit-scrollbar { height: 6px; }
+        .scrolling-wrapper::-webkit-scrollbar-track { background: #f1f1f1; }
+        .scrolling-wrapper::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        .scroll-card {
+            flex: 0 0 320px;
+            scroll-snap-align: center;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .scroll-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .scroll-card:hover img { transform: scale(1.1); }
         
-        .chat-window {
-            position: absolute; bottom: 80px; right: 0; width: 320px; height: 450px;
-            background: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee;
-        }
-        .chat-header { background: var(--primary-color); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;}
-        .chat-body { flex: 1; padding: 15px; background: #f9f9f9; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .message { padding: 10px 15px; border-radius: 10px; font-size: 0.9rem; max-width: 85%; }
-        .bot-msg { background: white; border: 1px solid #e0e0e0; align-self: flex-start; border-bottom-left-radius: 0; }
-        .user-msg { background: var(--primary-color); color: white; align-self: flex-end; border-bottom-right-radius: 0; }
-        .chat-footer { padding: 10px; background: white; border-top: 1px solid #eee; display: flex; }
-        .chat-footer input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
-        .chat-footer button { background: var(--accent-color); color: white; border: none; width: 35px; height: 35px; border-radius: 50%; margin-left: 10px; cursor: pointer; }
+        .center-btn { text-align: center; margin-top: 20px; }
 
-        .book-float {
-            position: fixed; bottom: 110px; right: 30px;
-            background: linear-gradient(45deg, #11998e, #38ef7d); color: white;
-            padding: 12px 25px; border-radius: 50px; font-weight: 700;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1999;
-            display: flex; gap: 8px; align-items: center; border: 2px solid white;
-            transition: transform 0.4s ease, opacity 0.4s ease;
-        }
-        .book-float:hover { transform: scale(1.05); }
-
-        /* Class to hide widgets near footer */
-        .widget-hidden {
-            transform: translateY(150px) !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
+        /* =========================================
+           8. TEXT BLOCKS & VIDEO
+           ========================================= */
+        .text-block {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 40px;
         }
 
-        /* --- MODAL --- */
-        .modal {
-            display: none; position: fixed; z-index: 3000; left: 0; top: 0;
-            width: 100%; height: 100%; background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px); justify-content: center; align-items: center;
-        }
-        .modal-content {
-            background: white; width: 90%; max-width: 450px; border-radius: 12px;
-            overflow: hidden; animation: zoomIn 0.3s;
-        }
-        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .modal-header { background: var(--primary-color); color: white; padding: 20px; text-align: center; position: relative; }
-        .close-modal { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 1.5rem; }
-        .modal-body { padding: 25px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; }
-        .btn-wa { background: #25D366; color: white; border: none; width: 100%; padding: 15px; font-weight: 700; border-radius: 6px; cursor: pointer; font-size: 1rem; display: flex; justify-content: center; gap: 10px; }
-        .btn-wa:hover { background: #128C7E; }
+        .text-block h2 { color: var(--primary); margin-bottom: 20px; font-size: 1.8rem; }
+        .text-block p { text-align: justify; color: var(--text-gray); }
 
-        /* --- RESPONSIVE --- */
+        .video-wrapper {
+            width: 100%;
+            background: #000;
+        }
+        .video-wrapper video {
+            width: 100%;
+            max-height: 80vh;
+            display: block;
+        }
+
+        /* =========================================
+           9. ABOUT SECTION
+           ========================================= */
+        .about-grid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            max-width: 1100px;
+            margin: 0 auto;
+            flex-wrap: wrap; 
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            flex: 0 0 350px;
+            max-width: 100%;
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-card);
+            border: 5px solid var(--white);
+            display: block;
+        }
+
+        .md-badge {
+            position: absolute;
+            bottom: 25px;
+            right: -20px;
+            background: var(--accent);
+            color: #000;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-card);
+            border-left: 5px solid var(--primary);
+        }
+
+        .about-content h3 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .credentials {
+            display: block;
+            font-size: 1rem;
+            color: var(--text-gray);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .quote-box {
+            margin-top: 20px;
+            background: rgba(212, 175, 55, 0.1); 
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* =========================================
+           10. GALLERY (MASONRY)
+           ========================================= */
+        .masonry {
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .masonry-item img {
+            width: 100%;
+            display: block;
+            transition: 0.3s;
+        }
+        
+        .masonry-item:hover img { opacity: 0.9; transform: scale(1.02); }
+
+        /* =========================================
+           11. CTA & FOOTER
+           ========================================= */
+        .cta-section {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 20px;
+            border-top: 5px solid var(--accent);
+        }
+        
+        .phone-display {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-decoration: none;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+        
+        .phone-display:hover { transform: scale(1.05); color: #fff; }
+
+        footer {
+            background: #111;
+            color: #888;
+            text-align: center;
+            padding: 50px 20px 30px;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+
+        .footer-address {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-copyright {
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        /* =========================================
+           12. RESPONSIVENESS (TABLET, MOBILE, WATCH)
+           ========================================= */
+        @media (max-width: 900px) {
+            /* Fix for Split Hero on Tablets/Mobile */
+            .split-hero { flex-direction: column-reverse; } /* Image on top, Text bottom */
+            .hero-text-side { flex-basis: auto; align-items: center; text-align: center; padding: 40px 20px; }
+            .hero-text-side h1, .hero-text-side p { text-align: center; }
+            .hero-image-side { flex-basis: auto; height: 60vh; width: 100%; }
+        }
+
+        @media (max-width: 850px) {
+            .about-grid { flex-direction: column; text-align: center; gap: 30px; }
+            .about-content { border-left: none; border-top: 5px solid var(--primary); }
+            .md-badge { right: 50%; transform: translateX(50%); bottom: -15px; width: max-content; }
+        }
+
         @media (max-width: 768px) {
-            .nav-links {
-                display: none; flex-direction: column; position: absolute;
-                top: 100%;
-                left: 0; width: 100%; background: white; padding: 20px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 1px solid #eee;
-            }
-            .nav-links.active { display: flex; }
-            .menu-toggle { display: block; }
-            .hero-content h1 { font-size: 2.2rem; }
-            .chat-widget { right: 20px; bottom: 20px; }
-            .book-float { right: 20px; bottom: 100px; padding: 10px 20px; font-size: 0.9rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.1rem; }
+            .masonry { column-count: 2; }
+            .text-block { padding: 30px; }
+            .poster-section { height: 50vh; }
+            .typing-text { font-size: 1.5rem; border-right-width: 3px; }
         }
 
-        @media (max-width: 350px) {
-            .logo { font-size: 1rem; }
-            .hero-content h1 { font-size: 1.5rem; }
-            .btn { padding: 10px 20px; width: 100%; margin-bottom: 10px; }
-            .services-grid, .gallery-grid, .contact-grid { grid-template-columns: 1fr; }
-            .chat-window { width: 90vw; right: -10px; bottom: 70px; }
-            .modal-content { width: 95%; max-height: 85vh; overflow-y: auto; }
-        }
-		 .highlight-item:hover { background: #1a252f !important; }
-        .highlight-item:nth-child(2):hover { background: #d35400 !important; }
-
-        @media (max-width: 768px) {
-            #highlights { margin-top: 0 !important; background: var(--light-bg); padding: 40px 0 !important; }
-            .highlight-grid { display: block !important; box-shadow: none !important; }
-            .highlight-item { margin-bottom: 15px; border-radius: 8px; transform: none !important; border: none !important; }
-        }
-		
-        /* SLIDER CSS */
-        .design-slider-wrapper { position: relative; width: 100%; overflow: hidden; padding: 20px 0; }
-        .slider-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: grab; }
-        .slide-card { min-width: 33.333%; padding: 15px; box-sizing: border-box; }
-        .design-image { position: relative; border-radius: 15px; overflow: hidden; height: 350px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .design-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .design-image:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
-        .design-image:hover img { transform: scale(1.1); }
-        .design-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); padding: 20px; color: white; }
-        .design-info h3 { font-size: 1.2rem; margin-bottom: 5px; font-weight: 700; }
-        .design-info p { font-size: 0.9rem; color: var(--accent-color); font-weight: 600; }
-        .badge-new { position: absolute; top: 15px; right: 15px; background: var(--accent-color); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; z-index: 2; }
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: white; color: var(--primary-color); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s; display: flex; align-items: center; justify-content: center; }
-        .slider-btn:hover { background: var(--primary-color); color: white; }
-        .prev-btn { left: 10px; } .next-btn { right: 10px; }
-        .btn-see-all { display: inline-flex; align-items: center; gap: 10px; padding: 12px 35px; background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); font-weight: 700; border-radius: 50px; transition: all 0.3s; text-transform: uppercase; font-size: 0.9rem; }
-        .btn-see-all:hover { background: var(--primary-color); color: white; gap: 15px; }
-        @media (max-width: 992px) { .slide-card { min-width: 50%; } }
-        @media (max-width: 600px) { .slide-card { min-width: 100%; } .design-image { height: 300px; } .slider-btn { display: none; } }
-
-        /* FORM STYLES */
-        .form-wrapper { background: white; max-width: 800px; margin: 0 auto; border-radius: 10px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
-        .form-header { background: var(--primary-color); color: white; padding: 30px; text-align: center; }
-        .form-header h2 { margin-bottom: 5px; color: white; }
-        .form-header p { opacity: 0.8; font-size: 0.9rem; }
-        form { padding: 40px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .input-group { display: flex; flex-direction: column; }
-        .input-group.full-width { grid-column: 1 / -1; }
-        .input-group label { font-weight: 700; margin-bottom: 8px; color: var(--primary-color); font-size: 0.9rem; }
-        .input-group label i { color: var(--accent-color); margin-right: 5px; }
-        .input-group input, .input-group select, .input-group textarea { padding: 12px; border: 2px solid #eee; border-radius: 5px; font-family: inherit; transition: 0.3s; }
-        .input-group input:focus, .input-group select:focus, .input-group textarea:focus { border-color: var(--accent-color); outline: none; }
-        .wa-submit-btn { background: #25D366; color: white; border: none; width: 100%; padding: 15px; font-size: 1.1rem; font-weight: 800; border-radius: 5px; margin-top: 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; text-transform: uppercase; }
-        .wa-submit-btn:hover { background: #128C7E; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
-        @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } form { padding: 25px; } }
-	
-	/* =========================================
-       EMERGENCY FIX FOR 250px SCREENS
-       ========================================= */
-    @media screen and (max-width: 359px) {
-        
-        .container { padding-left: 10px !important; padding-right: 10px !important; width: 100% !important; overflow-x: hidden !important; }
-        body, html { overflow-x: hidden !important; max-width: 100% !important; }
-
-        /* Stack Grids */
-        .services-grid, .gallery-grid, .contact-grid, .process-grid, .pricing-grid, 
-        .testimonial-grid, .promise-grid, .about-grid, .quality-grid, .highlight-grid {
-            grid-template-columns: 1fr !important; gap: 20px !important; display: block !important;
+        @media (max-width: 480px) {
+            .masonry { column-count: 1; }
+            .scroll-card { flex: 0 0 85%; }
+            .logo-container span { display: none; } /* Hide text, keep logo */
+            .phone-display { font-size: 2rem; }
+            .about-image-wrapper { flex: 0 0 100%; }
+            .about-content { padding: 25px 20px; min-width: 100%; }
+            .about-content h3 { font-size: 1.5rem; }
+            .hero-text-side h1 { font-size: 1.8rem; }
         }
 
-        /* Spacing */
-        .service-card, .gallery-item, .process-item, .price-card, .review-card, 
-        .promise-card, .highlight-item {
-            margin-bottom: 25px !important; width: 100% !important;
+        /* 250px Specific Constraints */
+        @media (max-width: 300px) {
+            body { font-size: 13px; }
+            nav { flex-direction: column; gap: 10px; padding: 10px; }
+            .btn-main { padding: 10px 20px; width: 100%; font-size: 0.8rem; }
+            .feature-card { width: 100%; padding: 20px 10px; }
+            .text-block { padding: 15px; }
+            .phone-display { font-size: 1.5rem; word-break: break-all; }
+            .section-header h2 { font-size: 1.5rem; }
+            .poster-section { height: 40vh; }
+            .typing-text { font-size: 1.1rem; }
         }
 
-        /* Typography */
-        h1 { font-size: 1.8rem !important; line-height: 1.2 !important; }
-        h2 { font-size: 1.5rem !important; }
-        .hero-content p { font-size: 1rem !important; }
-
-        /* Buttons */
-        .hero-btns { flex-direction: column !important; gap: 10px !important; width: 100% !important; }
-        .hero-btns .btn { width: 100% !important; display: block !important; margin: 5px 0 !important; }
-
-        /* Floating Widgets Resize */
-        .chat-widget { right: 10px !important; bottom: 10px !important; transform: scale(0.8) !important; transform-origin: bottom right !important; }
-        .book-float { right: 10px !important; bottom: 80px !important; padding: 8px 15px !important; font-size: 0.8rem !important; width: auto !important; }
-
-        /* Comparison Table Card View */
-        .comparison-table-wrapper { overflow: visible !important; width: 100% !important; padding: 0 5px; }
-        .comparison-table-wrapper table { width: 100% !important; display: block !important; min-width: 0 !important; }
-        .comparison-table-wrapper thead { display: none !important; }
-        .comparison-table-wrapper tbody { display: block !important; width: 100% !important; }
-        .comparison-table-wrapper tr { display: block !important; margin-bottom: 20px; border: 1px solid #e0e0e0; border-radius: 12px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; width: 100% !important; }
-        .comparison-table-wrapper td { display: block !important; width: 100% !important; border: none; padding: 15px !important; text-align: left !important; border-bottom: 1px solid #f0f0f0; }
-        .comparison-table-wrapper td:first-child { background: var(--primary-color); color: white; font-weight: 800; text-align: center !important; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--accent-color); font-size: 1.1rem; }
-        .comparison-table-wrapper td:last-child { border-bottom: none; }
-        .comparison-table-wrapper td:not(:first-child)::before { content: attr(data-label); display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; color: #888; letter-spacing: 0.5px; }
-
-        /* Components */
-        .comparison-container { height: 300px !important; }
-        .img-comp-container { height: 300px !important; }
-        .logo { font-size: 0.8rem !important; flex-direction: column; align-items: flex-start; }
-        .logo i { font-size: 1.2rem !important; margin-bottom: 2px; }
-        .navbar { padding: 0 10px !important; height: auto !important; min-height: 60px; padding-top: 5px !important; padding-bottom: 5px !important; }
-        header { padding: 0 !important; }
-        .menu-toggle { font-size: 1.5rem !important; }
-        .form-grid { grid-template-columns: 1fr !important; }
-        .input-group input, .input-group select { font-size: 0.9rem !important; }
-        #highlights { margin-top: 0 !important; padding-top: 30px !important; background: var(--light-bg) !important; }
-        .promo-bar { font-size: 0.75rem !important; padding: 5px !important; line-height: 1.3; }
-
-        /* FIX: Contact Info Email Overflow */
-        .info-item, .contact-list li { flex-wrap: wrap; }
-        .info-item a, .contact-list a { word-break: break-all; white-space: normal; font-size: 0.9rem; }
-        
-        /* FIX: Map Empty Area */
-        .map-wrapper { height: 300px !important; min-height: 0 !important; margin-top: 20px; }
-        .contact-grid { display: flex !important; flex-direction: column; }
-    }
     </style>
 </head>
 <body>
 
-    <!-- LOADER -->
-    <div id="loader"><div class="spinner"></div></div>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo-container">
+            <!-- Add logo.png to root -->
+            <img src="logo.png" alt="Jet Lands Logo" onerror="this.style.display='none'"> 
+            <span>JET LANDS</span>
+        </div>
+        <div class="nav-right">
+            <button class="lang-btn" onclick="toggleLanguage()">
+                <span class="lang-en">සිංහල</span>
+                <span class="lang-si">English</span>
+            </button>
+        </div>
+    </nav>
 
-    <!-- PROMO BAR -->
-    <div class="promo-bar" data-en="Special: Interest-Free Easy Payment Plans for New Blocks!" data-si="විශේෂ දීමනාව: නව ඉඩම් කට්ටි සඳහා පොලී නැති පහසු ගෙවීමේ ක්‍රම!">
-        Special: Interest-Free Easy Payment Plans for New Blocks!
-    </div>
-
-    <!-- HEADER -->
-    <header id="header">
-        <div class="container navbar">
-            <div class="logo">
-                <i class="fas fa-map-marked-alt"></i>
-                <div>JET LANDS<br><span>(PVT) LTD</span></div>
+    <!-- MODERN SPLIT HERO SECTION (COMBINES HERO + TOP SLIDER) -->
+    <section class="split-hero">
+        
+        <!-- Left Side: Content (Previously Hero) -->
+        <div class="hero-text-side">
+            <div class="lang-en">
+                <h1>Do you want to own land right next to the world-renowned NSBM?</h1>
+                <p>Don't think twice. Reserve your land today before prices rise.</p>
+                <a href="#cta" class="btn-main">Reserve Today</a>
             </div>
+            <div class="lang-si">
+                <h1>රටම දන්න NSBM එක ලඟින්ම ඉඩමක් ගන්න ඔයත් කැමතිද?</h1>
+                <p>දෙපාරක් හිතන්න එපා. මිල ඉහළ යනකන් බලාගෙන ඉන්නේ නැතිව, ඔබගේ ඉඩම අදම වෙන්කරවාගන්න.</p>
+                <a href="#cta" class="btn-main">අදම වෙන්කරවාගන්න</a>
+            </div>
+        </div>
+
+        <!-- Right Side: Auto Slider (Vertical Images Fit Perfectly Here) -->
+        <div class="hero-image-side">
             
-            <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+            <img src="top5.png" class="split-slide-img active" alt="Slider 1" onerror="this.src='https://placehold.co/800x1200?text=Top+Image+1'">
+            <img src="top2.png" class="split-slide-img" alt="Slider 2" onerror="this.src='https://placehold.co/800x1200?text=Top+Image+2'">
+            <img src="top5.png" class="split-slide-img" alt="Slider 3" onerror="this.src='https://placehold.co/800x1200?text=Top+Image+3'">
+            <img src="top2.png" class="split-slide-img" alt="Slider 4" onerror="this.src='https://placehold.co/800x1200?text=Top+Image+4'">
             
-            <nav class="nav-links" id="navLinks">
-                <a href="#home" data-en="Home" data-si="මුල් පිටුව">Home</a>
-                <a href="#about" data-en="About" data-si="අපි ගැන">About</a>
-                <a href="#services" data-en="Services" data-si="සේවාවන්">Services</a>
-                <a href="#gallery" data-en="Properties" data-si="ඉඩම්">Properties</a>
-                
-                <!-- Language Switcher -->
-                <button class="lang-btn" onclick="toggleLanguage()">
-                    <i class="fas fa-globe"></i> <span id="langText">SINHALA</span>
-                </button>
+        </div>
 
-                <a href="#contact" class="btn-contact" data-en="Contact Us" data-si="අප අමතන්න">Contact Us</a>
-            </nav>
-        </div>
-    </header>
+    </section>
 
-    <!-- HERO SECTION (Updated with Auto-Slider) -->
-    <section id="home" class="hero">
-        <div class="container hero-content" data-aos="fade-up">
-            <!-- Initial content matches the first slide (NSBM) -->
-            <h1 id="hero-title">Own a Prime Land Near NSBM</h1>
-            <p id="hero-desc">Don't think twice. Don't wait until prices rise—reserve your land block today.</p>
-            <div class="hero-btns">
-                <a href="#contact" class="btn btn-primary" data-en="Inquire Now" data-si="විමසන්න">Inquire Now</a>
-                <a href="#gallery" class="btn btn-outline" data-en="View Lands" data-si="ඉඩම් බලන්න">View Lands</a>
+    <!-- SECTION 01: AUTO IMAGES WITH TYPING TEXT -->
+    <section class="poster-section">
+        <!-- SLIDE 1 -->
+        <div class="poster-slide active" data-text="A premium land just steps away from NSBM.">
+            <img src="1.png" alt="Land near NSBM" onerror="this.src='https://placehold.co/800x400/1b4d3e/FFF?text=Slide+1'">
+            <div class="poster-overlay"></div>
+            <div class="poster-content">
+                <h2 class="typing-text"></h2>
             </div>
         </div>
-    </section>
-	
-	<!-- HIGHLIGHTS SECTION -->
-    <section id="highlights" style="position: relative; z-index: 50; margin-top: -80px; padding-bottom: 0;">
-        <div class="container">
-            <div class="highlight-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-radius: 8px; overflow: hidden;">
-                <div class="highlight-item" data-aos="fade-up" data-aos-delay="0" style="background: var(--primary-color); padding: 40px 30px; text-align: center; color: white; border-right: 1px solid rgba(255,255,255,0.1); transition: 0.3s;">
-                    <i class="fas fa-certificate" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i>
-                    <h3 style="font-size: 1.3rem; margin-bottom: 10px;" data-en="Clear Deeds" data-si="නිරවුල් ඔප්පු">Clear Deeds</h3>
-                    <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);" data-en="100% clear titles and legal documents approved by local authorities." data-si="100% පිරිසිදු ඔප්පු සහ පළාත් පාලන ආයතන විසින් අනුමත ලියකියවිලි.">100% clear titles and legal documents approved by local authorities.</p>
-                </div>
-                <div class="highlight-item" data-aos="fade-up" data-aos-delay="100" style="background: var(--accent-color); padding: 40px 30px; text-align: center; color: white; position: relative; transform: scaleY(1.05); z-index: 2; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
-                    <i class="fas fa-hand-holding-usd" style="font-size: 2.5rem; color: white; margin-bottom: 20px;"></i>
-                    <h3 style="font-size: 1.3rem; margin-bottom: 10px;" data-en="Easy Payment Plans" data-si="පහසු ගෙවීමේ ක්‍රම">Easy Payment Plans</h3>
-                    <p style="font-size: 0.9rem; color: rgba(255,255,255,0.9);" data-en="Interest-free payment schemes and bank loan facilities arranged for you." data-si="පොලී රහිත ගෙවීමේ ක්‍රම සහ බැංකු ණය පහසුකම් සලසා දෙනු ලැබේ.">Interest-free payment schemes and bank loan facilities arranged for you.</p>
-                </div>
-                <div class="highlight-item" data-aos="fade-up" data-aos-delay="200" style="background: var(--primary-color); padding: 40px 30px; text-align: center; color: white; border-left: 1px solid rgba(255,255,255,0.1); transition: 0.3s;">
-                    <i class="fas fa-map-marker-alt" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i>
-                    <h3 style="font-size: 1.3rem; margin-bottom: 10px;" data-en="Prime Locations" data-si="සුපිරි ඉඩම්">Prime Locations</h3>
-                    <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);" data-en="Best residential and commercial blocks in rapidly developing cities." data-si="වේගයෙන් දියුණු වන නගර වල හොඳම නේවාසික සහ ව්‍යාපාරික ඉඩම්.">Best residential and commercial blocks in rapidly developing cities.</p>
-                </div>
+
+        <!-- SLIDE 2 -->
+        <div class="poster-slide" data-text="The perfect location for living or investment.">
+            <img src="2.png" alt="Investment Land" onerror="this.src='https://placehold.co/800x400/1b4d3e/FFF?text=Slide+2'">
+            <div class="poster-overlay"></div>
+            <div class="poster-content">
+                <h2 class="typing-text"></h2>
             </div>
         </div>
-    </section>
-	
-	<!-- FEATURED LANDS SLIDER SECTION -->
-    <section id="latest-designs" style="background-color: #f8f9fa; padding-top: 100px; padding-bottom: 80px; overflow: hidden;">
-        <div class="container">
-            <div class="section-header" data-aos="fade-down">
-                <h2 data-en="Featured Properties" data-si="විශේෂ ඉඩම් ව්‍යාපෘති">Featured Properties</h2>
-                <div class="line"></div>
-                <p style="color: var(--text-light); max-width: 600px; margin: 0 auto;" data-en="Explore our latest land projects. Secured investments for your future." data-si="අපගේ නවතම ඉඩම් ව්‍යාපෘති. ඔබේ අනාගතය සඳහා ආරක්ෂිත ආයෝජනයක්.">Explore our latest land projects. Secured investments for your future.</p>
-            </div>
-            <div class="design-slider-wrapper" data-aos="fade-up">
-                <button class="slider-btn prev-btn" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-btn next-btn" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
-                <div class="slider-track" id="sliderTrack">
-                    <div class="slide-card"><div class="design-image"><span class="badge-new">NEW</span><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Homagama Land"><div class="design-info"><h3 data-en="Green Valley" data-si="ග්‍රීන් වැලි">Green Valley</h3><p>Homagama</p></div></div></div>
-                    <div class="slide-card"><div class="design-image"><span class="badge-new">SOLD OUT</span><img src="https://images.unsplash.com/photo-1572099606223-6e29045d7de3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Kottawa Land"><div class="design-info"><h3 data-en="City Gardens" data-si="සිටි ගාර්ඩන්ස්">City Gardens</h3><p>Kottawa</p></div></div></div>
-                    <div class="slide-card"><div class="design-image"><span class="badge-new">HOT</span><img src="https://images.unsplash.com/photo-1524813686514-a5756c97759e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Kahathuduwa Land"><div class="design-info"><h3 data-en="Highway View" data-si="හයිවේ විව්">Highway View</h3><p>Kahathuduwa</p></div></div></div>
-                    <div class="slide-card"><div class="design-image"><img src="https://images.unsplash.com/photo-1599809275671-b5942cabc7ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Padukka Land"><div class="design-info"><h3 data-en="Orchard Lands" data-si="ඕචඩ් ලෑන්ඩ්ස්">Orchard Lands</h3><p>Padukka</p></div></div></div>
-                    <div class="slide-card"><div class="design-image"><span class="badge-new">PREMIUM</span><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Malabe Land"><div class="design-info"><h3 data-en="Royal Park" data-si="රෝයල් පාර්ක්">Royal Park</h3><p>Malabe</p></div></div></div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="#gallery" class="btn-see-all"><span data-en="See All Lands" data-si="සියලුම ඉඩම් බලන්න">See All Lands</span> <i class="fas fa-arrow-right"></i></a>
+
+        <!-- SLIDE 3 -->
+        <div class="poster-slide" data-text="Easy access to bank loan facilities.">
+            <img src="3.png" alt="Bank Loans" onerror="this.src='https://placehold.co/800x400/1b4d3e/FFF?text=Slide+3'">
+            <div class="poster-overlay"></div>
+            <div class="poster-content">
+                <h2 class="typing-text"></h2>
             </div>
         </div>
     </section>
 
-<!-- NEW PADDY LANDS SECTION -->
-    <section id="paddy-lands" class="bg-light">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="6 Super Residential Plots Bordering a Beautiful Paddy Field" 
-                    data-si="සුන්දර වෙල් යායකට මායිම් වුණු සුපිරි නේවාසික බිම් කැබලි 06ක්">
-                    6 Super Residential Plots Bordering a Beautiful Paddy Field
-                </h2>
-                <div class="line"></div>
-                
-                <!-- Badge -->
-                <div style="background: var(--accent-color); color: white; display: inline-block; padding: 8px 25px; border-radius: 50px; font-weight: 700; margin-top: 15px;"
-                     data-en="All Facilities Included"
-                     data-si="සියළු පහසුකම් සහිතයි">
-                    All Facilities Included
-                </div>
+    <!-- SECTION 02: FEATURES -->
+    <section class="section-padding" style="background: #fff;">
+        <div class="section-header">
+            <div class="lang-en">
+                <h2>06 Super Luxury Residential Plots</h2>
+                <p>Bordering a beautiful paddy field. With all facilities.</p>
             </div>
+            <div class="lang-si">
+                <h2>සුන්දර වෙල් යායකට මායිම් වුණු සුපිරි නේවාසික බිම් කැබලි 06ක්</h2>
+                <p>සියළු පහසුකම් සහිතයි.</p>
+            </div>
+        </div>
 
-            <!-- Features Grid -->
-            <div class="services-grid">
-                
-                <!-- 1. Water -->
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="0">
-                    <div class="service-icon"><i class="fas fa-faucet"></i></div>
-                    <h3 data-en="Pipe Borne Water" data-si="නළ ජලය">Pipe Borne Water</h3>
-                </div>
-
-                <!-- 2. Electricity -->
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
-                    <h3 data-en="Electricity" data-si="විදුලිය">Electricity</h3>
-                </div>
-
-                <!-- 3. Deeds -->
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="service-icon"><i class="fas fa-file-contract"></i></div>
-                    <h3 data-en="Clear Deeds" data-si="නිරවුල් ඔප්පු">Clear Deeds</h3>
-                </div>
-
-                <!-- 4. Environment -->
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="service-icon"><i class="fas fa-tree"></i></div>
-                    <h3 data-en="Peaceful Environment" data-si="සුන්දර සාමකාමී වටපිටාව">Peaceful Environment</h3>
-                </div>
-
-                <!-- 5. Loans -->
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="service-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                    <h3 data-en="Easy Bank Loans" data-si="පහසු බැංකු ණය">Easy Bank Loans</h3>
-                </div>
-
-                <!-- 6. Main Road -->
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="service-icon"><i class="fas fa-road"></i></div>
-                    <h3 data-en="5 Mins to Main Road" data-si="ප්‍රධාන පාරට විනාඩි 05යි">5 Mins to Main Road</h3>
-                </div>
-
-                <!-- 7. NSBM -->
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="600">
-                    <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h3 data-en="Close to NSBM & Mahinda Rajapaksa College" data-si="NSBM හරිත සරසවිය සහ මහින්ද රාජපක්ෂ විද්‍යාලයට ඉතාමත් සමීපයි">Close to NSBM & Mahinda Rajapaksa College</h3>
-                </div>
-
-                <!-- 8. Highway -->
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="700">
-                    <div class="service-icon"><i class="fas fa-car-side"></i></div>
-                    <h3 data-en="15 Mins to Kottawa Highway" data-si="කොට්ටාව අධිවේගී පිවිසුමට විනාඩි 15යි">15 Mins to Kottawa Highway</h3>
-                </div>
-
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon-check">✓</div>
+                <div class="lang-en feature-text">Piped Water</div>
+                <div class="lang-si feature-text">නළ ජලය</div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-check">✓</div>
+                <div class="lang-en feature-text">Electricity</div>
+                <div class="lang-si feature-text">විදුලිය</div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-check">✓</div>
+                <div class="lang-en feature-text">Clear Deeds</div>
+                <div class="lang-si feature-text">නිරවුල් ඔප්පු</div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-check">✓</div>
+                <div class="lang-en feature-text">Peaceful Environment</div>
+                <div class="lang-si feature-text">සුන්දර සාමකාමී වටපිටාව</div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-check">✓</div>
+                <div class="lang-en feature-text">Easy Bank Loans</div>
+                <div class="lang-si feature-text">පහසු බැංකු ණය</div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-check">✓</div>
+                <div class="lang-en feature-text">5 Mins to Main Road</div>
+                <div class="lang-si feature-text">ප්‍රධාන පාරට විනාඩි 05යි</div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-check">✓</div>
+                <div class="lang-en feature-text">Close to NSBM & MR College</div>
+                <div class="lang-si feature-text">NSBM හරිත සරසවිය සහ මහින්ද රාජපක්ෂ විද්‍යාලයට ඉතාමත් සමීපයි</div>
+            </div>
+             <div class="feature-card">
+                <div class="icon-check">✓</div>
+                <div class="lang-en feature-text">15 Mins to Kottawa Highway</div>
+                <div class="lang-si feature-text">කොට්ටාව අධිවේගී පිවිසුමට විනාඩි 15යි</div>
             </div>
         </div>
     </section>
 
-<!-- INVESTMENT VALUE SECTION -->
-    <section id="investment-value" style="background-color: white;">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="The Safest Way to Invest Your Money" 
-                    data-si="ඔබේ මුදල් සුරක්ෂිතව ආයෝජනයට හොඳම මාර්ගය">
-                    The Safest Way to Invest Your Money
-                </h2>
-                <div class="line"></div>
+    <!-- SECTION 03: PLOT SLIDER -->
+    <section class="section-padding slider-container">
+        <div class="section-header">
+            <h2 class="lang-en">Available Plots</h2>
+            <h2 class="lang-si">ඉඩම් කොටස්</h2>
+        </div>
+        <div class="scrolling-wrapper" id="scrollContainer">
+            <div class="scroll-card"><img src="landplot1.png" onerror="this.src='https://placehold.co/400x300?text=Plot+1'"></div>
+            <div class="scroll-card"><img src="landplot2.png" onerror="this.src='https://placehold.co/400x300?text=Plot+2'"></div>
+            <div class="scroll-card"><img src="landplot3.png" onerror="this.src='https://placehold.co/400x300?text=Plot+3'"></div>
+            <div class="scroll-card"><img src="landplot4.png" onerror="this.src='https://placehold.co/400x300?text=Plot+4'"></div>
+            <div class="scroll-card"><img src="landplot5.png" onerror="this.src='https://placehold.co/400x300?text=Plot+5'"></div>
+            <div class="scroll-card"><img src="landplot6.png" onerror="this.src='https://placehold.co/400x300?text=Plot+6'"></div>
+        </div>
+        <div class="center-btn">
+            <button class="btn-main" onclick="document.getElementById('gallery').scrollIntoView();">
+                <span class="lang-en">See All</span>
+                <span class="lang-si">සියල්ල බලන්න</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- SECTION 04: INVESTMENT INFO -->
+    <section class="section-padding">
+        <div class="text-block">
+            <div class="lang-en">
+                <h2>A space for you in the best place for living and investment...</h2>
+                <p>The NSBM Green University area can be mentioned as an area that is undergoing very rapid development in Sri Lanka. A number of massive state and private economic projects, including housing schemes, are already underway in this area. Signs are already appearing that in the near future, it will become an economic and social hub second only to the capital of Sri Lanka. <strong> Did you know that with the attention of local and foreign investors, land prices around NSBM Green University have risen rapidly within the last 5 years?</strong> Without waiting any longer in the face of rising prices day by day, reserve your land today. This is the best time for investment.</p>
+            </div>
+            <div class="lang-si">
+                <h2>පදිංචියට, ආයෝජනයට හොඳම තැනකින් ඔබටත් ඉඩක්...</h2>
+                <p>ශ්‍රී ලංකාව තුල ඉතා සීග්‍රයෙන් සංවර්දනයට භාජනය වන ප්‍රදේශයක් ලෙස NSBM හරිත සරසවිය ආශ්‍රිත පුරවරය සඳහන් කල හැකිය. මේවන විටත් නිවාස යෝජනා ක්‍රම ඇතුළු රාජ්‍ය සහ පුද්ගලික දැවැන්ත ආර්ථිකමය ව්‍යාපෘති ගණනාවක් මෙම ප්‍රදේශයේ ක්‍රියාත්මක වෙමින් පවතී. නුදුරු අනාගතය තුල ශ්‍රී ලංකාවේ අගනුවරට නොදෙවෙනි ආර්ථික, සමාජීය මරමස්ථානයක් වීමේ ඉඟි මේවන විටත් පහළවෙමින් ඇත. <strong> දෙස් විදෙස් ආයෝජකයන්ගේ අවධානය යොමුවීමත් සමඟ පසුගිය වසර 5 ඇතුළත NSBM හරිත සරසවිය අවට ඉඩම් වල මිල ඉතා සීග්‍රයෙන් ඉහළ ගිය බව ඔබ දන්නවාද? </strong> දිනෙන් දින ඉහල යන මිලගණන් හමුවේ තවත් බලා නොසිට ඔබේ ඉඩම අදම වෙන්කරවා ගන්න. මේ ආයෝජනයට හොඳම කාලයයි.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 05: VIDEO -->
+    <section class="video-wrapper">
+        <video controls autoplay muted loop playsinline>
+            <source src="land.mp4" type="video/mp4">
+            Your browser does not support HTML video.
+        </video>
+    </section>
+
+    <!-- SECTION 06: LIFESTYLE -->
+    <section class="section-padding">
+        <div class="text-block">
+            <div class="lang-en">
+                <h2>The perfect place for a high-quality lifestyle.</h2>
+                <p>Are you a leading businessman? Or a high-level professional like a doctor, lawyer, or engineer? This is the best place to build your dream home on earth.</p>
+            </div>
+            <div class="lang-si">
+                <h2>උසස් ජීවන රටාවකට ගැළපෙනම තැන.</h2>
+                <p>ඔබ ප්‍රමුඛපෙල ව්‍යාපාරිකයෙක්ද? නැතිනම් වෛද්‍ය, නීතිඥ, ඉංජිනේරු වැනි ඉහළපෙළ වෘත්තීයවේදියෙක්ද? ඔබේ සොඳුරු කැදැල්ල මිහිතලය මත ගොඩනගන්නට මේ හොඳම තැනයි.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 07: ROI -->
+    <section class="section-padding" style="background: var(--white);">
+        <div class="text-block" style="background: var(--bg-light);">
+            <div class="lang-en">
+                <h2>The best way to invest your money safely.</h2>
+                <p>The value of money decreases over time. But the value of land you buy increases day by day. are you aware of the <strong>"Homagama Tech City"</strong> project? The value of this land located near the Homagama Tech City project will be unimaginable to you in 10 years.</p>
+            </div>
+            <div class="lang-si">
+                <h2>ඔබේ මුදල් සුරක්ෂිතව ආයෝජනයට හොඳම මාර්ගය.</h2>
+                <p>කාලයත් එක්ක සල්ලි වල වටිනාකම අඩුවෙනවා. ඒත් ඔබ ගන්න ඉඩමක වටිනාකම දවසින් දවස වැඩිවෙනවා. ඔබ <strong>“හෝමාගම ටෙක් සිටි”</strong> ව්‍යාපෘතිය පිලිබඳ දැනුවත්ද? හෝමාගම ටෙක් සිටි ව්‍යාපෘතිය ආශ්‍රිතව පිහිටා ඇති මෙම ඉඩමේ වටිනාකම තව අවුරුදු 10කින් ඔබට සිතාගන්නවත් බැරිවෙයි.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: ABOUT JET LANDS -->
+    <section id="about" class="section-padding" style="background: var(--bg-light);">
+        <div class="section-header">
+            <h2 class="lang-en">About Jet Lands</h2>
+            <h2 class="lang-si">අපි ගැන</h2>
+        </div>
+
+        <div class="about-grid">
+            <!-- Image Side -->
+            <div class="about-image-wrapper">
+                <img src="owner.png" alt="Manjula Makumbura" onerror="this.src='https://placehold.co/400x500?text=Managing+Director'">
+                <div class="md-badge">
+                    <span class="lang-en">Managing Director</span>
+                    <span class="lang-si">කළමනාකාර අධ්‍යක්ෂ</span>
+                </div>
             </div>
 
-            <div style="max-width: 900px; margin: 0 auto; text-align: center;" data-aos="fade-up">
-                
-                <!-- Icon for visual appeal -->
-                <div style="margin-bottom: 30px;">
-                    <i class="fas fa-chart-line" style="font-size: 4rem; color: var(--accent-color);"></i>
-                </div>
-
-                <!-- Paragraph 1 -->
-                <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--text-light);"
-                   data-en="The value of money depreciates over time. However, the value of the land you buy increases day by day."
-                   data-si="කාලයත් එක්ක සල්ලි වල වටිනාකම අඩුවෙනවා. ඒත් ඔබ ගන්න ඉඩමක වටිනාකම දවසින් දවස වැඩිවෙනවා.">
-                   The value of money depreciates over time. However, the value of the land you buy increases day by day.
-                </p>
-
-                <!-- Paragraph 2 (Tech City Highlight) -->
-                <div style="background: #fdf2e9; padding: 30px; border-radius: 10px; border-left: 5px solid var(--accent-color);">
-                    <h3 style="color: var(--primary-color); font-size: 1.3rem; margin-bottom: 15px;" 
-                        data-en="Homagama Tech City Project" 
-                        data-si="හෝමාගම ටෙක් සිටි ව්‍යාපෘතිය">
-                        Homagama Tech City Project
-                    </h3>
-                    <p style="font-size: 1.1rem; font-weight: 600; color: #333;"
-                       data-en="Are you aware of the 'Homagama Tech City' project? Located near this massive development, the value of this land will be unimaginable in 10 years."
-                       data-si="ඔබ “හෝමාගම ටෙක් සිටි” ව්‍යාපෘතිය පිලිබඳ දැනුවත්ද? හෝමාගම ටෙක් සිටි ව්‍යාපෘතිය ආශ්‍රිතව පිහිටා ඇති මෙම ඉඩමේ වටිනාකම තව අවුරුදු 10කින් ඔබට සිතාගන්නවත් බැරිවෙයි.">
-                       Are you aware of the 'Homagama Tech City' project? Located near this massive development, the value of this land will be unimaginable in 10 years.
+            <!-- Content Side -->
+            <div class="about-content">
+                <div class="lang-en">
+                    <h3>Manjula Makumbura</h3>
+                    <span class="credentials">Attorney at Law</span>
+                    <p>
+                        Jet Lands (PVT) LTD is a trusted name in the Sri Lankan real estate sector, dedicated to delivering premium property solutions. With a legal background, our leadership ensures that every plot we sell comes with <strong>100% clear deeds</strong> and zero legal hassles. 
                     </p>
-                </div>
-
-                <!-- Call to Action -->
-                <div style="margin-top: 40px;">
-                    <a href="#contact" class="btn btn-primary" 
-                       data-en="Secure Your Future" 
-                       data-si="ඔබේ අනාගතය සුරක්ෂිත කරගන්න">
-                       Secure Your Future
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-
-<!-- NSBM DEVELOPMENT SECTION -->
-    <section id="nsbm-development" class="bg-light">
-        <div class="container">
-            
-            <!-- Header -->
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="A Spot for You in the Best Place for Living & Investment" 
-                    data-si="පදිංචියට, ආයෝජනයට හොඳම තැනකින් ඔබටත් ඉඩක්...">
-                    A Spot for You in the Best Place for Living & Investment
-                </h2>
-                <div class="line"></div>
-            </div>
-
-            <!-- Content Wrapper -->
-            <div style="max-width: 900px; margin: 0 auto; text-align: center;" data-aos="fade-up">
-
-                <!-- Icon -->
-                <div style="margin-bottom: 30px;">
-                    <i class="fas fa-city" style="font-size: 4rem; color: var(--accent-color);"></i>
-                </div>
-
-                <!-- Text Block (Justified for better reading) -->
-                <div style="text-align: justify; font-size: 1.1rem; color: var(--text-light); line-height: 1.8;">
-                    
-                    <p style="margin-bottom: 20px;"
-                       data-en="The area surrounding NSBM Green University is one of the most rapidly developing regions in Sri Lanka. Several massive government and private economic projects, including housing schemes, are already in operation here."
-                       data-si="ශ්‍රී ලංකාව තුල ඉතා සීග්‍රයෙන් සංවර්දනයට භාජනය වන ප්‍රදේශයක් ලෙස NSBM හරිත සරසවිය ආශ්‍රිත පුරවරය සඳහන් කල හැකිය. මේවන විටත් නිවාස යෝජනා ක්‍රම ඇතුළු රාජ්‍ය සහ පුද්ගලික දැවැන්ත ආර්ථිකමය ව්‍යාපෘති ගණනාවක් මෙම ප්‍රදේශයේ ක්‍රියාත්මක වෙමින් පවතී.">
-                       The area surrounding NSBM Green University is one of the most rapidly developing regions in Sri Lanka. Several massive government and private economic projects, including housing schemes, are already in operation here.
+                    <p style="margin-top:10px;">
+                        We specialize in high-growth areas like the NSBM Green University zone, ensuring your investment multiplies in value safely and securely.
                     </p>
+                    <div class="quote-box">
+                        "Your trust is our most valuable asset."
+                    </div>
+                </div>
 
-                    <p style="margin-bottom: 20px;"
-                       data-en="Signs are already emerging that this area will soon become an economic and social hub second only to the capital. Did you know that with the attention of local and foreign investors, land prices around NSBM have skyrocketed in the last 5 years?"
-                       data-si="නුදුරු අනාගතය තුල ශ්‍රී ලංකාවේ අගනුවරට නොදෙවෙනි ආර්ථික, සමාජීය මරමස්ථානයක් වීමේ ඉඟි මේවන විටත් පහළවෙමින් ඇත. දෙස් විදෙස් ආයෝජකයන්ගේ අවධානය යොමුවීමත් සමඟ පසුගිය වසර 5 ඇතුළත NSBM හරිත සරසවිය අවට ඉඩම් වල මිල ඉතා සීග්‍රයෙන් ඉහළ ගිය බව ඔබ දන්නවාද?">
-                       Signs are already emerging that this area will soon become an economic and social hub second only to the capital. Did you know that with the attention of local and foreign investors, land prices around NSBM have skyrocketed in the last 5 years?
+                <div class="lang-si">
+                    <h3>මංජුල මාකුඹුර</h3>
+                    <span class="credentials">නීතිඥ</span>
+                    <p>
+                        ජෙට් ලෑන්ඩ්ස් (පුද්) සමාගම ශ්‍රී ලංකාවේ දේපළ වෙළඳාම් ක්ෂේත්‍රයේ විශ්වාසනීය නාමයකි. නීති ක්ෂේත්‍රයේ පළපුරුද්ද සමඟින්, අප ඔබ වෙත ලබාදෙන සෑම ඉඩමක්ම <strong>100% ක් නිරවුල් ඔප්පු</strong> සහිත බවට අපි සහතික වන්නෙමු.
                     </p>
-
-                    <!-- Highlighted Conclusion -->
-                    <p style="font-weight: 700; color: var(--primary-color); text-align: center; font-size: 1.2rem; margin-top: 30px;"
-                       data-en="Don't wait as prices rise day by day. Reserve your land today. This is the best time to invest."
-                       data-si="දිනෙන් දින ඉහල යන මිලගණන් හමුවේ තවත් බලා නොසිට ඔබේ ඉඩම අදම වෙන්කරවා ගන්න. මේ ආයෝජනයට හොඳම කාලයයි.">
-                       Don't wait as prices rise day by day. Reserve your land today. This is the best time to invest.
+                    <p style="margin-top:10px;">
+                        NSBM හරිත සරසවිය වැනි සීග්‍රයෙන් දියුණුවන ප්‍රදේශවල ඉහළ වටිනාකමක් සහිත ඉඩම් හඳුනාගෙන, ඔබේ අනාගත ආයෝජනය සුරක්ෂිත කිරීම අපගේ මූලික අරමුණයි.
                     </p>
-
-                </div>
-
-                <!-- Button -->
-                <div style="margin-top: 40px;">
-                    <a href="#contact" class="btn btn-primary" 
-                       data-en="Reserve Now" 
-                       data-si="දැන්ම වෙන්කරවා ගන්න">
-                       Reserve Now
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-<!-- HIGH-CLASS LIFESTYLE SECTION -->
-    <section id="lifestyle-choice" style="background-color: white;">
-        <div class="container">
-            
-            <!-- Header -->
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="The Perfect Place for a High-Class Lifestyle" 
-                    data-si="උසස් ජීවන රටාවකට ගැළපෙනම තැන">
-                    The Perfect Place for a High-Class Lifestyle
-                </h2>
-                <div class="line"></div>
-            </div>
-
-            <!-- Content -->
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;" data-aos="fade-up">
-
-                <!-- Icon -->
-                <div style="margin-bottom: 25px;">
-                    <i class="fas fa-crown" style="font-size: 3.5rem; color: var(--accent-color);"></i>
-                </div>
-
-                <!-- Question Text -->
-                <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 20px; line-height: 1.6;"
-                   data-en="Are you a leading entrepreneur? Or a high-profile professional like a Doctor, Lawyer, or Engineer?"
-                   data-si="ඔබ ප්‍රමුඛපෙල ව්‍යාපාරිකයෙක්ද? නැතිනම් වෛද්‍ය, නීතිඥ, ඉංජිනේරු වැනි ඉහළපෙළ වෘත්තීයවේදියෙක්ද?">
-                   Are you a leading entrepreneur? Or a high-profile professional like a Doctor, Lawyer, or Engineer?
-                </p>
-
-                <!-- Conclusion Text -->
-                <h3 style="color: var(--primary-color); font-weight: 800; font-size: 1.4rem; margin-top: 10px;"
-                    data-en="This is the best place to build your dream home on earth."
-                    data-si="ඔබේ සොඳුරු කැදැල්ල මිහිතලය මත ගොඩනගන්නට මේ හොඳම තැනයි.">
-                    This is the best place to build your dream home on earth.
-                </h3>
-
-            </div>
-        </div>
-    </section>
-
-<!-- LUCKY 6 CTA SECTION -->
-    <section id="lucky-cta" style="background-color: var(--primary-color); color: white; text-align: center; padding: 80px 0;">
-        <div class="container">
-            <div data-aos="zoom-in">
-                
-                <!-- Icon -->
-                <div style="margin-bottom: 20px;">
-                    <i class="fas fa-star" style="font-size: 3rem; color: var(--accent-color);"></i>
-                </div>
-
-                <!-- Main Heading -->
-                <h2 style="color: white; font-size: 2.2rem; margin-bottom: 15px;"
-                    data-en="Be One of the 6 Lucky Owners" 
-                    data-si="වාසනාවන්තයින් 06 දෙනෙකු අතරට ඔබත් එකතුවෙන්න">
-                    Be One of the 6 Lucky Owners
-                </h2>
-
-                <!-- Subheading -->
-                <p style="font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9;"
-                   data-en="Reserve your land today." 
-                   data-si="ඔබේ ඉඩම අදම වෙන්කරවාගන්න">
-                   Reserve your land today.
-                </p>
-
-                <!-- Phone Button -->
-                <a href="tel:0755229229" style="background: var(--accent-color); color: white; padding: 15px 40px; border-radius: 50px; font-size: 1.5rem; font-weight: 800; display: inline-flex; align-items: center; gap: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: 0.3s; text-decoration: none;">
-                    <i class="fas fa-phone-volume"></i>
-                    <span data-en="Call Now - 0755 229 229" 
-                          data-si="දැන්ම අමතන්න - 0755 229 229">
-                          0755 229 229
-                    </span>
-                </a>
-
-            </div>
-        </div>
-    </section>
-
-<!-- ABOUT SECTION -->
-    <section id="about" style="background-color: #fff;">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="Who We Are" data-si="අපි ගැන">Who We Are</h2>
-                <div class="line"></div>
-            </div>
-            <div class="about-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center;">
-                <div class="about-img-wrapper" data-aos="fade-right" style="position: relative;">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059ee971?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Jet Lands Team" style="border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); width: 100%;">
-                    <div style="position: absolute; bottom: -20px; right: -20px; background: var(--accent-color); color: white; padding: 20px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
-                        <span style="font-size: 2.5rem; font-weight: 800; display: block; line-height: 1;">15+</span>
-                        <span style="font-size: 0.9rem; font-weight: 600;" data-en="Years Trust" data-si="වසරක විශ්වාසය">Years Trust</span>
-                    </div>
-                </div>
-                <div class="about-content" data-aos="fade-left">
-                    <h3 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 20px;" data-en="Your Trusted Partner in Real Estate" data-si="ඉඩම් විකිණීමේ විශ්වාසවන්ත නාමය">Your Trusted Partner in Real Estate</h3>
-                    <p style="margin-bottom: 20px; color: var(--text-light); text-align: justify;" data-en="Jet Lands (PVT) LTD is a premier real estate company dedicated to providing high-quality land plots in the most sought-after locations. We specialize in developing raw land into ready-to-build properties with all essential facilities." data-si="Jet Lands (PVT) LTD යනු හොඳම ස්ථානවල උසස් තත්ත්වයේ ඉඩම් කට්ටි ලබා දීමට කැපවී සිටින ප්‍රමුඛ පෙළේ දේපළ වෙළඳාම් සමාගමකි. සියලු පහසුකම් සහිතව ඉඩම් සංවර්ධනය කර ඔබට ලබා දීම අපගේ අරමුණයි.">Jet Lands (PVT) LTD is a premier real estate company dedicated to providing high-quality land plots...</p>
-                    <ul style="margin-bottom: 30px;">
-                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="Clear Titles & Deeds" data-si="නිරවුල් අයිතිය සහ ඔප්පු">Clear Titles & Deeds</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="Electricity & Pipe Borne Water" data-si="විදුලිය සහ නල ජලය">Electricity & Pipe Borne Water</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="Wide Carpet Roads" data-si="පුළුල් කාපට් මාර්ග">Wide Carpet Roads</span></li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="Easy Payment Schemes" data-si="පහසු ගෙවීමේ ක්‍රම">Easy Payment Schemes</span></li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="background: var(--primary-color); padding: 12px 30px; color: white; border-radius: 5px; text-decoration: none;" data-en="Contact Us Today" data-si="අදම අමතන්න">Contact Us Today</a>
-                </div>
-            </div>
-        </div>
-    </section>
-	
-	
-	
-    <!-- Why Choose Us? SECTION -->
-    <section id="Choose">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="Why Buy From Us?" data-si="අපෙන් ඉඩමක් ගන්නේ ඇයි?">Why Buy From Us?</h2>
-                <div class="line"></div>
-            </div>
-            <div style="text-align: center; max-width: 800px; margin: 0 auto;" data-aos="fade-up">
-                <p style="font-size: 1.2rem; margin-bottom: 20px;" data-en="Jet Lands (PVT) LTD ensures every land block is legally clear and fully developed. We make your land ownership dream hassle-free." data-si="Jet Lands (PVT) LTD විසින් සෑම ඉඩම් කොටසක්ම නීත්‍යානුකූලව පිරිසිදු සහ පූර්ණ ලෙස සංවර්ධනය කර ඇති බව සහතික කරයි.">Jet Lands (PVT) LTD ensures every land block is legally clear and fully developed. We make your land ownership dream hassle-free.</p>
-                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
-                    <div style="background: var(--light-bg); padding: 15px 30px; border-radius: 5px;">
-                        <h3 style="color: var(--accent-color); font-size: 2rem;">15+</h3>
-                        <span data-en="Years Experience" data-si="වසරක පළපුරුද්ද">Years Experience</span>
-                    </div>
-                    <div style="background: var(--light-bg); padding: 15px 30px; border-radius: 5px;">
-                        <h3 style="color: var(--accent-color); font-size: 2rem;">50+</h3>
-                        <span data-en="Projects Completed" data-si="නිම කළ ව්‍යාපෘති">Projects Completed</span>
-                    </div>
-                    <div style="background: var(--light-bg); padding: 15px 30px; border-radius: 5px;">
-                        <h3 style="color: var(--accent-color); font-size: 2rem;">1000+</h3>
-                        <span data-en="Happy Customers" data-si="තෘප්තිමත් පාරිභෝගිකයින්">Happy Customers</span>
+                    <div class="quote-box">
+                        "ඔබේ විශ්වාසය අපගේ වටිනාම දේපළයි."
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES SECTION -->
-    <section id="services" class="bg-light">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="Our Services" data-si="අපගේ සේවාවන්">Our Services</h2>
-                <div class="line"></div>
-            </div>
-            <div class="services-grid">
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="0"><div class="service-icon"><i class="fas fa-map-marked"></i></div><h3 data-en="Land Sales" data-si="ඉඩම් විකිණීම">Land Sales</h3><p data-en="Prime land blocks in Colombo, Gampaha, and Kalutara districts." data-si="කොළඹ, ගම්පහ සහ කළුතර දිස්ත්‍රික්කවල සුපිරි ඉඩම් කට්ටි.">Prime land blocks in Colombo, Gampaha, and Kalutara districts.</p></div>
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="100"><div class="service-icon"><i class="fas fa-road"></i></div><h3 data-en="Land Development" data-si="ඉඩම් සංවර්ධනය">Land Development</h3><p data-en="Road construction, drainage systems, and land clearing services." data-si="මාර්ග ඉදිකිරීම, කාණු පද්ධති සැකසීම සහ ඉඩම් පිරිසිදු කිරීම.">Road construction, drainage systems, and land clearing services.</p></div>
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="200"><div class="service-icon"><i class="fas fa-file-signature"></i></div><h3 data-en="Legal Support" data-si="නීතිමය සහාය">Legal Support</h3><p data-en="Complete support for deed checking, title clearance, and registration." data-si="ඔප්පු පරීක්ෂා කිරීම, පත්තිරු ලබා ගැනීම සහ ලියාපදිංචිය සඳහා සහාය.">Complete support for deed checking, title clearance, and registration.</p></div>
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="300"><div class="service-icon"><i class="fas fa-hand-holding-usd"></i></div><h3 data-en="Loan Facilities" data-si="ණය පහසුකම්">Loan Facilities</h3><p data-en="Arranging bank loans and easy payment plans for buyers." data-si="ගැනුම්කරුවන් සඳහා බැංකු ණය සහ පහසු ගෙවීමේ ක්‍රම සලසා දීම.">Arranging bank loans and easy payment plans for buyers.</p></div>
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="400"><div class="service-icon"><i class="fas fa-tree"></i></div><h3 data-en="Coconut/Crop Lands" data-si="වගා ඉඩම්">Coconut/Crop Lands</h3><p data-en="Sale of coconut estates and agricultural lands for investment." data-si="ආයෝජනය සඳහා පොල් ඉඩම් සහ වගා ඉඩම් විකිණීම.">Sale of coconut estates and agricultural lands for investment.</p></div>
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="500"><div class="service-icon"><i class="fas fa-compass"></i></div><h3 data-en="Surveying" data-si="මිනුම් කටයුතු">Surveying</h3><p data-en="Professional land surveying and blocking out services." data-si="වෘත්තීය මට්ටමේ ඉඩම් මැනීම සහ කට්ටි කිරීමේ සේවාව.">Professional land surveying and blocking out services.</p></div>
-            </div>
+    <!-- SECTION 08: GALLERY -->
+    <section id="gallery" class="section-padding">
+        <div class="section-header">
+            <h2 class="lang-en">Gallery</h2>
+            <h2 class="lang-si">ඡායාරූප එකතුව</h2>
         </div>
-    </section>
-	
-	<!-- VIDEO TOUR SECTION -->
-    <section id="video-tour" style="position: relative; height: 400px; display: flex; align-items: center; justify-content: center; background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; background-attachment: fixed;">
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6);"></div>
-        <div class="container" style="position: relative; z-index: 2; text-align: center; color: white;">
-            <div class="play-btn" data-aos="zoom-in" style="width: 80px; height: 80px; background: white; color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 20px; cursor: pointer; animation: pulse 2s infinite;"><i class="fas fa-play" style="margin-left: 5px;"></i></div>
-            <h2 style="font-size: 2.5rem; margin-bottom: 10px;" data-en="Tour Our Latest Project" data-si="අපගේ නවතම ව්‍යාපෘතිය නරඹන්න">Tour Our Latest Project</h2>
-            <p style="font-size: 1.2rem;" data-en="See how we develop land with modern infrastructure" data-si="නවීන පහසුකම් සමඟ අප ඉඩම් සංවර්ධනය කරන ආකාරය බලන්න">See how we develop land with modern infrastructure</p>
-        </div>
-        <style>@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } }</style>
-    </section>
-	
-	<!-- BEFORE & AFTER SECTION -->
-    <section id="transformation" style="background: white; padding-bottom: 80px;">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="Land Development" data-si="ඉඩම් සංවර්ධනය">Land Development</h2>
-                <div class="line"></div>
-                <p data-en="Drag the slider to see raw land vs developed property." data-si="හිස් ඉඩම සහ සංවර්ධනය කළ ඉඩම අතර වෙනස බලන්න.">Drag the slider to see raw land vs developed property.</p>
-            </div>
-            <div class="comparison-container" data-aos="zoom-in">
-                <div class="img-comp-container">
-                    <!-- Images changed to represent land development -->
-                    <div class="img-comp-img img-after"><img src="https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?q=80&w=1956&auto=format&fit=crop" alt="Developed Land"><span class="label-badge after-badge" data-en="DEVELOPED" data-si="සංවර්ධිත">DEVELOPED</span></div>
-                    <div class="img-comp-img img-before"><img src="https://images.unsplash.com/photo-1598335624129-981f42d2a41d?q=80&w=1974&auto=format&fit=crop" alt="Raw Land"><span class="label-badge before-badge" data-en="RAW LAND" data-si="සංවර්ධනයට පෙර">RAW LAND</span></div>
-                    <div class="slider-handle"><i class="fas fa-arrows-alt-h"></i></div>
-                    <input type="range" min="0" max="100" value="50" class="slider-range" oninput="slideCompare(this.value)">
-                </div>
-            </div>
+        <div class="masonry">
+            <div class="masonry-item"><img src="4.png" onerror="this.src='https://placehold.co/400x500?text=View+1'"></div>
+            <div class="masonry-item"><img src="5.png" onerror="this.src='https://placehold.co/400x300?text=View+2'"></div>
+            <div class="masonry-item"><img src="6.png" onerror="this.src='https://placehold.co/400x600?text=View+3'"></div>
+            <div class="masonry-item"><img src="7.png" onerror="this.src='https://placehold.co/400x400?text=View+4'"></div>
+            <div class="masonry-item"><img src="8.png" onerror="this.src='https://placehold.co/400x550?text=View+5'"></div>
+            <div class="masonry-item"><img src="9.png" onerror="this.src='https://placehold.co/400x350?text=View+6'"></div>
         </div>
     </section>
 
-    <style>
-        .comparison-container { max-width: 800px; margin: 0 auto; position: relative; border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
-        .img-comp-container { position: relative; height: 450px; overflow: hidden; }
-        .img-comp-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
-        .img-comp-img img { width: 100%; height: 100%; object-fit: cover; }
-        .img-before { width: 50%; border-right: 3px solid white; z-index: 2; transition: width 0s; }
-        .label-badge { position: absolute; top: 20px; padding: 5px 15px; background: rgba(0,0,0,0.6); color: white; font-weight: bold; font-size: 0.8rem; border-radius: 4px; z-index: 3; }
-        .before-badge { left: 20px; } .after-badge { right: 20px; }
-        .slider-range { position: absolute; top: 50%; left: -25px; width: calc(100% + 50px); height: 50px; z-index: 10; opacity: 0; cursor: ew-resize; }
-        .slider-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 5; pointer-events: none; color: var(--accent-color); }
-    </style>
-    <script>function slideCompare(val) { document.querySelector('.img-before').style.width = val + "%"; document.querySelector('.slider-handle').style.left = val + "%"; }</script>
-	
-	
-	
-	
-	
-	<!-- BUYING PROCESS SECTION -->
-    <section id="process" style="background-color: var(--white); padding-bottom: 100px;">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="How to Buy" data-si="ඉඩමක් මිලදී ගන්නා ආකාරය">How to Buy</h2>
-                <div class="line"></div>
-                <p style="max-width: 600px; margin: 0 auto; color: var(--text-light);" data-en="Simple 4 steps to own your land with Jet Lands." data-si="සරල පියවර 4කින් ඔබේ ඉඩම අයිති කරගන්න.">Simple 4 steps to own your land with Jet Lands.</p>
-            </div>
-            <div class="process-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: center;">
-                <div class="process-item" data-aos="fade-up" data-aos-delay="0" style="position: relative;"><div class="step-icon" style="width: 80px; height: 80px; background: var(--light-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 2px dashed var(--accent-color);"><span style="font-size: 1.5rem; font-weight: 800; color: var(--accent-color);">01</span></div><h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-color);" data-en="Visit Land" data-si="ඉඩම පරීක්ෂාව">Visit Land</h3><p style="font-size: 0.9rem; color: var(--text-light);" data-en="Visit the location and select your preferred block." data-si="ස්ථානයට පැමිණ ඔබට කැමති කොටස තෝරාගන්න.">Visit the location and select your preferred block.</p></div>
-                <div class="process-item" data-aos="fade-up" data-aos-delay="100"><div class="step-icon" style="width: 80px; height: 80px; background: var(--light-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 2px dashed var(--accent-color);"><span style="font-size: 1.5rem; font-weight: 800; color: var(--accent-color);">02</span></div><h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-color);" data-en="Reservation" data-si="වෙන් කරවා ගැනීම">Reservation</h3><p style="font-size: 0.9rem; color: var(--text-light);" data-en="Pay Rs. 100,000 and reserve your block for 14 days." data-si="රු. 100,000 ගෙවා දින 14කට වෙන් කරවා ගන්න.">Pay Rs. 100,000 and reserve your block for 14 days.</p></div>
-                <div class="process-item" data-aos="fade-up" data-aos-delay="200"><div class="step-icon" style="width: 80px; height: 80px; background: var(--light-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 2px dashed var(--accent-color);"><span style="font-size: 1.5rem; font-weight: 800; color: var(--accent-color);">03</span></div><h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-color);" data-en="Down Payment" data-si="මූලික ගෙවීම">Down Payment</h3><p style="font-size: 0.9rem; color: var(--text-light);" data-en="Pay 40% of the value within 2 weeks." data-si="සති 2ක් තුළ වටිනාකමෙන් 40%ක් ගෙවන්න.">Pay 40% of the value within 2 weeks.</p></div>
-                <div class="process-item" data-aos="fade-up" data-aos-delay="300"><div class="step-icon" style="width: 80px; height: 80px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3);"><i class="fas fa-file-contract" style="font-size: 1.5rem; color: white;"></i></div><h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-color);" data-en="Deed Transfer" data-si="ඔප්පු ලිවීම">Deed Transfer</h3><p style="font-size: 0.9rem; color: var(--text-light);" data-en="Pay balance or arrange loan to transfer deed." data-si="ඉතිරිය ගෙවා හෝ ණය මගින් ඔප්පුව ලබා ගන්න.">Pay balance or arrange loan to transfer deed.</p></div>
-            </div>
+    <!-- SECTION 09: CALL TO ACTION -->
+    <section id="cta" class="cta-section">
+        <div class="lang-en">
+            <h2>Join the lucky 06 people.</h2>
+            <p>Reserve your land today. Call now.</p>
         </div>
-    </section>
-	
-	<!-- OUR PROMISE SECTION -->
-    <section id="promise" style="background-color: var(--primary-color); color: white; position: relative; overflow: hidden;">
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; background-image: radial-gradient(var(--accent-color) 1px, transparent 1px); background-size: 20px 20px;"></div>
-        <div class="container" style="position: relative; z-index: 2;">
-            <div class="section-header" data-aos="fade-up">
-                <h2 style="color: white;" data-en="Our Promise to You" data-si="අපගේ පොරොන්දුව">Our Promise to You</h2>
-                <div class="line" style="background: white;"></div>
-                <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto;" data-en="We sell more than just land; we sell trust and future security." data-si="අපි විකුණන්නේ ඉඩම් පමණක් නොවේ; අපි විශ්වාසය සහ අනාගත සුරක්ෂිතභාවය විකුණමු.">We sell more than just land; we sell trust and future security.</p>
-            </div>
-            <div class="promise-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
-                <div class="promise-card" data-aos="fade-up" data-aos-delay="0" style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 8px; border-left: 4px solid var(--accent-color); transition: 0.3s;"><i class="fas fa-search-location" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i><h3 style="font-size: 1.25rem; margin-bottom: 10px;" data-en="Best Locations" data-si="හොඳම පිහිටීම">Best Locations</h3><p style="font-size: 0.9rem; color: #ddd;" data-en="We pick lands close to main roads, schools, and hospitals." data-si="ප්‍රධාන පාරවල්, පාසල් සහ රෝහල් වලට ආසන්න ඉඩම් පමණක් අපි තෝරා ගනිමු.">We pick lands close to main roads, schools, and hospitals.</p></div>
-                <div class="promise-card" data-aos="fade-up" data-aos-delay="100" style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 8px; border-left: 4px solid var(--accent-color); transition: 0.3s;"><i class="fas fa-water" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i><h3 style="font-size: 1.25rem; margin-bottom: 10px;" data-en="Infrastructure" data-si="යටිතල පහසුකම්">Infrastructure</h3><p style="font-size: 0.9rem; color: #ddd;" data-en="Every block comes with electricity, water lines, and wide roads." data-si="සෑම ඉඩම් කොටසකටම විදුලිය, ජලය සහ පුළුල් මාර්ග ඇත.">Every block comes with electricity, water lines, and wide roads.</p></div>
-                <div class="promise-card" data-aos="fade-up" data-aos-delay="200" style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 8px; border-left: 4px solid var(--accent-color); transition: 0.3s;"><i class="fas fa-file-alt" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i><h3 style="font-size: 1.25rem; margin-bottom: 10px;" data-en="Clear Documents" data-si="නිරවුල් ලියකියවිලි">Clear Documents</h3><p style="font-size: 0.9rem; color: #ddd;" data-en="We provide Bim Saviya or First Class deeds approved by lawyers." data-si="නීතිඥයින් විසින් අනුමත බිම් සවිය හෝ පළමු පන්තියේ ඔප්පු.">We provide Bim Saviya or First Class deeds approved by lawyers.</p></div>
-                <div class="promise-card" data-aos="fade-up" data-aos-delay="300" style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 8px; border-left: 4px solid var(--accent-color); transition: 0.3s;"><i class="fas fa-smile" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i><h3 style="font-size: 1.25rem; margin-bottom: 10px;" data-en="Lifetime Value" data-si="ජීවිත කාලයටම වටිනාකමක්">Lifetime Value</h3><p style="font-size: 0.9rem; color: #ddd;" data-en="Land values in our project areas appreciate by 15-20% annually." data-si="අපගේ ව්‍යාපෘති ඇති ප්‍රදේශවල ඉඩම් වටිනාකම වාර්ෂිකව 15-20%කින් වැඩි වේ.">Land values in our project areas appreciate by 15-20% annually.</p></div>
-            </div>
+        <div class="lang-si">
+            <h2>වාසනාවන්තයින් 06 දෙනෙකු අතරට ඔබත් එකතුවෙන්න.</h2>
+            <p>ඔබේ ඉඩම අදම වෙන්කරවාගන්න දැන්ම අමතන්න.</p>
         </div>
-    </section>
-	
-	<!-- COMMITMENT TO QUALITY SECTION -->
-    <section id="quality" style="background-color: var(--light-bg); padding: 100px 0;">
-        <div class="container">
-            <div class="quality-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: center;">
-                <div class="quality-text" data-aos="fade-right">
-                    <div style="display: inline-block; background: var(--accent-color); color: white; padding: 5px 15px; font-size: 0.85rem; font-weight: 700; border-radius: 4px; margin-bottom: 15px; text-transform: uppercase;"><span data-en="Local Authority Approvals" data-si="පළාත් පාලන ආයතන අනුමැතිය">Local Authority Approvals</span></div>
-                    <h2 style="font-size: 2.2rem; color: var(--primary-color); margin-bottom: 25px; line-height: 1.3;" data-en="Invest with Confidence in Real Estate" data-si="විශ්වාසය සමඟ දේපළ වෙළඳාම් හි ආයෝජනය කරන්න">Invest with Confidence in Real Estate</h2>
-                    <p style="margin-bottom: 20px; text-align: justify; color: var(--text-light); line-height: 1.8;" data-en="At Jet Lands (PVT) LTD, we understand that buying a land is the foundation of your future wealth. That is why we do not just sell land; we sell developed properties. All our lands are approved by the Urban Development Authority (UDA) and relevant Pradeshiya Sabhas, ensuring you can start building your home immediately." data-si="Jet Lands (PVT) LTD හිදී, ඉඩමක් මිලදී ගැනීම ඔබේ අනාගත ධනයේ පදනම බව අපි වටහා ගනිමු. අප විකුණන්නේ නිකම්ම ඉඩම් නොව සංවර්ධිත දේපළයි. අපගේ සියලුම ඉඩම් නාගරික සංවර්ධන අධිකාරිය (UDA) සහ අදාළ ප්‍රාදේශීය සභා මගින් අනුමත කර ඇති බැවින් ඔබට වහාම නිවසක් ඉදිකිරීම ආරම්භ කළ හැක.">At Jet Lands (PVT) LTD, we understand that buying a land is the foundation of your future wealth...</p>
-                    <p style="margin-bottom: 30px; text-align: justify; color: var(--text-light); line-height: 1.8;" data-en="Our team of surveyors and lawyers meticulously check every document going back 30 years to guarantee a 100% clear title. Whether you are looking for a residential block to live in or an investment plot to sell later for a profit, Jet Lands is your safest choice in Sri Lanka." data-si="අපගේ මිනුම්කරුවන් සහ නීතිඥයින් කණ්ඩායම වසර 30ක් ආපස්සට ගොස් සෑම ලියවිල්ලක්ම පරීක්ෂා කර 100% නිරවුල් අයිතිය තහවුරු කරයි. ඔබ පදිංචියට ඉඩමක් සොයන්නේ නම් හෝ ආයෝජනයක් ලෙස නම්, Jet Lands යනු ඔබේ ආරක්ෂිතම තේරීමයි.">Our team of surveyors and lawyers meticulously check every document going back 30 years...</p>
-                    <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--primary-color);"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="UDA & PS Approvals" data-si="UDA සහ සභා අනුමැතිය">UDA & PS Approvals</span></li>
-                        <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--primary-color);"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="Bank Loan Support" data-si="බැංකු ණය සහාය">Bank Loan Support</span></li>
-                        <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--primary-color);"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="3 Phase Electricity" data-si="තෙකලා විදුලිය">3 Phase Electricity</span></li>
-                        <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--primary-color);"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="Wide Access Roads" data-si="පුළුල් ප්‍රවේශ මාර්ග">Wide Access Roads</span></li>
-                    </ul>
-                </div>
-                <div class="quality-image" data-aos="fade-left" style="position: relative;">
-                    <img src="https://images.unsplash.com/photo-1516156008625-3a9d60da923c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Land Inspection" style="width: 100%; border-radius: 8px; box-shadow: var(--shadow);">
-                    <div style="position: absolute; bottom: 30px; left: -20px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-left: 5px solid var(--primary-color); max-width: 250px;">
-                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;"><i class="fas fa-file-signature" style="font-size: 2rem; color: var(--primary-color);"></i><div><h4 style="font-size: 0.9rem; margin: 0; color: var(--text-main);" data-en="Deed Registration" data-si="ඔප්පු ලියාපදිංචිය">Deed Registration</h4><small style="color: green; font-weight: 700;" data-en="One Day Service" data-si="එක්දින සේවාව">One Day Service</small></div></div><p style="font-size: 0.8rem; color: #666; margin: 0;" data-en="We handle all land registry work." data-si="ඉඩම් රෙජිස්ට්‍රාර් කටයුතු සියල්ල අප විසින් සිදුකරයි.">We handle all land registry work.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="gallery">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="Available Properties" data-si="විකිණීමට ඇති ඉඩම්">Available Properties</h2>
-                <div class="line"></div>
-            </div>
-            <div class="gallery-filter" data-aos="fade-up">
-                <button class="filter-btn active" onclick="filterGallery('all')" data-en="All" data-si="සියල්ල">All</button>
-                <button class="filter-btn" onclick="filterGallery('colombo')" data-en="Colombo" data-si="කොළඹ">Colombo</button>
-                <button class="filter-btn" onclick="filterGallery('gampaha')" data-en="Gampaha" data-si="ගම්පහ">Gampaha</button>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item colombo" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Homagama"><div class="gallery-overlay"><h3 data-en="Homagama City Limits" data-si="හෝමාගම නගර සීමාව">Homagama City Limits</h3><p data-en="10 Perch Blocks" data-si="පර්චස් 10 කට්ටි">10 Perch Blocks</p></div></div>
-                <div class="gallery-item gampaha" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1572099606223-6e29045d7de3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Miriswatta"><div class="gallery-overlay"><h3 data-en="Miriswatta Junction" data-si="මිරිස්වත්ත හන්දිය">Miriswatta Junction</h3><p data-en="Commercial Plots" data-si="ව්‍යාපාරික ඉඩම්">Commercial Plots</p></div></div>
-                <div class="gallery-item colombo" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Kottawa"><div class="gallery-overlay"><h3 data-en="Kottawa Highway" data-si="කොට්ටාව හයිවේ">Kottawa Highway</h3><p data-en="Luxury Residential" data-si="සුඛෝපභෝගී නේවාසික">Luxury Residential</p></div></div>
-                <div class="gallery-item gampaha" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Kadawatha"><div class="gallery-overlay"><h3 data-en="Kadawatha Town" data-si="කඩවත නගරය">Kadawatha Town</h3><p data-en="15 Perch Blocks" data-si="පර්චස් 15 කට්ටි">15 Perch Blocks</p></div></div>
-            </div>
-        </div>
-    </section>
-	
-	
-	<!-- WHATSAPP QUOTE FORM SECTION -->
-    <section id="quote-form" style="background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover fixed; padding: 80px 0;">
-        <div class="container">
-            <div class="form-wrapper" data-aos="zoom-in">
-                <div class="form-header"><h2 data-en="Reserve Your Land" data-si="ඔබේ ඉඩම වෙන්කරගන්න">Reserve Your Land</h2><p data-en="Fill this form to inquire about a land block via WhatsApp." data-si="ඉඩමක් ගැන විමසීමට මෙම පෝරමය පුරවා WhatsApp කරන්න.">Fill this form to inquire about a land block via WhatsApp.</p></div>
-                <form onsubmit="submitWhatsappForm(event)">
-                    <div class="form-grid">
-                        <div class="input-group"><label><i class="fas fa-user"></i> <span data-en="Your Name" data-si="ඔබගේ නම">Your Name</span></label><input type="text" id="w-name" placeholder="Ex: Mr. Kamal" required></div>
-                        <div class="input-group"><label><i class="fas fa-phone"></i> <span data-en="Phone Number" data-si="දුරකථන අංකය">Phone Number</span></label><input type="tel" id="w-phone" placeholder="Ex: 077 123 4567" required></div>
-                        <div class="input-group"><label><i class="fas fa-map-marker-alt"></i> <span data-en="Preferred Location" data-si="කැමති ප්‍රදේශය">Preferred Location</span></label><input type="text" id="w-location" placeholder="Ex: Homagama" required></div>
-                        <div class="input-group"><label><i class="fas fa-tools"></i> <span data-en="Requirement" data-si="අවශ්‍යතාවය">Requirement</span></label><select id="w-service"><option value="Buy Land">Buy Land </option><option value="Sell Land">Sell Land </option><option value="Land Valuation">Land Valuation </option><option value="Legal Advice">Legal Advice </option></select></div>
-                        <div class="input-group full-width"><label><i class="fas fa-pencil-alt"></i> <span data-en="Budget/Message" data-si="අයවැය/පණිවිඩය">Budget/Message</span></label><textarea id="w-message" rows="3" placeholder="Ex: Budget 5-10 Lacks per perch..."></textarea></div>
-                    </div>
-                    <button type="submit" class="wa-submit-btn"><i class="fab fa-whatsapp"></i> <span data-en="Send to WhatsApp" data-si="WhatsApp වෙත යවන්න">Send to WhatsApp</span></button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-<!-- FAQ SECTION -->
-    <section id="faq" style="background-color: var(--light-bg);">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up"><h2 data-en="Frequently Asked Questions" data-si="නිතර අසන ප්‍රශ්න">Frequently Asked Questions</h2><div class="line"></div></div>
-            <div class="faq-list" style="max-width: 800px; margin: 0 auto;">
-                <div class="faq-item" style="background: white; margin-bottom: 15px; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);"><div class="faq-question" onclick="this.nextElementSibling.classList.toggle('active')" style="padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600;"><span data-en="Are the deeds clear?" data-si="ඔප්පු නිරවුල් ද?">Are the deeds clear?</span><i class="fas fa-chevron-down" style="color: var(--accent-color);"></i></div><div class="faq-answer" style="display: none; padding: 15px 20px; border-top: 1px solid #eee; color: #666; background: #fafafa;"><p data-en="Yes, all our lands have Bim Saviya or First Class titles approved by lawyers." data-si="ඔව්, අපගේ සියලුම ඉඩම් වලට නීතිඥයින් විසින් අනුමත කළ බිම් සවිය හෝ පළමු පන්තියේ ඔප්පු ඇත.">Yes, all our lands have Bim Saviya or First Class titles approved by lawyers.</p></div></div>
-                <div class="faq-item" style="background: white; margin-bottom: 15px; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);"><div class="faq-question" onclick="this.nextElementSibling.classList.toggle('active')" style="padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600;"><span data-en="Can I pay in installments?" data-si="කොටස් වශයෙන් ගෙවිය හැකිද?">Can I pay in installments?</span><i class="fas fa-chevron-down" style="color: var(--accent-color);"></i></div><div class="faq-answer" style="display: none; padding: 15px 20px; border-top: 1px solid #eee; color: #666; background: #fafafa;"><p data-en="Yes, we offer up to 18 months interest-free payment plans after the initial down payment." data-si="ඔව්, මූලික ගෙවීමෙන් පසු මාස 18ක් දක්වා පොලී රහිතව ගෙවීමේ පහසුකම් ඇත.">Yes, we offer up to 18 months interest-free payment plans after the initial down payment.</p></div></div>
-                <div class="faq-item" style="background: white; margin-bottom: 15px; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);"><div class="faq-question" onclick="this.nextElementSibling.classList.toggle('active')" style="padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600;"><span data-en="Do lands have electricity and water?" data-si="ඉඩම් වලට විදුලිය සහ ජලය තිබේද?">Do lands have electricity and water?</span><i class="fas fa-chevron-down" style="color: var(--accent-color);"></i></div><div class="faq-answer" style="display: none; padding: 15px 20px; border-top: 1px solid #eee; color: #666; background: #fafafa;"><p data-en="Yes, every block is developed with 3-phase electricity lines and pipe-borne water connections." data-si="ඔව්, සෑම බිම් කොටසකටම තෙකලා විදුලිය සහ නල ජල පහසුකම් සලසා ඇත.">Yes, every block is developed with 3-phase electricity lines and pipe-borne water connections.</p></div></div>
-            </div>
-        </div>
-        <style>.faq-answer.active { display: block !important; animation: slideDown 0.3s ease; } @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }</style>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 data-en="Contact Us" data-si="අප අමතන්න">Contact Us</h2>
-                <div class="line" style="background: white;"></div>
-            </div>
-            <div class="contact-grid">
-                <div class="info-box" data-aos="fade-right">
-                    <h3 data-en="Head Office" data-si="ප්‍රධාන කාර්යාලය">Head Office</h3>
-                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong data-en="Location" data-si="ලිපිනය">Location</strong><br><span data-en="126/1/1, Court Road, Homagama." data-si="126/1/1, උසාවිය පාර, හෝමාගම.">126/1/1, Court Road, Homagama.</span></div></div>
-                    <div class="info-item"><i class="fas fa-phone-alt"></i><div><strong data-en="Sales Hotline" data-si="විකුණුම් අංශය">Sales Hotline</strong><br><a href="tel:0777877204">077 787 7204</a><br><a href="tel:0762627204">076 262 7204</a></div></div>
-                    <div class="info-item"><i class="fas fa-phone"></i><div><strong data-en="Office Line" data-si="කාර්යාල දුරකථනය">Office Line</strong><br><a href="tel:0117203140">011 720 3140</a></div></div>
-                    <div class="info-item"><i class="fas fa-envelope"></i><div><strong data-en="Email" data-si="විද්‍යුත් තැපෑල">Email</strong><br><a href="mailto:info@jetlands.com">info@jetlands.com</a></div></div>
-                </div>
-                <div class="map-wrapper" data-aos="fade-left"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31693.39864230787!2d80.0003!3d6.8406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2523b05555555%3A0x5555555555555555!2sHomagama%20Court!5e0!3m2!1sen!2slk!4v1600000000000!5m2!1sen!2slk" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen></iframe></div>
-            </div>
-        </div>
+        <a href="tel:0755229229" class="phone-display">0755 229 229</a>
     </section>
 
     <!-- FOOTER -->
-    <footer id="main-footer" style="position: relative; background-color: #1a252f; color: #fff; font-size: 0.95rem; overflow: hidden;">
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(#2c3e50 1px, transparent 1px), linear-gradient(90deg, #2c3e50 1px, transparent 1px); background-size: 30px 30px; opacity: 0.1; pointer-events: none;"></div>
-        <div class="footer-cta" style="background: var(--accent-color); padding: 30px 0; position: relative; z-index: 2;">
-            <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-                <div style="flex: 1;"><h3 style="margin: 0; font-size: 1.5rem; font-weight: 800;" data-en="Looking for a prime land?" data-si="හොඳ ඉඩමක් සොයනවාද?">Looking for a prime land?</h3><p style="margin: 5px 0 0; opacity: 0.9;" data-en="Contact us today for the best land deals." data-si="හොඳම ඉඩම් ගනුදෙනු සඳහා අදම අපව අමතන්න.">Contact us today for the best land deals.</p></div>
-                <a href="#contact" style="background: white; color: var(--accent-color); padding: 12px 30px; border-radius: 50px; font-weight: 800; text-transform: uppercase; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.2);"><span data-en="Contact Us" data-si="අප අමතන්න">Contact Us</span> <i class="fas fa-arrow-right"></i></a>
-            </div>
+    <footer>
+        <div class="footer-address">
+            <span>📍</span> 358, Maya MW, Makumbura, Pannipitiya
         </div>
-        <div class="container" style="padding: 70px 20px 40px; position: relative; z-index: 2;">
-            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px;">
-                <div class="footer-col" data-aos="fade-up" data-aos-delay="0"><div class="footer-logo" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;"><i class="fas fa-map-marked-alt" style="color: var(--accent-color);"></i> JET LANDS</div><p style="color: #a0aab5; line-height: 1.8; margin-bottom: 25px;" data-en="The leader in Sri Lankan real estate. We provide land with clear deeds, development, and trust." data-si="ශ්‍රී ලංකාවේ දේපළ වෙළඳාම් ක්ෂේත්‍රයේ ප්‍රමුඛයා. නිරවුල් ඔප්පු සහ සංවර්ධනය සහිත ඉඩම්.">The leader in Sri Lankan real estate. We provide land with clear deeds, development, and trust.</p><div class="social-links" style="display: flex; gap: 15px;"><a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a><a href="#" class="social-btn youtube"><i class="fab fa-youtube"></i></a></div></div>
-                <div class="footer-col" data-aos="fade-up" data-aos-delay="100"><h4 class="footer-title" data-en="Quick Links" data-si="ක්ෂණික සබැඳි">Quick Links</h4><ul class="footer-links"><li><a href="#home" data-en="Home" data-si="මුල් පිටුව">Home</a></li><li><a href="#about" data-en="About Us" data-si="අපි ගැන">About Us</a></li><li><a href="#gallery" data-en="Properties" data-si="ඉඩම්">Properties</a></li><li><a href="#process" data-en="Buying Process" data-si="මිලදී ගන්නා ක්‍රමය">Buying Process</a></li><li><a href="#contact" data-en="Contact Us" data-si="අප අමතන්න">Contact Us</a></li></ul></div>
-                <div class="footer-col" data-aos="fade-up" data-aos-delay="200"><h4 class="footer-title" data-en="Our Services" data-si="අපගේ සේවාවන්">Our Services</h4><ul class="footer-links"><li><a href="#services" data-en="Land Sales" data-si="ඉඩම් විකිණීම">Land Sales</a></li><li><a href="#services" data-en="Land Surveying" data-si="ඉඩම් මැනීම">Land Surveying</a></li><li><a href="#services" data-en="Legal Services" data-si="නීතිමය සේවාවන්">Legal Services</a></li><li><a href="#services" data-en="Land Clearing" data-si="ඉඩම් පිරිසිදු කිරීම">Land Clearing</a></li><li><a href="#services" data-en="Valuation" data-si="තක්සේරු කිරීම">Valuation</a></li></ul></div>
-                <div class="footer-col" data-aos="fade-up" data-aos-delay="300"><h4 class="footer-title" data-en="Get In Touch" data-si="සම්බන්ධ වන්න">Get In Touch</h4><ul class="contact-list" style="list-style: none; padding: 0;"><li><i class="fas fa-map-marker-alt"></i><span data-en="126/1/1, Court Road, Homagama." data-si="126/1/1, උසාවිය පාර, හෝමාගම.">126/1/1, Court Road, Homagama.</span></li><li><i class="fas fa-phone-alt"></i><div style="display: flex; flex-direction: column;"><a href="tel:0777877204">077 787 7204</a><a href="tel:0762627204">076 262 7204</a></div></li><li><i class="fas fa-envelope"></i><a href="mailto:info@jetlands.com">info@jetlands.com</a></li><li><i class="fas fa-clock"></i><span data-en="Mon - Sun: 8:30 AM - 5:30 PM" data-si="සඳුදා - ඉරිදා: පෙ.ව 8:30 - ප.ව 5:30">Mon - Sun: 8:30 AM - 5:30 PM</span></li></ul></div>
-            </div>
-        </div>
-        <div class="footer-bottom" style="border-top: 1px solid rgba(255,255,255,0.1); padding: 25px 0; background: #151e26; position: relative; z-index: 2;">
-            <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
-                <p style="margin: 0; color: #7f8c8d; font-size: 0.9rem;">&copy; 2026 <strong>Jet Lands (PVT) LTD</strong>. <span data-en="All Rights Reserved." data-si="සියලුම හිමිකම් ඇවිරිණි.">All Rights Reserved.</span></p>
-                <p style="margin: 0; color: #7f8c8d; font-size: 0.85rem;"><span data-en="Your Land Partner" data-si="ඔබේ ඉඩම් සහකරු">Your Land Partner</span></p>
-            </div>
-        </div>
-        <button id="backToTop" onclick="scrollToTop()" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+        <p class="footer-copyright">&copy; 2024 Jet Lands (PVT) LTD. All Rights Reserved.</p>
     </footer>
 
-    <!-- WIDGETS -->
-    <div class="book-float" onclick="openModal()"><i class="fab fa-whatsapp"></i> <span data-en="Reserve Land" data-si="ඉඩමක් වෙන්කරගන්න">Reserve Land</span></div>
-    <div class="chat-widget">
-        <div class="chat-window" id="chatWindow">
-            <div class="chat-header"><span data-en="Jet Lands Support" data-si="පාරිභෝගික සහාය">Jet Lands Support</span><span style="cursor: pointer; font-size: 1.2rem;" onclick="toggleChat()">&times;</span></div>
-            <div class="chat-body" id="chatBody"></div>
-            <div class="chat-footer"><input type="text" id="chatInput" placeholder="..." onkeypress="handleKeyPress(event)"><button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button></div>
-        </div>
-        <div class="chat-bubble" onclick="toggleChat()"><i class="fas fa-comments"></i></div>
-    </div>
-
-    <!-- MODAL -->
-    <div id="bookingModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><span class="close-modal" onclick="closeModal()">&times;</span><h3 data-en="Land Inquiry" data-si="ඉඩම් විමසීම්">Land Inquiry</h3></div>
-            <div class="modal-body">
-                <form onsubmit="sendToWhatsApp(event)">
-                    <div class="form-group"><label data-en="Your Name" data-si="ඔබගේ නම">Your Name</label><input type="text" id="b_name" required></div>
-                    <div class="form-group"><label data-en="Budget Range" data-si="අයවැය">Budget Range</label><select id="b_service"><option value="5-10 Lacks">5-10 Lacks per P</option><option value="10-20 Lacks">10-20 Lacks per P</option><option value="20+ Lacks">20+ Lacks per P</option></select></div>
-                    <div class="form-group"><label data-en="Preferred Area" data-si="කැමති ප්‍රදේශය">Preferred Area</label><input type="text" id="b_location" required></div>
-                    <button type="submit" class="btn-wa"><i class="fab fa-whatsapp"></i> <span data-en="Send via WhatsApp" data-si="WhatsApp මගින් යවන්න">Send via WhatsApp</span></button>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <!-- SCRIPTS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Init AOS with settings for better mobile performance
-        AOS.init({ 
-            offset: 0, 
-            duration: 800, 
-            once: true,
-            disable: window.innerWidth < 500 ? false : false 
-        });
-
-        window.onload = function() {
-            const loader = document.getElementById('loader');
-            loader.style.opacity = '0';
-            setTimeout(() => { loader.style.visibility = 'hidden'; }, 500);
-            adjustHeaderTop();
-            startHeroSlider(); 
-        };
-
-        // --- HERO SLIDER LOGIC ---
-        const heroSlides = [
-            {
-                img: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
-                en_title: 'Own a Prime Land Near NSBM', 
-                en_desc: "Don't think twice. Don't wait until prices rise—reserve your land block today.",
-                si_title: 'රටම දන්න NSBM එක ලඟින්ම ඉඩමක්', 
-                si_desc: 'දෙපාරක් හිතන්න එපා. මිල ඉහළ යනකන් බලාගෙන ඉන්නේ නැතිව, ඔබගේ ඉඩම අදම වෙන්කරවාගන්න.'
-            },
-            {
-                img: 'https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?q=80&w=1920&auto=format&fit=crop',
-                en_title: 'Invest in Prime Locations', 
-                en_desc: 'Lands located near cities with high commercial value and rapid development.',
-                si_title: 'වටිනාම ප්‍රදේශවලින් ආයෝජනය කරන්න', 
-                si_desc: 'වේගයෙන් දියුණු වන නගරවලට ආසන්න වටිනා ඉඩම්.'
-            },
-            {
-                img: 'https://images.unsplash.com/photo-1598335624129-981f42d2a41d?q=80&w=1920&auto=format&fit=crop',
-                en_title: 'Lands with Complete Facilities', 
-                en_desc: 'Electricity, pipe-borne water, and wide access roads for every block.',
-                si_title: 'සියලු පහසුකම් සහිත ඉඩම්', 
-                si_desc: 'සෑම ඉඩම් කොටසකටම විදුලිය, ජලය සහ පුළුල් මාර්ග.'
-            },
-            {
-                img: 'https://images.unsplash.com/photo-1516156008625-3a9d60da923c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
-                en_title: 'Clear Deeds & Title Insurance', 
-                en_desc: '100% legal documents approved by local authorities and lawyers.',
-                si_title: 'නිරවුල් ඔප්පු සහ සහතික', 
-                si_desc: 'නීතිඥයින් සහ පළාත් පාලන ආයතන විසින් අනුමත 100% නිරවුල් ඔප්පු.'
-            }
-        ];
-        let currentSlideIndex = 0;
-        let sliderInterval;
-
-        function startHeroSlider() {
-            // Initial Set
-            updateHeroContent();
-            sliderInterval = setInterval(() => {
-                currentSlideIndex = (currentSlideIndex + 1) % heroSlides.length;
-                updateHeroContent();
-            }, 5000); 
-        }
-
-        function updateHeroContent() {
-            const heroSection = document.getElementById('home');
-            const titleEl = document.getElementById('hero-title');
-            const descEl = document.getElementById('hero-desc');
-            const slide = heroSlides[currentSlideIndex];
-
-            // 1. Change Background
-            heroSection.style.backgroundImage = `var(--gradient-overlay), url('${slide.img}')`;
-
-            // 2. Change Text (Fade Effect)
-            titleEl.style.opacity = 0;
-            descEl.style.opacity = 0;
-
-            setTimeout(() => {
-                if (currentLang === 'si') {
-                    titleEl.innerText = slide.si_title;
-                    descEl.innerText = slide.si_desc;
-                } else {
-                    titleEl.innerText = slide.en_title;
-                    descEl.innerText = slide.en_desc;
-                }
-                titleEl.style.opacity = 1;
-                descEl.style.opacity = 1;
-            }, 500);
-        }
-
-        // --- LANGUAGE SWITCHER ---
-        let currentLang = 'en';
+        // 1. Language Toggle Logic
         function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'si' : 'en';
-            
-            // Auto close menu on mobile when language changed
-            if (window.innerWidth <= 768) {
-                document.getElementById('navLinks').classList.remove('active');
-            }
-
-            updateContent();
+            document.body.classList.toggle('sinhala-mode');
         }
 
-        function updateContent() {
-            if(currentLang === 'si') { 
-                document.body.classList.add('lang-si'); 
-                document.getElementById('langText').innerText = "ENGLISH"; 
-            } else { 
-                document.body.classList.remove('lang-si'); 
-                document.getElementById('langText').innerText = "SINHALA"; 
+        // 2. Section 01: Auto Slider with Typing Effect
+        const slides = document.querySelectorAll('.poster-slide');
+        let currentSlideIndex = 0;
+        let typingTimeout; // To store the timeout ID
+        let slideInterval; // To store the interval ID
+
+        function typeWriter(element, text, i = 0) {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                // Adjust speed here (50ms is standard typing speed)
+                typingTimeout = setTimeout(() => typeWriter(element, text, i + 1), 50);
             }
-
-            // Update Static Text
-            const elements = document.querySelectorAll(`[data-${currentLang}]`);
-            elements.forEach(el => { el.innerText = el.getAttribute(`data-${currentLang}`); });
-
-            // Update Placeholders
-            const inputs = document.querySelectorAll('input, textarea');
-            inputs.forEach(input => {
-                if(currentLang === 'si') { if(input.id === 'chatInput') input.placeholder = "පණිවිඩයක් ලියන්න..."; }
-                else { if(input.id === 'chatInput') input.placeholder = "Type a message..."; }
-            });
-
-            // Update Hero Text Immediately
-            updateHeroContent();
-            
-            setTimeout(adjustHeaderTop, 50);
         }
 
-        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+        function changeSlide() {
+            // 1. Clean up previous slide
+            const prevSlide = slides[currentSlideIndex];
+            prevSlide.classList.remove('active');
+            // Clear text immediately so it doesn't linger
+            prevSlide.querySelector('.typing-text').innerHTML = ""; 
+
+            // 2. Advance Index
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+
+            // 3. Setup New Slide
+            const nextSlide = slides[currentSlideIndex];
+            nextSlide.classList.add('active');
+            
+            // 4. Start Typing Animation
+            const textContainer = nextSlide.querySelector('.typing-text');
+            const textToType = nextSlide.getAttribute('data-text');
+            
+            // Clear any existing typing timeout to prevent overlaps
+            clearTimeout(typingTimeout);
+            textContainer.innerHTML = ""; // Ensure empty before starting
+            typeWriter(textContainer, textToType);
+        }
+
+        // Initialize First Slide Text manually on load
+        window.addEventListener('load', () => {
+             const firstSlide = slides[0];
+             const textContainer = firstSlide.querySelector('.typing-text');
+             const textToType = firstSlide.getAttribute('data-text');
+             typeWriter(textContainer, textToType);
+             
+             // Start the loop (Change every 5 seconds)
+             slideInterval = setInterval(changeSlide, 5000);
+        });
+
+        // 3. Section 03: Auto Horizontal Scroll
+        const slider = document.getElementById('scrollContainer');
         
-        // Navbar Auto-close logic
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) { toggleMenu(); }
-                });
-            });
-        });
-
-        function adjustHeaderTop() {
-            const header = document.getElementById("header");
-            const promoBar = document.querySelector('.promo-bar');
-            const promoHeight = promoBar.offsetHeight;
-            if (window.scrollY > 50) { header.style.top = "0"; } else { header.style.top = promoHeight + "px"; }
-        }
-        window.addEventListener("scroll", adjustHeaderTop);
-        window.addEventListener("resize", adjustHeaderTop);
-
-        // Auto Hide Floating Buttons (90%) and Top Button (95%)
-        window.addEventListener('scroll', () => {
-            const widgets = document.querySelectorAll('.chat-widget, .book-float');
-            const backToTop = document.getElementById("backToTop");
-            const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
-            
-            // Logic for Widgets
-            if (scrollPercent > 0.9) { 
-                widgets.forEach(w => w.classList.add('widget-hidden'));
+        function autoScrollSlider() {
+            // If scrolled to end, go back to start
+            if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
             } else {
-                widgets.forEach(w => w.classList.remove('widget-hidden'));
+                // Scroll width of one card (320px) + gap (20px)
+                slider.scrollBy({ left: 340, behavior: 'smooth' });
             }
+        }
+        
+        // Auto scroll every 3 seconds
+        setInterval(autoScrollSlider, 3000);
 
-            // Logic for Back To Top Button
-            if (window.scrollY > 300) {
-                backToTop.style.display = "block";
-                // Hide if near footer (95%)
-                if (scrollPercent > 0.95) {
-                    backToTop.classList.add('widget-hidden');
-                } else {
-                    backToTop.classList.remove('widget-hidden');
-                }
-            } else {
-                backToTop.style.display = "none";
-            }
-        });
+        // 4. Split Hero Slider (New)
+        const splitSlides = document.querySelectorAll('.split-slide-img');
+        let splitIndex = 0;
 
-        function filterGallery(cat) {
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.style.display = (cat === 'all' || item.classList.contains(cat)) ? 'block' : 'none';
-                item.classList.remove('aos-animate');
-                setTimeout(()=> item.classList.add('aos-animate'), 50);
-            });
+        if (splitSlides.length > 0) {
+            setInterval(() => {
+                splitSlides[splitIndex].classList.remove('active');
+                splitIndex = (splitIndex + 1) % splitSlides.length;
+                splitSlides[splitIndex].classList.add('active');
+            }, 4000); // Change every 4 seconds
         }
 
-        function openModal() { document.getElementById('bookingModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
-        window.onclick = function(event) { if (event.target == document.getElementById('bookingModal')) closeModal(); }
-
-        function sendToWhatsApp(e) {
-            e.preventDefault();
-            const name = document.getElementById('b_name').value;
-            const service = document.getElementById('b_service').value;
-            const loc = document.getElementById('b_location').value;
-            const msg = `*Land Inquiry via Website*%0A%0AName: ${name}%0ABudget: ${service}%0ALocation: ${loc}`;
-            window.open(`https://wa.me/94777877204?text=${msg}`, '_blank');
-            closeModal();
-        }
-
-        let isChatOpen = false;
-        function toggleChat() {
-            const win = document.getElementById('chatWindow');
-            if(!isChatOpen) {
-                win.style.display = 'flex';
-                if(document.getElementById('chatBody').innerHTML === '') {
-                    const greeting = currentLang === 'si' ? "ආයුබෝවන්! Jet Lands වෙත සාදරයෙන් පිළිගනිමු. ඔබට අවශ්‍ය ඉඩම කුමක්ද?" : "Hello! Welcome to Jet Lands. How can we help you find a land today?";
-                    addBotMsg(greeting);
-                }
-            } else { win.style.display = 'none'; }
-            isChatOpen = !isChatOpen;
-        }
-
-        function handleKeyPress(e) { if(e.key === 'Enter') sendMessage(); }
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const txt = input.value.trim();
-            if(!txt) return;
-            addUserMsg(txt);
-            input.value = '';
-            setTimeout(() => {
-                let response = "";
-                const lower = txt.toLowerCase();
-                if(currentLang === 'en') {
-                    if(lower.includes('price') || lower.includes('cost')) response = "Land prices vary by location. Please use the calculator or contact us for a price list.";
-                    else if(lower.includes('location')) response = "We are located at 126/1/1, Court Road, Homagama.";
-                    else if(lower.includes('phone')) response = "Call our sales team: 077 787 7204";
-                    else response = "Thank you! Please contact us on WhatsApp for more land details.";
-                } else {
-                    if(lower.includes('මිල') || lower.includes('ගාස්තු')) response = "ප්‍රදේශය අනුව ඉඩම් මිල වෙනස් වේ. කරුණාකර අපව අමතන්න.";
-                    else if(lower.includes('ලිපිනය') || lower.includes('කොහෙද')) response = "අපගේ ලිපිනය: 126/1/1, උසාවිය පාර, හෝමාගම.";
-                    else if(lower.includes('දුරකථන')) response = "අමතන්න: 077 787 7204";
-                    else response = "ස්තූතියි! වැඩි විස්තර සඳහා WhatsApp හරහා අපව අමතන්න.";
-                }
-                addBotMsg(response);
-            }, 800);
-        }
-
-        function addUserMsg(text) { const div = document.createElement('div'); div.className = 'message user-msg'; div.innerText = text; const body = document.getElementById('chatBody'); body.appendChild(div); body.scrollTop = body.scrollHeight; }
-        function addBotMsg(text) { const div = document.createElement('div'); div.className = 'message bot-msg'; div.innerText = text; const body = document.getElementById('chatBody'); body.appendChild(div); body.scrollTop = body.scrollHeight; }
-		
-        // Auto Slider Logic for Designs (Now Lands)
-        const track = document.getElementById('sliderTrack');
-        const cards = document.querySelectorAll('.slide-card');
-        let currentIndex = 0;
-        let cardWidth = cards[0].offsetWidth;
-        let cardsToShow = window.innerWidth > 992 ? 3 : (window.innerWidth > 600 ? 2 : 1);
-        let maxIndex = cards.length - cardsToShow;
-        let designAutoPlay;
-
-        window.addEventListener('resize', () => {
-            cardWidth = cards[0].offsetWidth;
-            cardsToShow = window.innerWidth > 992 ? 3 : (window.innerWidth > 600 ? 2 : 1);
-            maxIndex = cards.length - cardsToShow;
-            updateSliderPosition();
-        });
-
-        function moveSlide(direction) {
-            currentIndex += direction;
-            if (currentIndex < 0) { currentIndex = maxIndex; } else if (currentIndex > maxIndex) { currentIndex = 0; }
-            updateSliderPosition();
-            resetDesignTimer();
-        }
-
-        function updateSliderPosition() {
-            const translateX = -(currentIndex * (100 / cardsToShow));
-            track.style.transform = `translateX(${translateX}%)`;
-        }
-
-        function startDesignAutoPlay() { designAutoPlay = setInterval(() => { moveSlide(1); }, 3500); }
-        function resetDesignTimer() { clearInterval(designAutoPlay); startDesignAutoPlay(); }
-        startDesignAutoPlay();
-
-        let touchStartX = 0;
-        let touchEndX = 0;
-        track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; clearInterval(designAutoPlay); });
-        track.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipe(); startDesignAutoPlay(); });
-        function handleSwipe() { if (touchEndX < touchStartX - 50) moveSlide(1); if (touchEndX > touchStartX + 50) moveSlide(-1); }
-	
-        // Calculator Updated for Land
-        function calculateCost() {
-            const area = document.getElementById('calc-area').value;
-            const rate = document.getElementById('calc-type').value;
-            const resultBox = document.getElementById('calc-result');
-            const totalSpan = document.getElementById('total-cost');
-            if(area && area > 0) {
-                const total = area * rate;
-                totalSpan.innerText = total.toLocaleString('en-US');
-                resultBox.style.display = 'block';
-            } else { alert("Please enter valid number of perches!"); }
-        }
-    
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
-
-        function submitWhatsappForm(e) {
-            e.preventDefault();
-            const name = document.getElementById('w-name').value;
-            const phone = document.getElementById('w-phone').value;
-            const location = document.getElementById('w-location').value;
-            const service = document.getElementById('w-service').value;
-            const note = document.getElementById('w-message').value;
-            const message = `*🔔 NEW LAND INQUIRY*%0A__________________________%0A%0A👤 *Name:* ${name}%0A📞 *Phone:* ${phone}%0A📍 *Preferred Area:* ${location}%0A🏞 *Type:* ${service}%0A📝 *Budget/Note:* ${note}%0A__________________________%0A%0A*Please contact me regarding this.*`;
-            const url = `https://wa.me/94777877204?text=${message}`;
-            window.open(url, '_blank');
-        }
     </script>
 </body>
 </html>
