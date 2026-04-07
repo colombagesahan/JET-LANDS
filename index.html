@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jet Lands | Premium Real Estate & Land Sales</title>
+    <meta name="description" content="Jet Lands (PVT) LTD - Premium land plots with 100% clear deeds. Specializing in high-growth areas like NSBM Green University zone.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌳</text></svg>">
+
+    <!-- AOS Library CSS (For Scroll Animations) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Abhaya+Libre:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-color: #1a472a; /* Jet Lands Dark Green */
+            --primary-dark: #0f2c19;
+            --accent-color: #d1a128; /* Jet Lands Gold/Mustard */
+            --accent-hover: #b58b20;
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --text-main: #333333;
+            --text-light: #666666;
+            
+            --font-en: 'Inter', sans-serif;
+            --font-si: 'Abhaya Libre', serif;
+            
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --gradient-overlay: linear-gradient(rgba(26, 71, 42, 0.85), rgba(26, 71, 42, 0.75));
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-en);
+            color: var(--text-main);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Sinhala Mode Class */
+        body.lang-si { font-family: var(--font-si); }
+        body.lang-si h1, body.lang-si h2, body.lang-si h3, body.lang-si .btn { font-weight: 800; }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- 1. LOADER --- */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--white); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+        }
+        .spinner {
+            width: 50px; height: 50px; border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--accent-color); border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- 2. PROMO BAR --- */
+        .promo-bar {
+            background: var(--accent-color); color: var(--primary-dark);
+            text-align: center; padding: 8px 10px;
+            font-size: 0.9rem; font-weight: 800;
+            position: relative; z-index: 1002;
+            min-height: 38px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: fixed; width: 100%; top: 38px; z-index: 1000;
+            transition: top 0.1s;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center; height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem; font-weight: 800; color: var(--primary-color);
+            text-transform: uppercase; line-height: 1.1;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .logo i { color: var(--accent-color); font-size: 1.8rem; }
+        .logo span { color: var(--text-light); font-size: 0.4em; display: block; font-weight: 600; letter-spacing: 2px;}
+
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { font-weight: 600; color: var(--primary-color); font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        .lang-btn {
+            border: 2px solid var(--primary-color);
+            padding: 5px 15px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 700;
+            cursor: pointer; background: transparent;
+            color: var(--primary-color); transition: 0.3s;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .lang-btn:hover { background: var(--primary-color); color: white; }
+
+        .btn-contact {
+            background: var(--primary-color); color: white !important;
+            padding: 10px 25px !important; border-radius: 4px;
+            transition: 0.3s !important;
+        }
+        .btn-contact:hover { background: var(--accent-color); color: var(--primary-dark) !important; transform: translateY(-2px); }
+
+        .menu-toggle { display: none; font-size: 1.8rem; color: var(--primary-color); cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background-color: var(--primary-color);
+            background-size: cover; background-position: center;
+            height: 100vh; display: flex; align-items: center;
+            text-align: center; color: var(--white); padding-top: 118px;
+            position: relative;
+            transition: background-image 1s ease-in-out;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); 
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative; z-index: 2;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem; margin-bottom: 20px;
+            line-height: 1.2; text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            color: var(--white);
+        }
+        .hero-content p {
+            font-size: 1.3rem; margin-bottom: 35px;
+            font-weight: 300; max-width: 800px; margin-left: auto; margin-right: auto;
+            color: #f1f1f1; text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .hero-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        
+        .btn {
+            padding: 15px 35px; font-size: 1rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px;
+            border-radius: 4px; border: 2px solid transparent; cursor: pointer;
+            transition: 0.3s; display: inline-block;
+        }
+        .btn-primary { background: var(--accent-color); color: var(--primary-dark); }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px); }
+        .btn-outline { border-color: white; color: white; background: transparent; }
+        .btn-outline:hover { background: white; color: var(--primary-color); }
+
+        /* --- SECTIONS --- */
+        section { padding: 80px 0; }
+        .bg-light { background-color: var(--light-bg); }
+
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 {
+            font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; font-weight: 800;
+        }
+        .section-header .line {
+            width: 80px; height: 5px; background: var(--accent-color);
+            margin: 0 auto; border-radius: 2px;
+        }
+
+        /* --- SERVICES GRID --- */
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; padding: 0 10px;
+        }
+        .service-card {
+            background: white; padding: 40px 25px; text-align: center;
+            border-radius: 8px; box-shadow: var(--shadow);
+            transition: 0.3s; border-bottom: 4px solid transparent;
+            height: 100%;
+        }
+        .service-card:hover { transform: translateY(-10px); border-bottom-color: var(--accent-color); }
+        .service-icon {
+            font-size: 3rem; color: var(--accent-color); margin-bottom: 25px;
+        }
+        .service-card h3 {
+            font-size: 1.4rem; margin-bottom: 15px; color: var(--primary-color);
+        }
+        .service-card p { color: var(--text-light); font-size: 0.95rem; }
+
+        /* --- GALLERY --- */
+        .gallery-filter { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
+        .filter-btn {
+            background: transparent; border: 2px solid var(--primary-color);
+            color: var(--primary-color); padding: 8px 25px; border-radius: 30px;
+            cursor: pointer; font-weight: 700; transition: 0.3s;
+        }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary-color); color: white; }
+
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+        }
+        .gallery-item {
+            position: relative; height: 280px; border-radius: 8px; overflow: hidden; cursor: pointer;
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(transparent, rgba(26, 71, 42, 0.95));
+            color: white; padding: 20px; transform: translateY(100%); transition: 0.3s;
+        }
+        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+
+        /* --- CONTACT --- */
+        .contact-section { background: var(--primary-color); color: white; }
+        .contact-section h2 { color: white; }
+        .contact-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;
+        }
+        .info-box h3 { color: var(--accent-color); margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; display: inline-block;}
+        .info-item { display: flex; gap: 15px; margin-bottom: 20px; font-size: 1.1rem; }
+        .info-item i { color: var(--accent-color); margin-top: 5px; flex-shrink: 0; }
+        .info-item a { color: #ccc; word-break: break-all; } .info-item a:hover { color: white; }
+        
+        .map-wrapper { height: 100%; min-height: 350px; border-radius: 8px; overflow: hidden; }
+
+        /* --- FOOTER --- */
+        .footer-title {
+            color: white; font-size: 1.2rem; font-weight: 700;
+            margin-bottom: 25px; position: relative; padding-bottom: 10px;
+        }
+        .footer-title::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 40px; height: 3px; background: var(--accent-color);
+        }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #a0aab5; transition: 0.3s; display: inline-flex; align-items: center; }
+        .footer-links a::before {
+            content: '\f105'; font-family: 'Font Awesome 5 Free'; font-weight: 900;
+            margin-right: 8px; color: var(--accent-color); opacity: 0;
+            transform: translateX(-10px); transition: 0.3s;
+        }
+        .footer-links a:hover { color: white; padding-left: 5px; }
+        .footer-links a:hover::before { opacity: 1; transform: translateX(0); }
+
+        .contact-list li { display: flex; gap: 15px; margin-bottom: 20px; color: #a0aab5; align-items: flex-start; }
+        .contact-list i { color: var(--accent-color); font-size: 1.1rem; margin-top: 4px; }
+        .contact-list a { color: #a0aab5; transition: 0.3s; word-break: break-all; }
+        .contact-list a:hover { color: white; }
+
+        .social-btn {
+            width: 40px; height: 40px; background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; color: white; transition: 0.3s;
+        }
+        .social-btn:hover { background: var(--accent-color); color: var(--primary-dark); transform: translateY(-3px); }
+        
+        #backToTop {
+            display: none; position: fixed; bottom: 30px; left: 30px; z-index: 99;
+            font-size: 1.2rem; border: none; outline: none;
+            background-color: var(--primary-color); color: white;
+            cursor: pointer; padding: 12px 15px; border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+        #backToTop:hover { background-color: var(--accent-color); color: var(--primary-dark); transform: translateY(-3px); }
+
+        /* --- WIDGETS --- */
+        .chat-widget { 
+            position: fixed; bottom: 30px; right: 30px; z-index: 2000; 
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+        .chat-bubble {
+            background: var(--accent-color); color: var(--primary-dark); width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; cursor: pointer; box-shadow: 0 10px 20px rgba(209, 161, 40, 0.4);
+            transition: 0.3s; animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(209, 161, 40, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(209, 161, 40, 0); } 100% { box-shadow: 0 0 0 0 rgba(209, 161, 40, 0); } }
+        
+        .chat-window {
+            position: absolute; bottom: 80px; right: 0; width: 320px; height: 450px;
+            background: white; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee;
+        }
+        .chat-header { background: var(--primary-color); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;}
+        .chat-body { flex: 1; padding: 15px; background: #f9f9f9; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .message { padding: 10px 15px; border-radius: 10px; font-size: 0.9rem; max-width: 85%; }
+        .bot-msg { background: white; border: 1px solid #e0e0e0; align-self: flex-start; border-bottom-left-radius: 0; }
+        .user-msg { background: var(--primary-color); color: white; align-self: flex-end; border-bottom-right-radius: 0; }
+        .chat-footer { padding: 10px; background: white; border-top: 1px solid #eee; display: flex; }
+        .chat-footer input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
+        .chat-footer button { background: var(--accent-color); color: var(--primary-dark); border: none; width: 35px; height: 35px; border-radius: 50%; margin-left: 10px; cursor: pointer; }
+
+        .book-float {
+            position: fixed; bottom: 110px; right: 30px;
+            background: linear-gradient(45deg, #1a472a, #235c37); color: white;
+            padding: 12px 25px; border-radius: 50px; font-weight: 700;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1999;
+            display: flex; gap: 8px; align-items: center; border: 2px solid var(--accent-color);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+        .book-float:hover { transform: scale(1.05); }
+
+        .widget-hidden { transform: translateY(150px) !important; opacity: 0 !important; pointer-events: none !important; }
+
+        /* --- MODAL --- */
+        .modal {
+            display: none; position: fixed; z-index: 3000; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px); justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: white; width: 90%; max-width: 450px; border-radius: 12px;
+            overflow: hidden; animation: zoomIn 0.3s;
+        }
+        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-header { background: var(--primary-color); color: white; padding: 20px; text-align: center; position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 1.5rem; }
+        .modal-body { padding: 25px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; }
+        .btn-wa { background: #25D366; color: white; border: none; width: 100%; padding: 15px; font-weight: 700; border-radius: 6px; cursor: pointer; font-size: 1rem; display: flex; justify-content: center; gap: 10px; }
+        .btn-wa:hover { background: #128C7E; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; flex-direction: column; position: absolute;
+                top: 100%; left: 0; width: 100%; background: white; padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 1px solid #eee;
+            }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .chat-widget { right: 20px; bottom: 20px; }
+            .book-float { right: 20px; bottom: 100px; padding: 10px 20px; font-size: 0.9rem; }
+        }
+
+        @media (max-width: 350px) {
+            .logo { font-size: 1rem; }
+            .hero-content h1 { font-size: 1.5rem; }
+            .btn { padding: 10px 20px; width: 100%; margin-bottom: 10px; }
+            .services-grid, .gallery-grid, .contact-grid { grid-template-columns: 1fr; }
+            .chat-window { width: 90vw; right: -10px; bottom: 70px; }
+            .modal-content { width: 95%; max-height: 85vh; overflow-y: auto; }
+        }
+        
+		.highlight-item:hover { background: #0f2c19 !important; border-color: var(--accent-color) !important;}
+        .highlight-item:nth-child(2):hover { background: #b58b20 !important; }
+
+        @media (max-width: 768px) {
+            #highlights { margin-top: 0 !important; background: var(--light-bg); padding: 40px 0 !important; }
+            .highlight-grid { display: block !important; box-shadow: none !important; }
+            .highlight-item { margin-bottom: 15px; border-radius: 8px; transform: none !important; border: none !important; }
+        }
+		
+        /* LATEST DESIGNS SLIDER CSS */
+        .design-slider-wrapper { position: relative; width: 100%; overflow: hidden; padding: 20px 0; }
+        .slider-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: grab; }
+        .slide-card { min-width: 33.333%; padding: 15px; box-sizing: border-box; }
+        .design-image { position: relative; border-radius: 15px; overflow: hidden; height: 350px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .design-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .design-image:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        .design-image:hover img { transform: scale(1.1); }
+        .design-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(26, 71, 42, 0.95), transparent); padding: 20px; color: white; }
+        .design-info h3 { font-size: 1.2rem; margin-bottom: 5px; font-weight: 700; color: white;}
+        .design-info p { font-size: 0.9rem; color: var(--accent-color); font-weight: 600; }
+        .badge-new { position: absolute; top: 15px; right: 15px; background: var(--accent-color); color: var(--primary-dark); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; z-index: 2; }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: white; color: var(--primary-color); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+        .slider-btn:hover { background: var(--primary-color); color: white; }
+        .prev-btn { left: 10px; } .next-btn { right: 10px; }
+        .btn-see-all { display: inline-flex; align-items: center; gap: 10px; padding: 12px 35px; background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); font-weight: 700; border-radius: 50px; transition: all 0.3s; text-transform: uppercase; font-size: 0.9rem; }
+        .btn-see-all:hover { background: var(--primary-color); color: white; gap: 15px; }
+        @media (max-width: 992px) { .slide-card { min-width: 50%; } }
+        @media (max-width: 600px) { .slide-card { min-width: 100%; } .design-image { height: 300px; } .slider-btn { display: none; } }
+
+        /* WHATSAPP FORM STYLES */
+        .form-wrapper { background: white; max-width: 800px; margin: 0 auto; border-radius: 10px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .form-header { background: var(--primary-color); color: white; padding: 30px; text-align: center; }
+        .form-header h2 { margin-bottom: 5px; color: var(--accent-color); }
+        .form-header p { opacity: 0.9; font-size: 0.9rem; }
+        form { padding: 40px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; }
+        .input-group.full-width { grid-column: 1 / -1; }
+        .input-group label { font-weight: 700; margin-bottom: 8px; color: var(--primary-color); font-size: 0.9rem; }
+        .input-group label i { color: var(--accent-color); margin-right: 5px; }
+        .input-group input, .input-group select, .input-group textarea { padding: 12px; border: 2px solid #eee; border-radius: 5px; font-family: inherit; transition: 0.3s; }
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus { border-color: var(--accent-color); outline: none; }
+        .wa-submit-btn { background: #25D366; color: white; border: none; width: 100%; padding: 15px; font-size: 1.1rem; font-weight: 800; border-radius: 5px; margin-top: 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; text-transform: uppercase; }
+        .wa-submit-btn:hover { background: #128C7E; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
+        @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } form { padding: 25px; } }
+	
+	/* =========================================
+       EMERGENCY FIX FOR 250px SCREENS
+       ========================================= */
+    @media screen and (max-width: 359px) {
+        
+        .container { padding-left: 10px !important; padding-right: 10px !important; width: 100% !important; overflow-x: hidden !important; }
+        body, html { overflow-x: hidden !important; max-width: 100% !important; }
+
+        .services-grid, .gallery-grid, .contact-grid, .process-grid, .pricing-grid, 
+        .testimonial-grid, .promise-grid, .about-grid, .quality-grid, .highlight-grid {
+            grid-template-columns: 1fr !important; gap: 20px !important; display: block !important;
+        }
+
+        .service-card, .gallery-item, .process-item, .price-card, .review-card, 
+        .promise-card, .highlight-item { margin-bottom: 25px !important; width: 100% !important; }
+
+        h1 { font-size: 1.8rem !important; line-height: 1.2 !important; }
+        h2 { font-size: 1.5rem !important; }
+        .hero-content p { font-size: 1rem !important; }
+
+        .hero-btns { flex-direction: column !important; gap: 10px !important; width: 100% !important; }
+        .hero-btns .btn { width: 100% !important; display: block !important; margin: 5px 0 !important; }
+
+        .chat-widget { right: 10px !important; bottom: 10px !important; transform: scale(0.8) !important; transform-origin: bottom right !important; }
+        .book-float { right: 10px !important; bottom: 80px !important; padding: 8px 15px !important; font-size: 0.8rem !important; width: auto !important; }
+
+        .comparison-table-wrapper { overflow: visible !important; width: 100% !important; padding: 0 5px; }
+        .comparison-table-wrapper table { width: 100% !important; display: block !important; min-width: 0 !important; }
+        .comparison-table-wrapper thead { display: none !important; }
+        .comparison-table-wrapper tbody { display: block !important; width: 100% !important; }
+        .comparison-table-wrapper tr { display: block !important; margin-bottom: 20px; border: 1px solid #e0e0e0; border-radius: 12px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; width: 100% !important; }
+        .comparison-table-wrapper td { display: block !important; width: 100% !important; border: none; padding: 15px !important; text-align: left !important; border-bottom: 1px solid #f0f0f0; }
+        .comparison-table-wrapper td:first-child { background: var(--primary-color); color: white; font-weight: 800; text-align: center !important; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--accent-color); font-size: 1.1rem; }
+        .comparison-table-wrapper td:last-child { border-bottom: none; }
+        .comparison-table-wrapper td:not(:first-child)::before { content: attr(data-label); display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; color: #888; letter-spacing: 0.5px; }
+
+        .comparison-container { height: 300px !important; }
+        .img-comp-container { height: 300px !important; }
+        .logo { font-size: 1.1rem !important; flex-direction: column; align-items: flex-start; }
+        .logo i { font-size: 1.2rem !important; margin-bottom: 2px; }
+        .navbar { padding: 0 10px !important; height: auto !important; min-height: 60px; padding-top: 5px !important; padding-bottom: 5px !important; }
+        header { padding: 0 !important; }
+        .menu-toggle { font-size: 1.5rem !important; }
+        .form-grid { grid-template-columns: 1fr !important; }
+        .input-group input, .input-group select { font-size: 0.9rem !important; }
+        #highlights { margin-top: 0 !important; padding-top: 30px !important; background: var(--light-bg) !important; }
+        .promo-bar { font-size: 0.75rem !important; padding: 5px !important; line-height: 1.3; }
+
+        .info-item, .contact-list li { flex-wrap: wrap; }
+        .info-item a, .contact-list a { word-break: break-all; white-space: normal; font-size: 0.9rem; }
+        
+        .map-wrapper { height: 300px !important; min-height: 0 !important; margin-top: 20px; }
+        .contact-grid { display: flex !important; flex-direction: column; }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- LOADER -->
+    <div id="loader"><div class="spinner"></div></div>
+
+    <!-- PROMO BAR -->
+    <div class="promo-bar" data-en="Special: Reserve your land today and enjoy easy payment plans!" data-si="විශේෂ දීමනාව: අදම ඔබේ බිම් කොටස වෙන්කර පහසු ගෙවීමේ ක්‍රම භුක්ති විඳින්න!">
+        Special: Reserve your land today and enjoy easy payment plans!
+    </div>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container navbar">
+            <div class="logo">
+                <i class="fas fa-tree"></i>
+                <div>JET LANDS<br><span>(PVT) LTD</span></div>
+            </div>
+            
+            <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#home" data-en="Home" data-si="මුල් පිටුව">Home</a>
+                <a href="#about" data-en="About" data-si="අපි ගැන">About</a>
+                <a href="#services" data-en="Features" data-si="පහසුකම්">Features</a>
+                <a href="#gallery" data-en="Lands" data-si="බිම් කොටස්">Lands</a>
+                
+                <!-- Language Switcher -->
+                <button class="lang-btn" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i> <span id="langText">SINHALA</span>
+                </button>
+
+                <a href="#contact" class="btn-contact" data-en="Contact Us" data-si="අප අමතන්න">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+        <div class="container hero-content" data-aos="fade-up">
+            <h1 id="hero-title">Premium Lands for Your Future</h1>
+            <p id="hero-desc">Invest in highly residential areas like the NSBM Green University zone with 100% clear deeds.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn btn-primary" data-en="Reserve a Plot" data-si="බිම් කොටසක් වෙන්කරන්න">Reserve a Plot</a>
+                <a href="#gallery" class="btn btn-outline" data-en="View Projects" data-si="ව්‍යාපෘති බලන්න">View Projects</a>
+            </div>
+        </div>
+    </section>
+	
+	<!-- HIGHLIGHTS SECTION -->
+    <section id="highlights" style="position: relative; z-index: 50; margin-top: -80px; padding-bottom: 0;">
+        <div class="container">
+            <div class="highlight-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-radius: 8px; overflow: hidden;">
+                <div class="highlight-item" data-aos="fade-up" data-aos-delay="0" style="background: var(--primary-color); padding: 40px 30px; text-align: center; color: white; border-right: 1px solid rgba(255,255,255,0.1); transition: 0.3s; border: 2px solid transparent;">
+                    <i class="fas fa-file-signature" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 10px;" data-en="100% Clear Deeds" data-si="100% නිරවුල් ඔප්පු">100% Clear Deeds</h3>
+                    <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);" data-en="Supervised by legal professionals ensuring zero legal hassles." data-si="නීති වෘත්තිකයන්ගේ අධීක්ෂණය යටතේ නිරවුල් ඔප්පු ලබා දීම.">Supervised by legal professionals ensuring zero legal hassles.</p>
+                </div>
+                <div class="highlight-item" data-aos="fade-up" data-aos-delay="100" style="background: var(--accent-color); padding: 40px 30px; text-align: center; color: var(--primary-dark); position: relative; transform: scaleY(1.05); z-index: 2; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+                    <i class="fas fa-map-marked-alt" style="font-size: 2.5rem; color: var(--primary-dark); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 10px;" data-en="High-Growth Areas" data-si="ඉහළ වටිනාකමක් ඇති ප්‍රදේශ">High-Growth Areas</h3>
+                    <p style="font-size: 0.9rem; color: rgba(15, 44, 25, 0.85);" data-en="Specializing in prime locations like the NSBM Green University zone." data-si="NSBM හරිත විශ්වවිද්‍යාල කලාපය වැනි ඉහළ ආයෝජන වටිනාකමක් ඇති බිම්.">Specializing in prime locations like the NSBM Green University zone.</p>
+                </div>
+                <div class="highlight-item" data-aos="fade-up" data-aos-delay="200" style="background: var(--primary-color); padding: 40px 30px; text-align: center; color: white; border-left: 1px solid rgba(255,255,255,0.1); transition: 0.3s; border: 2px solid transparent;">
+                    <i class="fas fa-hand-holding-usd" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 10px;" data-en="Bank Loan Facilities" data-si="බැංකු ණය පහසුකම්">Bank Loan Facilities</h3>
+                    <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);" data-en="Easy payment plans and seamless bank loan arrangements for buyers." data-si="ගැනුම්කරුවන් සඳහා පහසු ගෙවීමේ ක්‍රම සහ බැංකු ණය පහසුකම්.">Easy payment plans and seamless bank loan arrangements for buyers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- LATEST LANDS SLIDER SECTION -->
+    <section id="latest-designs" style="background-color: #f8f9fa; padding-top: 100px; padding-bottom: 80px; overflow: hidden;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-down">
+                <h2 data-en="Our Latest Land Projects" data-si="අපගේ නවතම ඉඩම් ව්‍යාපෘති">Our Latest Land Projects</h2>
+                <div class="line"></div>
+                <p style="color: var(--text-light); max-width: 600px; margin: 0 auto;" data-en="Explore highly residential and commercial plots ready for immediate development." data-si="ඉදි කිරීම් සඳහා සූදානම් කර ඇති අගනා නේවාසික සහ වාණිජ බිම් කොටස්.">Explore highly residential and commercial plots ready for immediate development.</p>
+            </div>
+            <div class="design-slider-wrapper" data-aos="fade-up">
+                <button class="slider-btn prev-btn" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next-btn" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="slider-track" id="sliderTrack">
+                    <div class="slide-card"><div class="design-image"><span class="badge-new">NSBM ZONE</span><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Green Plot"><div class="design-info"><h3 data-en="Green View Estate" data-si="ග්‍රීන් විව් වත්ත">Green View Estate</h3><p>Pitipana, Homagama</p></div></div></div>
+                    <div class="slide-card"><div class="design-image"><span class="badge-new">SELLING FAST</span><img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Suburban Land"><div class="design-info"><h3 data-en="Urban Square" data-si="අර්බන් ස්කුවෙයාර්">Urban Square</h3><p>Makumbura</p></div></div></div>
+                    <div class="slide-card"><div class="design-image"><span class="badge-new">PRIME</span><img src="https://images.unsplash.com/photo-1513880989635-6eb491ce7f5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Highway Plot"><div class="design-info"><h3 data-en="Highway Residencies" data-si="හයිවේ රෙසිඩන්සීස්">Highway Residencies</h3><p>Pannipitiya</p></div></div></div>
+                    <div class="slide-card"><div class="design-image"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Nature Land"><div class="design-info"><h3 data-en="Nature's Bliss" data-si="නේචර්ස් බ්ලිස්">Nature's Bliss</h3><p>Godagama</p></div></div></div>
+                    <div class="slide-card"><div class="design-image"><span class="badge-new">HOT</span><img src="https://images.unsplash.com/photo-1508344928928-7165b67de128?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="City Plot"><div class="design-info"><h3 data-en="City Center Plots" data-si="සිටි සෙන්ටර් ඉඩම්">City Center Plots</h3><p>Kottawa</p></div></div></div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#contact" class="btn-see-all"><span data-en="Inquire Now" data-si="දැන්ම විමසන්න">Inquire Now</span> <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+<!-- ABOUT SECTION -->
+    <section id="about" style="background-color: #fff;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="About Jet Lands" data-si="අපි ගැන">About Jet Lands</h2>
+                <div class="line"></div>
+            </div>
+            <div class="about-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center;">
+                <div class="about-img-wrapper" data-aos="fade-right" style="position: relative; background: var(--light-bg); padding: 40px; border-radius: 10px; text-align: center; border: 1px solid #e0e0e0;">
+                    <div style="width: 200px; height: 200px; background: #ddd; margin: 0 auto 20px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #888;">
+                        <i class="fas fa-user-tie" style="font-size: 5rem; color: #ccc;"></i>
+                    </div>
+                    <h3 style="color: var(--text-light); font-weight: 600;">Managing Director</h3>
+                    <div style="position: absolute; bottom: 20px; right: 20px; background: var(--accent-color); color: var(--primary-dark); padding: 10px 20px; border-radius: 30px; font-weight: 800; font-size: 0.9rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+                        MANAGING DIRECTOR
+                    </div>
+                </div>
+                <div class="about-content" data-aos="fade-left" style="background: white; border-radius: 10px; padding: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); border-left: 5px solid var(--primary-color);">
+                    <h3 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 5px; font-weight: 800;" data-en="Manjula Makumbura" data-si="මංජුල මාකුඹුර">Manjula Makumbura</h3>
+                    <p style="color: var(--text-light); font-style: italic; margin-bottom: 25px; font-weight: 600;" data-en="Attorney at Law" data-si="නීතීඥ">Attorney at Law</p>
+                    
+                    <p style="margin-bottom: 20px; color: var(--text-main); text-align: justify; line-height: 1.8;" data-en="Jet Lands (PVT) LTD is a trusted name in the Sri Lankan real estate sector, dedicated to delivering premium property solutions. With a legal background, our leadership ensures that every plot we sell comes with 100% clear deeds and zero legal hassles." data-si="Jet Lands (PVT) LTD යනු ශ්‍රී ලංකාවේ දේපල වෙළඳාම් ක්ෂේත්‍රයේ විශ්වාසදායක නාමයකි. නීතිමය පසුබිමක් සහිත අපගේ නායකත්වය යටතේ, අප විසින් අලෙවි කරන සෑම බිම් කොටසක්ම 100% නිරවුල් ඔප්පු සහිතව ලබා දීමට අපි සහතික වෙමු.">Jet Lands (PVT) LTD is a trusted name in the Sri Lankan real estate sector, dedicated to delivering premium property solutions. With a legal background, our leadership ensures that every plot we sell comes with 100% clear deeds and zero legal hassles.</p>
+                    
+                    <p style="margin-bottom: 30px; color: var(--text-main); text-align: justify; line-height: 1.8;" data-en="We specialize in high-growth areas like the NSBM Green University zone, ensuring your investment multiplies in value safely and securely." data-si="NSBM හරිත විශ්වවිද්‍යාල කලාපය වැනි ඉහළ වටිනාකමක් ඇති ප්‍රදේශ වෙත අපි විශේෂ අවධානයක් යොමු කරන අතර, ඔබේ ආයෝජනයේ වටිනාකම සුරක්ෂිතව ඉහළ යන බවට සහතික වෙමු.">We specialize in high-growth areas like the NSBM Green University zone, ensuring your investment multiplies in value safely and securely.</p>
+                    
+                    <div style="background: var(--light-bg); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent-color);">
+                        <p style="font-weight: 700; color: var(--primary-color); font-style: italic; margin: 0;" data-en="&quot;Your trust is our most valuable asset.&quot;" data-si="&quot;ඔබේ විශ්වාසය අපගේ වටිනාම වත්කමයි.&quot;">"Your trust is our most valuable asset."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- CTA PRE-FOOTER BANNER SECTION (From Screenshot 2) -->
+    <section style="background-color: var(--primary-color); color: white; padding: 60px 0; text-align: center;">
+        <div class="container" data-aos="zoom-in">
+            <h2 style="font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; color: white;" data-en="Join the lucky 06 people." data-si="වාසනාවන්ත 06 දෙනා අතරට එක්වන්න.">Join the lucky 06 people.</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9;" data-en="Reserve your land today. Call now." data-si="අදම ඔබේ බිම් කොටස වෙන්කරවා ගන්න. දැන්ම අමතන්න.">Reserve your land today. Call now.</p>
+            <a href="tel:0755229229" style="font-size: 3.5rem; font-weight: 800; color: var(--accent-color); display: inline-block; letter-spacing: 2px;">0755 229 229</a>
+        </div>
+    </section>
+	
+    <!-- Why Choose Us? SECTION -->
+    <section id="Choose">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="Why Choose Jet Lands?" data-si="අපව තෝරාගත යුත්තේ ඇයි?">Why Choose Jet Lands?</h2>
+                <div class="line"></div>
+            </div>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;" data-aos="fade-up">
+                <p style="font-size: 1.2rem; margin-bottom: 20px;" data-en="We don't just sell land; we secure your future. Every plot is meticulously developed and legally verified." data-si="අපි ඉඩම් විකුණන්නේ පමණක් නොවේ, ඔබේ අනාගතය සුරක්ෂිත කරමු. සෑම බිම් කොටසක්ම මනාව සංවර්ධනය කර නීතිමය වශයෙන් තහවුරු කර ඇත.">We don't just sell land; we secure your future. Every plot is meticulously developed and legally verified.</p>
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+                    <div style="background: var(--light-bg); padding: 15px 30px; border-radius: 5px; border-bottom: 3px solid var(--accent-color);">
+                        <h3 style="color: var(--primary-color); font-size: 2rem;">100%</h3>
+                        <span style="font-weight: 600;" data-en="Clear Titles" data-si="නිරවුල් ඔප්පු">Clear Titles</span>
+                    </div>
+                    <div style="background: var(--light-bg); padding: 15px 30px; border-radius: 5px; border-bottom: 3px solid var(--accent-color);">
+                        <h3 style="color: var(--primary-color); font-size: 2rem;">NSBM</h3>
+                        <span style="font-weight: 600;" data-en="Prime Zone" data-si="අගනා කලාපය">Prime Zone</span>
+                    </div>
+                    <div style="background: var(--light-bg); padding: 15px 30px; border-radius: 5px; border-bottom: 3px solid var(--accent-color);">
+                        <h3 style="color: var(--primary-color); font-size: 2rem;">High</h3>
+                        <span style="font-weight: 600;" data-en="ROI" data-si="ආයෝජන ප්‍රතිලාභ">ROI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES (FEATURES) SECTION -->
+    <section id="services" class="bg-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="Land Features & Offerings" data-si="ඉඩම් පහසුකම්">Land Features & Offerings</h2>
+                <div class="line"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="0"><div class="service-icon"><i class="fas fa-road"></i></div><h3 data-en="Paved Roads" data-si="කාපට් යෙදූ මාර්ග">Paved Roads</h3><p data-en="Wide, carpeted internal roads for easy access to every plot." data-si="සෑම බිම් කොටසකටම පහසුවෙන් පිවිසීමට පුළුල් කාපට් මාර්ග.">Wide, carpeted internal roads for easy access to every plot.</p></div>
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="100"><div class="service-icon"><i class="fas fa-plug"></i></div><h3 data-en="Three-Phase Electricity" data-si="තෙකලා විදුලිය">Three-Phase Electricity</h3><p data-en="Ready-to-connect power grid for residential and commercial needs." data-si="නේවාසික සහ වාණිජ අවශ්‍යතා සඳහා සූදානම් කළ විදුලි පද්ධතිය.">Ready-to-connect power grid for residential and commercial needs.</p></div>
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="200"><div class="service-icon"><i class="fas fa-faucet"></i></div><h3 data-en="Pipe-Borne Water" data-si="නළ ජලය">Pipe-Borne Water</h3><p data-en="Uninterrupted water supply lines installed to every property." data-si="සෑම ඉඩමකටම අඛණ්ඩ ජල සැපයුම් මාර්ග ලබා දී ඇත.">Uninterrupted water supply lines installed to every property.</p></div>
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="300"><div class="service-icon"><i class="fas fa-balance-scale"></i></div><h3 data-en="Legal Support" data-si="නීතිමය සහාය">Legal Support</h3><p data-en="Attorney-supervised deed transfers ensuring peace of mind." data-si="නීතීඥ උපදෙස් මත සිදුවන නිරවුල් ඔප්පු පවරීම්.">Attorney-supervised deed transfers ensuring peace of mind.</p></div>
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="400"><div class="service-icon"><i class="fas fa-landmark"></i></div><h3 data-en="Bank Loan Assistance" data-si="බැංකු ණය සහාය">Bank Loan Assistance</h3><p data-en="We handle all paperwork required for quick bank loan approvals." data-si="ඉක්මන් බැංකු ණය අනුමැතිය සඳහා අවශ්‍ය ලියකියවිලි අපි සකසමු.">We handle all paperwork required for quick bank loan approvals.</p></div>
+                <div class="service-card" data-aos="zoom-in" data-aos-delay="500"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3 data-en="Investment Guidance" data-si="ආයෝජන උපදෙස්">Investment Guidance</h3><p data-en="Consultation on plots with the highest return on investment." data-si="ඉහළම ප්‍රතිලාභ ලබා දෙන බිම් කොටස් පිළිබඳව උපදෙස්.">Consultation on plots with the highest return on investment.</p></div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- VIDEO TOUR SECTION -->
+    <section id="video-tour" style="position: relative; height: 400px; display: flex; align-items: center; justify-content: center; background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; background-attachment: fixed;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 44, 25, 0.7);"></div>
+        <div class="container" style="position: relative; z-index: 2; text-align: center; color: white;">
+            <div class="play-btn" data-aos="zoom-in" style="width: 80px; height: 80px; background: var(--accent-color); color: var(--primary-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 20px; cursor: pointer; animation: pulse 2s infinite;"><i class="fas fa-play" style="margin-left: 5px;"></i></div>
+            <h2 style="font-size: 2.5rem; margin-bottom: 10px; font-weight: 800;" data-en="Take a Drone Tour" data-si="ඩ්‍රෝන දර්ශන නරඹන්න">Take a Drone Tour</h2>
+            <p style="font-size: 1.2rem;" data-en="See the scenic beauty and development of our latest projects." data-si="අපගේ නවතම ව්‍යාපෘති වල සුන්දරත්වය සහ සංවර්ධනය නරඹන්න.">See the scenic beauty and development of our latest projects.</p>
+        </div>
+    </section>
+	
+	<!-- BEFORE & AFTER SECTION -->
+    <section id="transformation" style="background: white; padding-bottom: 80px;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="See the Development" data-si="සංවර්ධනය දෑසින් දකින්න">See the Development</h2>
+                <div class="line"></div>
+                <p data-en="Drag the slider to see how we transform raw lands into premium residential plots." data-si="සාමාන්‍ය ඉඩමක් අගනා නේවාසික බිමක් බවට පත් කරන ආකාරය බලන්න.">Drag the slider to see how we transform raw lands into premium residential plots.</p>
+            </div>
+            <div class="comparison-container" data-aos="zoom-in">
+                <div class="img-comp-container">
+                    <div class="img-comp-img img-after"><img src="https://images.unsplash.com/photo-1513880989635-6eb491ce7f5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80" alt="Developed Plot"><span class="label-badge after-badge" data-en="DEVELOPED" data-si="සංවර්ධිතයි">DEVELOPED</span></div>
+                    <div class="img-comp-img img-before"><img src="https://images.unsplash.com/photo-1508344928928-7165b67de128?ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80" alt="Raw Land"><span class="label-badge before-badge" data-en="RAW LAND" data-si="මූලික ඉඩම">RAW LAND</span></div>
+                    <div class="slider-handle"><i class="fas fa-arrows-alt-h"></i></div>
+                    <input type="range" min="0" max="100" value="50" class="slider-range" oninput="slideCompare(this.value)">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .comparison-container { max-width: 800px; margin: 0 auto; position: relative; border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
+        .img-comp-container { position: relative; height: 450px; overflow: hidden; }
+        .img-comp-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        .img-comp-img img { width: 100%; height: 100%; object-fit: cover; }
+        .img-before { width: 50%; border-right: 3px solid white; z-index: 2; transition: width 0s; }
+        .label-badge { position: absolute; top: 20px; padding: 5px 15px; background: rgba(0,0,0,0.6); color: white; font-weight: bold; font-size: 0.8rem; border-radius: 4px; z-index: 3; }
+        .before-badge { left: 20px; } .after-badge { right: 20px; }
+        .slider-range { position: absolute; top: 50%; left: -25px; width: calc(100% + 50px); height: 50px; z-index: 10; opacity: 0; cursor: ew-resize; }
+        .slider-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 5; pointer-events: none; color: var(--primary-color); }
+    </style>
+    <script>function slideCompare(val) { document.querySelector('.img-before').style.width = val + "%"; document.querySelector('.slider-handle').style.left = val + "%"; }</script>
+	
+	<!-- WORK PROCESS SECTION -->
+    <section id="process" style="background-color: var(--white); padding-bottom: 100px;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="How to Own Your Land" data-si="ඔබේ ඉඩම ලබාගන්නා ආකාරය">How to Own Your Land</h2>
+                <div class="line"></div>
+                <p style="max-width: 600px; margin: 0 auto; color: var(--text-light);" data-en="A simple, transparent process to make land ownership easy." data-si="ඉඩම් හිමිකාරීත්වය පහසු කිරීම සඳහා සරල, විනිවිද පෙනෙන ක්‍රියාවලියක්.">A simple, transparent process to make land ownership easy.</p>
+            </div>
+            <div class="process-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: center;">
+                <div class="process-item" data-aos="fade-up" data-aos-delay="0" style="position: relative;"><div class="step-icon" style="width: 80px; height: 80px; background: var(--light-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 2px dashed var(--accent-color);"><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary-color);">01</span></div><h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-color);" data-en="Site Visit" data-si="ඉඩම පරීක්ෂාව">Site Visit</h3><p style="font-size: 0.9rem; color: var(--text-light);" data-en="We arrange a free site visit for you to choose the best plot." data-si="හොඳම බිම් කොටස තෝරා ගැනීමට අපි නොමිලේ ඉඩම පෙන්වීමට කටයුතු කරමු.">We arrange a free site visit for you to choose the best plot.</p></div>
+                <div class="process-item" data-aos="fade-up" data-aos-delay="100"><div class="step-icon" style="width: 80px; height: 80px; background: var(--light-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 2px dashed var(--accent-color);"><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary-color);">02</span></div><h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-color);" data-en="Reservation" data-si="වෙන් කිරීම">Reservation</h3><p style="font-size: 0.9rem; color: var(--text-light);" data-en="Reserve your plot with an initial down payment." data-si="මූලික ගෙවීමක් කර ඔබගේ බිම් කොටස වෙන්කරවා ගන්න.">Reserve your plot with an initial down payment.</p></div>
+                <div class="process-item" data-aos="fade-up" data-aos-delay="200"><div class="step-icon" style="width: 80px; height: 80px; background: var(--light-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 2px dashed var(--accent-color);"><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary-color);">03</span></div><h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-color);" data-en="Payment Plan" data-si="ගෙවීමේ ක්‍රම">Payment Plan</h3><p style="font-size: 0.9rem; color: var(--text-light);" data-en="Pay the balance via interest-free plans or bank loans." data-si="පොලී රහිත ගෙවීම් හෝ බැංකු ණය මගින් ඉතිරිය ගෙවන්න.">Pay the balance via interest-free plans or bank loans.</p></div>
+                <div class="process-item" data-aos="fade-up" data-aos-delay="300"><div class="step-icon" style="width: 80px; height: 80px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 10px 20px rgba(209, 161, 40, 0.3);"><i class="fas fa-file-signature" style="font-size: 1.5rem; color: var(--primary-dark);"></i></div><h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary-color);" data-en="Deed Transfer" data-si="ඔප්පුව පැවරීම">Deed Transfer</h3><p style="font-size: 0.9rem; color: var(--text-light);" data-en="Receive your clear deed signed and authorized." data-si="ඔබගේ නිරවුල් ඔප්පුව නීත්‍යානුකූලව ලබා ගන්න.">Receive your clear deed signed and authorized.</p></div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- OUR PROMISE SECTION -->
+    <section id="promise" style="background-color: var(--primary-color); color: white; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-image: radial-gradient(var(--accent-color) 1px, transparent 1px); background-size: 20px 20px;"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="section-header" data-aos="fade-up">
+                <h2 style="color: white;" data-en="Our Promise to You" data-si="අපගේ පොරොන්දුව">Our Promise to You</h2>
+                <div class="line" style="background: var(--accent-color);"></div>
+                <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto;" data-en="Your trust is our most valuable asset. Here is what we guarantee." data-si="ඔබේ විශ්වාසය අපගේ වටිනාම වත්කමයි. අපි සහතික කරන දේවල් මෙන්න.">Your trust is our most valuable asset. Here is what we guarantee.</p>
+            </div>
+            <div class="promise-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+                <div class="promise-card" data-aos="fade-up" data-aos-delay="0" style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 8px; border-left: 4px solid var(--accent-color); transition: 0.3s;"><i class="fas fa-shield-alt" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i><h3 style="font-size: 1.25rem; margin-bottom: 10px;" data-en="Zero Legal Risks" data-si="නිරවුල් අයිතිය">Zero Legal Risks</h3><p style="font-size: 0.9rem; color: #ddd;" data-en="Every deed is checked and verified by an Attorney at Law." data-si="සෑම ඔප්පුවක්ම නීතීඥවරයෙකු විසින් පරීක්ෂා කර තහවුරු කර ඇත.">Every deed is checked and verified by an Attorney at Law.</p></div>
+                <div class="promise-card" data-aos="fade-up" data-aos-delay="100" style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 8px; border-left: 4px solid var(--accent-color); transition: 0.3s;"><i class="fas fa-chart-bar" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i><h3 style="font-size: 1.25rem; margin-bottom: 10px;" data-en="High ROI" data-si="ඉහළ ආයෝජන ප්‍රතිලාභ">High ROI</h3><p style="font-size: 0.9rem; color: #ddd;" data-en="We only select lands in rapidly developing areas like NSBM zone." data-si="අපි තෝරාගන්නේ NSBM කලාපය වැනි වේගයෙන් දියුණු වන ප්‍රදේශවල ඉඩම් පමණි.">We only select lands in rapidly developing areas like NSBM zone.</p></div>
+                <div class="promise-card" data-aos="fade-up" data-aos-delay="200" style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 8px; border-left: 4px solid var(--accent-color); transition: 0.3s;"><i class="fas fa-tools" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i><h3 style="font-size: 1.25rem; margin-bottom: 10px;" data-en="Ready to Build" data-si="ඉදිකිරීමට සූදානම්">Ready to Build</h3><p style="font-size: 0.9rem; color: #ddd;" data-en="Water, electricity, and paved roads are pre-installed for you." data-si="ජලය, විදුලිය සහ කාපට් මාර්ග ඔබට ලබා දී ඇත.">Water, electricity, and paved roads are pre-installed for you.</p></div>
+                <div class="promise-card" data-aos="fade-up" data-aos-delay="300" style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 8px; border-left: 4px solid var(--accent-color); transition: 0.3s;"><i class="fas fa-coins" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i><h3 style="font-size: 1.25rem; margin-bottom: 10px;" data-en="No Hidden Fees" data-si="සැඟවුණු ගාස්තු නැත">No Hidden Fees</h3><p style="font-size: 0.9rem; color: #ddd;" data-en="Transparent pricing with flexible, interest-free payment options." data-si="පොලී රහිත ගෙවීම් විකල්ප සමගින් විනිවිද පෙනෙන මිල ගණන්.">Transparent pricing with flexible, interest-free payment options.</p></div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- COMMITMENT TO LEGAL QUALITY SECTION -->
+    <section id="quality" style="background-color: var(--light-bg); padding: 100px 0;">
+        <div class="container">
+            <div class="quality-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: center;">
+                <div class="quality-text" data-aos="fade-right">
+                    <div style="display: inline-block; background: var(--accent-color); color: var(--primary-dark); padding: 5px 15px; font-size: 0.85rem; font-weight: 800; border-radius: 4px; margin-bottom: 15px; text-transform: uppercase;"><span data-en="Local Council Approvals" data-si="පළාත් පාලන අනුමැතිය">Local Council Approvals</span></div>
+                    <h2 style="font-size: 2.2rem; color: var(--primary-color); margin-bottom: 25px; line-height: 1.3;" data-en="Our Commitment to Legal Integrity" data-si="නීතිමය වලංගුභාවය පිළිබඳ අපගේ කැපවීම">Our Commitment to Legal Integrity</h2>
+                    <p style="margin-bottom: 20px; text-align: justify; color: var(--text-light); line-height: 1.8;" data-en="At Jet Lands, buying a property means zero worries. Every land block is sub-divided strictly according to local council and UDA regulations. Because our Managing Director is a qualified Attorney at Law, title abstracts (පත්තිරු) spanning over 30 years are thoroughly checked to ensure clear ownership." data-si="Jet Lands හරහා ඉඩමක් මිලදී ගැනීම යනු කිසිදු කරදරයකින් තොර වීමයි. සෑම බිම් කොටසක්ම පළාත් පාලන සහ UDA රෙගුලාසි වලට අනුකූලව අනුමත කර ඇත. අපගේ කළමනාකාර අධ්‍යක්ෂවරයා සුදුසුකම් ලත් නීතීඥවරයෙකු වන බැවින්, වසර 30කට අධික පත්තිරු පරීක්ෂා කර නිරවුල් අයිතිය තහවුරු කරනු ලැබේ.">At Jet Lands, buying a property means zero worries. Every land block is sub-divided strictly according to local council and UDA regulations...</p>
+                    <p style="margin-bottom: 30px; text-align: justify; color: var(--text-light); line-height: 1.8;" data-en="Furthermore, all survey plans are approved by licensed surveyors and registered. This makes applying for bank loans incredibly easy, as our documents meet the highest legal standards required by any financial institution in Sri Lanka." data-si="තවද, සියලුම මිනින්දෝරු සැලසුම් බලපත්‍රලාභී මිනින්දෝරුවන් විසින් අනුමත කර ලියාපදිංචි කර ඇත. ශ්‍රී ලංකාවේ ඕනෑම මූල්‍ය ආයතනයක් විසින් පිළිගන්නා ඉහළම නීතිමය ප්‍රමිතීන්ට අපගේ ලේඛන අනුකූල වන බැවින්, බැංකු ණය ලබා ගැනීම ඉතා පහසු වේ.">Furthermore, all survey plans are approved by licensed surveyors and registered. This makes applying for bank loans incredibly easy...</p>
+                    <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--primary-color);"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="Approved Survey Plans" data-si="අනුමත මිනින්දෝරු සැලසුම්">Approved Survey Plans</span></li>
+                        <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--primary-color);"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="Pradeshiya Sabha Approvals" data-si="ප්‍රාදේශීය සභා අනුමැතිය">Pradeshiya Sabha Approvals</span></li>
+                        <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--primary-color);"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="30-Year Title Reports" data-si="වසර 30 ක පත්තිරු">30-Year Title Reports</span></li>
+                        <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--primary-color);"><i class="fas fa-check-circle" style="color: var(--accent-color);"></i><span data-en="Bank Loan Ready" data-si="බැංකු ණය සඳහා සූදානම්">Bank Loan Ready</span></li>
+                    </ul>
+                </div>
+                <div class="quality-image" data-aos="fade-left" style="position: relative;">
+                    <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Legal Documents" style="width: 100%; border-radius: 8px; box-shadow: var(--shadow);">
+                    <div style="position: absolute; bottom: 30px; left: -20px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-left: 5px solid var(--primary-color); max-width: 250px;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;"><i class="fas fa-balance-scale" style="font-size: 2rem; color: var(--primary-color);"></i><div><h4 style="font-size: 0.9rem; margin: 0; color: var(--text-main);" data-en="Attorney Verified" data-si="නීතීඥ තහවුරුව">Attorney Verified</h4><small style="color: var(--primary-color); font-weight: 800;" data-en="100% Guaranteed" data-si="100% සහතිකය">100% Guaranteed</small></div></div><p style="font-size: 0.8rem; color: #666; margin: 0;" data-en="Clear deeds are our ultimate promise." data-si="නිරවුල් ඔප්පු යනු අපගේ ප්‍රධානතම පොරොන්දුවයි.">Clear deeds are our ultimate promise.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- BANKING PARTNERS SECTION -->
+    <section id="partners" style="background-color: var(--white); padding-top: 50px; padding-bottom: 50px;">
+        <div class="container">
+            <h3 style="text-align: center; color: #888; margin-bottom: 30px; font-size: 1.2rem;" data-en="Loan facilities available from all major banks" data-si="සියලුම ප්‍රධාන බැංකු වලින් ණය පහසුකම් ලබා ගත හැක">Loan facilities available from all major banks</h3>
+            <div class="brand-grid" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; align-items: center; opacity: 0.8;">
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="0"><i class="fas fa-university" style="font-size: 2rem;"></i> <span style="font-weight: 800; font-size: 1.5rem;">BOC</span></div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-building" style="font-size: 2rem;"></i> <span style="font-weight: 800; font-size: 1.5rem;">COMMERCIAL</span></div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-piggy-bank" style="font-size: 2rem;"></i> <span style="font-weight: 800; font-size: 1.5rem;">SAMPATH</span></div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="300"><i class="fas fa-landmark" style="font-size: 2rem;"></i> <span style="font-weight: 800; font-size: 1.5rem;">HNB</span></div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="400"><i class="fas fa-money-check-alt" style="font-size: 2rem;"></i> <span style="font-weight: 800; font-size: 1.5rem;">NSB</span></div>
+            </div>
+        </div>
+        <style>.brand-item { display: flex; align-items: center; gap: 10px; color: #555; filter: grayscale(100%); transition: 0.3s; } .brand-item:hover { filter: grayscale(0%); color: var(--primary-color); transform: scale(1.1); }</style>
+    </section>
+
+    <!-- GALLERY / LANDS -->
+    <section id="gallery" class="bg-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="Our Property Gallery" data-si="අපගේ බිම් කොටස්">Our Property Gallery</h2>
+                <div class="line"></div>
+            </div>
+            <div class="gallery-filter" data-aos="fade-up">
+                <button class="filter-btn active" onclick="filterGallery('all')" data-en="All" data-si="සියල්ල">All</button>
+                <button class="filter-btn" onclick="filterGallery('residential')" data-en="Residential Plots" data-si="නේවාසික බිම්">Residential Plots</button>
+                <button class="filter-btn" onclick="filterGallery('commercial')" data-en="Commercial Lands" data-si="වාණිජ ඉඩම්">Commercial Lands</button>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item residential" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Plot 1"><div class="gallery-overlay"><h3 data-en="NSBM Zone Block" data-si="NSBM කලාපයේ බිම්">NSBM Zone Block</h3><p data-en="Pitipana" data-si="පිටිපන">Pitipana</p></div></div>
+                <div class="gallery-item commercial" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1513880989635-6eb491ce7f5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Plot 2"><div class="gallery-overlay"><h3 data-en="Highway Access Plot" data-si="අධිවේගී මාර්ගයට ආසන්න බිම්">Highway Access Plot</h3><p data-en="Makumbura" data-si="මාකුඹුර">Makumbura</p></div></div>
+                <div class="gallery-item residential" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Plot 3"><div class="gallery-overlay"><h3 data-en="Nature View" data-si="ස්වභාවික පරිසරය">Nature View</h3><p data-en="Homagama" data-si="හෝමාගම">Homagama</p></div></div>
+                <div class="gallery-item residential" data-aos="zoom-in"><img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Plot 4"><div class="gallery-overlay"><h3 data-en="Suburban Square" data-si="නගරාසන්න බිම්">Suburban Square</h3><p data-en="Pannipitiya" data-si="පන්නිපිටිය">Pannipitiya</p></div></div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" style="background-color: var(--white); text-align: center;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="Happy Landowners" data-si="පාරිභෝගික අදහස්">Happy Landowners</h2>
+                <div class="line"></div>
+            </div>
+            <div class="testimonial-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="review-card" data-aos="zoom-in" data-aos-delay="0" style="background: var(--light-bg); padding: 30px; border-radius: 10px; box-shadow: var(--shadow); position: relative;"><i class="fas fa-quote-left" style="font-size: 2rem; color: var(--accent-color); opacity: 0.5; position: absolute; top: 20px; left: 20px;"></i><p style="font-style: italic; color: #555; margin-bottom: 20px; margin-top: 15px;" data-en="Buying land near NSBM was a great investment. The Jet Lands team made the deed transfer so fast and easy!" data-si="NSBM අසලින් ඉඩමක් ගැනීම ඉතා හොඳ ආයෝජනයක්. Jet Lands කණ්ඩායම ඔප්පු පැවරීමේ කටයුතු ඉතා ඉක්මනින් කර දුන්නා.">Buying land near NSBM was a great investment. The Jet Lands team made the deed transfer so fast and easy!</p><div class="stars" style="color: var(--accent-color); margin-bottom: 10px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><h4 style="color: var(--primary-color);">Kamal Perera</h4><span style="font-size: 0.8rem; color: #999;">Homagama</span></div>
+                <div class="review-card" data-aos="zoom-in" data-aos-delay="100" style="background: var(--light-bg); padding: 30px; border-radius: 10px; box-shadow: var(--shadow); position: relative;"><i class="fas fa-quote-left" style="font-size: 2rem; color: var(--accent-color); opacity: 0.5; position: absolute; top: 20px; left: 20px;"></i><p style="font-style: italic; color: #555; margin-bottom: 20px; margin-top: 15px;" data-en="I had total peace of mind knowing the Managing Director is an Attorney. 100% clear deeds as promised." data-si="කළමනාකාර අධ්‍යක්ෂවරයා නීතීඥවරයෙකු වීම නිසා මට ලොකු විශ්වාසයක් තිබුණා. පොරොන්දු වූ පරිදිම 100% නිරවුල් ඔප්පු.">I had total peace of mind knowing the Managing Director is an Attorney. 100% clear deeds as promised.</p><div class="stars" style="color: var(--accent-color); margin-bottom: 10px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><h4 style="color: var(--primary-color);">Dilani Silva</h4><span style="font-size: 0.8rem; color: #999;">Makumbura</span></div>
+                <div class="review-card" data-aos="zoom-in" data-aos-delay="200" style="background: var(--light-bg); padding: 30px; border-radius: 10px; box-shadow: var(--shadow); position: relative;"><i class="fas fa-quote-left" style="font-size: 2rem; color: var(--accent-color); opacity: 0.5; position: absolute; top: 20px; left: 20px;"></i><p style="font-style: italic; color: #555; margin-bottom: 20px; margin-top: 15px;" data-en="Highly recommended! Good roads, electricity, and water were already there. A very professional land sale company." data-si="මම අනිවාර්යයෙන්ම නිර්දේශ කරනවා! පාරවල්, විදුලිය සහ ජලය කලින්ම ලබා දී තිබුණා. ඉතා වෘත්තීය ඉඩම් අලෙවි ආයතනයක්.">Highly recommended! Good roads, electricity, and water were already there. A very professional land sale company.</p><div class="stars" style="color: var(--accent-color); margin-bottom: 10px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><h4 style="color: var(--primary-color);">Jagath Gunawardena</h4><span style="font-size: 0.8rem; color: #999;">Pannipitiya</span></div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- WHATSAPP QUOTE FORM SECTION -->
+    <section id="quote-form" style="background: linear-gradient(rgba(26, 71, 42, 0.9), rgba(26, 71, 42, 0.8)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover fixed; padding: 80px 0;">
+        <div class="container">
+            <div class="form-wrapper" data-aos="zoom-in">
+                <div class="form-header"><h2 data-en="Reserve Your Plot Today" data-si="අදම ඔබේ බිම් කොටස වෙන්කරගන්න">Reserve Your Plot Today</h2><p data-en="Fill this form to send your details directly to our WhatsApp." data-si="ඔබගේ විස්තර WhatsApp වෙත යොමු කිරීමට මෙම පෝරමය පුරවන්න.">Fill this form to send your details directly to our WhatsApp.</p></div>
+                <form onsubmit="submitWhatsappForm(event)">
+                    <div class="form-grid">
+                        <div class="input-group"><label><i class="fas fa-user"></i> <span data-en="Your Name" data-si="ඔබගේ නම">Your Name</span></label><input type="text" id="w-name" placeholder="Ex: Mr. Kamal" required></div>
+                        <div class="input-group"><label><i class="fas fa-phone"></i> <span data-en="Phone Number" data-si="දුරකථන අංකය">Phone Number</span></label><input type="tel" id="w-phone" placeholder="Ex: 077 123 4567" required></div>
+                        <div class="input-group"><label><i class="fas fa-map-marker-alt"></i> <span data-en="Preferred Area" data-si="කැමති ප්‍රදේශය">Preferred Area</span></label><input type="text" id="w-location" placeholder="Ex: NSBM Zone / Makumbura" required></div>
+                        <div class="input-group"><label><i class="fas fa-ruler-combined"></i> <span data-en="Perches Required" data-si="අවශ්‍ය පර්චස් ප්‍රමාණය">Perches Required</span></label><select id="w-service"><option value="6 - 8 Perches">6 - 8 Perches</option><option value="10 - 12 Perches">10 - 12 Perches</option><option value="15+ Perches">15+ Perches</option><option value="Commercial Land">Commercial Land</option></select></div>
+                        <div class="input-group full-width"><label><i class="fas fa-pencil-alt"></i> <span data-en="Additional Note (Optional)" data-si="අමතර විස්තර (අවශ්‍ය නම්)">Additional Note (Optional)</span></label><textarea id="w-message" rows="3" placeholder="Ex: I am looking for a bank loan option..."></textarea></div>
+                    </div>
+                    <button type="submit" class="wa-submit-btn"><i class="fab fa-whatsapp"></i> <span data-en="Send to WhatsApp" data-si="WhatsApp වෙත යවන්න">Send to WhatsApp</span></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+<!-- FAQ SECTION -->
+    <section id="faq" style="background-color: var(--light-bg);">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up"><h2 data-en="Frequently Asked Questions" data-si="නිතර අසන ප්‍රශ්න">Frequently Asked Questions</h2><div class="line"></div></div>
+            <div class="faq-list" style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item" style="background: white; margin-bottom: 15px; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);"><div class="faq-question" onclick="this.nextElementSibling.classList.toggle('active')" style="padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600;"><span data-en="Are the deeds completely clear?" data-si="ඔප්පු සම්පූර්ණයෙන්ම නිරවුල්ද?">Are the deeds completely clear?</span><i class="fas fa-chevron-down" style="color: var(--accent-color);"></i></div><div class="faq-answer" style="display: none; padding: 15px 20px; border-top: 1px solid #eee; color: #666; background: #fafafa;"><p data-en="Yes, absolutely. Our Managing Director is an Attorney at Law, and every deed goes through a rigorous 30-year title check." data-si="ඔව්, අනිවාර්යයෙන්ම. අපගේ කළමනාකාර අධ්‍යක්ෂවරයා නීතීඥවරයෙකු වන අතර, සෑම ඔප්පුවක්ම වසර 30 ක පත්තිරු පරීක්ෂාවකට ලක් කෙරේ.">Yes, absolutely. Our Managing Director is an Attorney at Law, and every deed goes through a rigorous 30-year title check.</p></div></div>
+                <div class="faq-item" style="background: white; margin-bottom: 15px; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);"><div class="faq-question" onclick="this.nextElementSibling.classList.toggle('active')" style="padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600;"><span data-en="Can I pay in installments?" data-si="මට වාරික වශයෙන් ගෙවිය හැකිද?">Can I pay in installments?</span><i class="fas fa-chevron-down" style="color: var(--accent-color);"></i></div><div class="faq-answer" style="display: none; padding: 15px 20px; border-top: 1px solid #eee; color: #666; background: #fafafa;"><p data-en="Yes, we offer interest-free payment plans for a certain period, and we arrange bank loans for long-term payments." data-si="ඔව්, අපි නිශ්චිත කාලයක් සඳහා පොලී රහිත ගෙවීම් ක්‍රම ලබා දෙන අතර, දිගු කාලීන ගෙවීම් සඳහා බැංකු ණය සකසා දෙමු.">Yes, we offer interest-free payment plans for a certain period, and we arrange bank loans for long-term payments.</p></div></div>
+                <div class="faq-item" style="background: white; margin-bottom: 15px; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);"><div class="faq-question" onclick="this.nextElementSibling.classList.toggle('active')" style="padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600;"><span data-en="Does the land have water and electricity?" data-si="ඉඩමට ජලය සහ විදුලිය තිබේද?">Does the land have water and electricity?</span><i class="fas fa-chevron-down" style="color: var(--accent-color);"></i></div><div class="faq-answer" style="display: none; padding: 15px 20px; border-top: 1px solid #eee; color: #666; background: #fafafa;"><p data-en="Yes, all our projects come with pipe-borne water, 3-phase electricity, and wide paved roads." data-si="ඔව්, අපගේ සියලුම ව්‍යාපෘති නළ ජලය, තෙකලා විදුලිය සහ පුළුල් කාපට් මාර්ග වලින් සමන්විත වේ.">Yes, all our projects come with pipe-borne water, 3-phase electricity, and wide paved roads.</p></div></div>
+            </div>
+        </div>
+        <style>.faq-answer.active { display: block !important; animation: slideDown 0.3s ease; } @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }</style>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 data-en="Contact Us" data-si="අප අමතන්න">Contact Us</h2>
+                <div class="line" style="background: var(--accent-color);"></div>
+            </div>
+            <div class="contact-grid">
+                <div class="info-box" data-aos="fade-right">
+                    <h3 data-en="Head Office" data-si="ප්‍රධාන කාර්යාලය">Head Office</h3>
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><strong data-en="Location" data-si="ලිපිනය">Location</strong><br><span data-en="358, Maya MW, Makumbura, Pannipitiya." data-si="358, මායා මාවත, මාකුඹුර, පන්නිපිටිය.">358, Maya MW, Makumbura, Pannipitiya.</span></div></div>
+                    <div class="info-item"><i class="fas fa-phone-alt"></i><div><strong data-en="Hotline" data-si="ක්ෂණික ඇමතුම්">Hotline</strong><br><a href="tel:0755229229">0755 229 229</a></div></div>
+                    <div class="info-item"><i class="fas fa-envelope"></i><div><strong data-en="Email" data-si="විද්‍යුත් තැපෑල">Email</strong><br><a href="mailto:info@jetlands.lk">info@jetlands.lk</a></div></div>
+                </div>
+                <div class="map-wrapper" data-aos="fade-left"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31693.39864230787!2d79.9575!3d6.8406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2523b05555555%3A0x5555555555555555!2sMakumbura%2C%20Pannipitiya!5e0!3m2!1sen!2slk!4v1600000000000!5m2!1sen!2slk" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen></iframe></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="main-footer" style="position: relative; background-color: var(--primary-dark); color: #fff; font-size: 0.95rem; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(#1a472a 1px, transparent 1px), linear-gradient(90deg, #1a472a 1px, transparent 1px); background-size: 30px 30px; opacity: 0.1; pointer-events: none;"></div>
+        
+        <div class="container" style="padding: 70px 20px 40px; position: relative; z-index: 2;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px;">
+                <div class="footer-col" data-aos="fade-up" data-aos-delay="0"><div class="footer-logo" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;"><i class="fas fa-tree" style="color: var(--accent-color);"></i> JET LANDS</div><p style="color: #a0aab5; line-height: 1.8; margin-bottom: 25px;" data-en="A trusted name in the Sri Lankan real estate sector, delivering premium property solutions with 100% clear deeds." data-si="100% නිරවුල් ඔප්පු සමගින් අගනා බිම් කොටස් සපයන ශ්‍රී ලංකාවේ දේපල වෙළඳාම් ක්ෂේත්‍රයේ විශ්වාසදායක නාමය.">A trusted name in the Sri Lankan real estate sector, delivering premium property solutions with 100% clear deeds.</p><div class="social-links" style="display: flex; gap: 15px;"><a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a><a href="#" class="social-btn youtube"><i class="fab fa-youtube"></i></a></div></div>
+                <div class="footer-col" data-aos="fade-up" data-aos-delay="100"><h4 class="footer-title" data-en="Quick Links" data-si="ක්ෂණික සබැඳි">Quick Links</h4><ul class="footer-links"><li><a href="#home" data-en="Home" data-si="මුල් පිටුව">Home</a></li><li><a href="#about" data-en="About Us" data-si="අපි ගැන">About Us</a></li><li><a href="#gallery" data-en="Land Projects" data-si="ව්‍යාපෘති">Land Projects</a></li><li><a href="#contact" data-en="Contact Us" data-si="අප අමතන්න">Contact Us</a></li></ul></div>
+                <div class="footer-col" data-aos="fade-up" data-aos-delay="200"><h4 class="footer-title" data-en="Our Services" data-si="අපගේ සේවාවන්">Our Services</h4><ul class="footer-links"><li><a href="#services" data-en="Residential Plots" data-si="නේවාසික බිම්">Residential Plots</a></li><li><a href="#services" data-en="Commercial Lands" data-si="වාණිජ ඉඩම්">Commercial Lands</a></li><li><a href="#services" data-en="Legal Support" data-si="නීතිමය සහාය">Legal Support</a></li><li><a href="#services" data-en="Bank Loan Setup" data-si="බැංකු ණය පහසුකම්">Bank Loan Setup</a></li></ul></div>
+                <div class="footer-col" data-aos="fade-up" data-aos-delay="300"><h4 class="footer-title" data-en="Get In Touch" data-si="සම්බන්ධ වන්න">Get In Touch</h4><ul class="contact-list" style="list-style: none; padding: 0;"><li><i class="fas fa-map-marker-alt"></i><span data-en="358, Maya MW, Makumbura, Pannipitiya." data-si="358, මායා මාවත, මාකුඹුර, පන්නිපිටිය.">358, Maya MW, Makumbura, Pannipitiya.</span></li><li><i class="fas fa-phone-alt"></i><div style="display: flex; flex-direction: column;"><a href="tel:0755229229">0755 229 229</a></div></li><li><i class="fas fa-envelope"></i><a href="mailto:info@jetlands.lk">info@jetlands.lk</a></li><li><i class="fas fa-clock"></i><span data-en="Mon - Sat: 8:30 AM - 5:30 PM" data-si="සඳුදා - සෙනසුරාදා: පෙ.ව 8:30 - ප.ව 5:30">Mon - Sat: 8:30 AM - 5:30 PM</span></li></ul></div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="border-top: 1px solid rgba(255,255,255,0.05); padding: 25px 0; background: #0a1f11; position: relative; z-index: 2;">
+            <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
+                <p style="margin: 0; color: #7f8c8d; font-size: 0.9rem;">&copy; 2024 <strong>Jet Lands (PVT) LTD</strong>. <span data-en="All Rights Reserved." data-si="සියලුම හිමිකම් ඇවිරිණි.">All Rights Reserved.</span></p>
+                <p style="margin: 0; color: #7f8c8d; font-size: 0.85rem;"><span data-en="Your trust is our most valuable asset." data-si="ඔබේ විශ්වාසය අපගේ වටිනාම වත්කමයි.">Your trust is our most valuable asset.</span></p>
+            </div>
+        </div>
+        <button id="backToTop" onclick="scrollToTop()" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+    </footer>
+
+    <!-- WIDGETS -->
+    <div class="book-float" onclick="openModal()"><i class="fab fa-whatsapp"></i> <span data-en="Inquire Now" data-si="විස්තර විමසන්න">Inquire Now</span></div>
+    <div class="chat-widget">
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header"><span data-en="Jet Lands Assistant" data-si="සහයක සේවාව">Jet Lands Assistant</span><span style="cursor: pointer; font-size: 1.2rem;" onclick="toggleChat()">&times;</span></div>
+            <div class="chat-body" id="chatBody"></div>
+            <div class="chat-footer"><input type="text" id="chatInput" placeholder="..." onkeypress="handleKeyPress(event)"><button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button></div>
+        </div>
+        <div class="chat-bubble" onclick="toggleChat()"><i class="fas fa-comments"></i></div>
+    </div>
+
+    <!-- MODAL -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><span class="close-modal" onclick="closeModal()">&times;</span><h3 data-en="Request Land Details" data-si="ඉඩම් විස්තර ලබාගන්න">Request Land Details</h3></div>
+            <div class="modal-body">
+                <form onsubmit="sendToWhatsApp(event)">
+                    <div class="form-group"><label data-en="Your Name" data-si="ඔබගේ නම">Your Name</label><input type="text" id="b_name" required></div>
+                    <div class="form-group"><label data-en="Property Area" data-si="අවශ්‍ය ප්‍රදේශය">Property Area</label><select id="b_service"><option value="NSBM Zone">NSBM Zone</option><option value="Makumbura">Makumbura</option><option value="Pannipitiya">Pannipitiya</option><option value="Other">Other</option></select></div>
+                    <div class="form-group"><label data-en="Contact Number" data-si="දුරකථන අංකය">Contact Number</label><input type="tel" id="b_location" required></div>
+                    <button type="submit" class="btn-wa"><i class="fab fa-whatsapp"></i> <span data-en="Send via WhatsApp" data-si="WhatsApp මගින් යවන්න">Send via WhatsApp</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ 
+            offset: 0,
+            duration: 800, 
+            once: true,
+            disable: window.innerWidth < 500 ? false : false 
+        });
+
+        window.onload = function() {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => { loader.style.visibility = 'hidden'; }, 500);
+            adjustHeaderTop();
+            startHeroSlider(); 
+        };
+
+        // --- HERO SLIDER LOGIC ---
+        const heroSlides = [
+            {
+                img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
+                en_title: 'Premium Lands for Your Future', en_desc: 'Invest in highly residential areas like the NSBM Green University zone with 100% clear deeds.',
+                si_title: 'ඔබේ අනාගතය සඳහා අගනා බිම්', si_desc: '100% නිරවුල් ඔප්පු සමගින් NSBM කලාපය වැනි ඉහළ නේවාසික ප්‍රදේශවල ආයෝජනය කරන්න.'
+            },
+            {
+                img: 'https://images.unsplash.com/photo-1513880989635-6eb491ce7f5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
+                en_title: '100% Clear Titles Guaranteed', en_desc: 'Attorney-supervised deed transfers ensuring complete peace of mind for every buyer.',
+                si_title: '100% නිරවුල් ඔප්පු පිළිබඳ සහතිකය', si_desc: 'සෑම ගැනුම්කරුවෙකුටම නීතීඥ අධීක්ෂණය යටතේ නිරවුල් ඔප්පු පැවරීම.'
+            },
+            {
+                img: 'https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80',
+                en_title: 'Ready for Immediate Building', en_desc: 'Paved roads, three-phase electricity, and pipe-borne water already installed.',
+                si_title: 'ඉදිකිරීම් සඳහා සූදානම් කර ඇති බිම්', si_desc: 'කාපට් මාර්ග, තෙකලා විදුලිය සහ නළ ජලය දැනටමත් සපයා ඇත.'
+            }
+        ];
+
+        let currentSlideIndex = 0;
+        let sliderInterval;
+
+        function startHeroSlider() {
+            updateHeroContent();
+            sliderInterval = setInterval(() => {
+                currentSlideIndex = (currentSlideIndex + 1) % heroSlides.length;
+                updateHeroContent();
+            }, 5000); 
+        }
+
+        function updateHeroContent() {
+            const heroSection = document.getElementById('home');
+            const titleEl = document.getElementById('hero-title');
+            const descEl = document.getElementById('hero-desc');
+            const slide = heroSlides[currentSlideIndex];
+
+            heroSection.style.backgroundImage = `var(--gradient-overlay), url('${slide.img}')`;
+
+            titleEl.style.opacity = 0;
+            descEl.style.opacity = 0;
+
+            setTimeout(() => {
+                if (currentLang === 'si') {
+                    titleEl.innerText = slide.si_title;
+                    descEl.innerText = slide.si_desc;
+                } else {
+                    titleEl.innerText = slide.en_title;
+                    descEl.innerText = slide.en_desc;
+                }
+                titleEl.style.opacity = 1;
+                descEl.style.opacity = 1;
+            }, 500);
+        }
+
+        // --- LANGUAGE SWITCHER ---
+        let currentLang = 'en';
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'si' : 'en';
+            
+            if (window.innerWidth <= 768) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+
+            updateContent();
+        }
+
+        function updateContent() {
+            if(currentLang === 'si') { 
+                document.body.classList.add('lang-si'); 
+                document.getElementById('langText').innerText = "ENGLISH"; 
+            } else { 
+                document.body.classList.remove('lang-si'); 
+                document.getElementById('langText').innerText = "SINHALA"; 
+            }
+
+            const elements = document.querySelectorAll(`[data-${currentLang}]`);
+            elements.forEach(el => { el.innerText = el.getAttribute(`data-${currentLang}`); });
+
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                if(currentLang === 'si') { if(input.id === 'chatInput') input.placeholder = "පණිවිඩයක් ලියන්න..."; }
+                else { if(input.id === 'chatInput') input.placeholder = "Type a message..."; }
+            });
+
+            updateHeroContent();
+            setTimeout(adjustHeaderTop, 50);
+        }
+
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) { toggleMenu(); }
+                });
+            });
+        });
+
+        function adjustHeaderTop() {
+            const header = document.getElementById("header");
+            const promoBar = document.querySelector('.promo-bar');
+            const promoHeight = promoBar.offsetHeight;
+            if (window.scrollY > 50) { header.style.top = "0"; } else { header.style.top = promoHeight + "px"; }
+        }
+        window.addEventListener("scroll", adjustHeaderTop);
+        window.addEventListener("resize", adjustHeaderTop);
+
+        window.addEventListener('scroll', () => {
+            const widgets = document.querySelectorAll('.chat-widget, .book-float');
+            const backToTop = document.getElementById("backToTop");
+            const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+            
+            if (scrollPercent > 0.9) { 
+                widgets.forEach(w => w.classList.add('widget-hidden'));
+            } else {
+                widgets.forEach(w => w.classList.remove('widget-hidden'));
+            }
+
+            if (window.scrollY > 300) {
+                backToTop.style.display = "block";
+                if (scrollPercent > 0.95) {
+                    backToTop.classList.add('widget-hidden');
+                } else {
+                    backToTop.classList.remove('widget-hidden');
+                }
+            } else {
+                backToTop.style.display = "none";
+            }
+        });
+
+        function filterGallery(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.style.display = (cat === 'all' || item.classList.contains(cat)) ? 'block' : 'none';
+                item.classList.remove('aos-animate');
+                setTimeout(()=> item.classList.add('aos-animate'), 50);
+            });
+        }
+
+        function openModal() { document.getElementById('bookingModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
+        window.onclick = function(event) { if (event.target == document.getElementById('bookingModal')) closeModal(); }
+
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('b_name').value;
+            const service = document.getElementById('b_service').value;
+            const loc = document.getElementById('b_location').value;
+            const msg = `*New Land Inquiry via Website*%0A%0AName: ${name}%0AArea: ${service}%0AContact: ${loc}`;
+            window.open(`https://wa.me/94755229229?text=${msg}`, '_blank');
+            closeModal();
+        }
+
+        let isChatOpen = false;
+        function toggleChat() {
+            const win = document.getElementById('chatWindow');
+            if(!isChatOpen) {
+                win.style.display = 'flex';
+                if(document.getElementById('chatBody').innerHTML === '') {
+                    const greeting = currentLang === 'si' ? "ආයුබෝවන්! Jet Lands වෙත සාදරයෙන් පිළිගනිමු. ඔබට අවශ්‍ය ප්‍රදේශය කුමක්ද?" : "Hello! Welcome to Jet Lands. Which area are you looking for?";
+                    addBotMsg(greeting);
+                }
+            } else { win.style.display = 'none'; }
+            isChatOpen = !isChatOpen;
+        }
+
+        function handleKeyPress(e) { if(e.key === 'Enter') sendMessage(); }
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const txt = input.value.trim();
+            if(!txt) return;
+            addUserMsg(txt);
+            input.value = '';
+            setTimeout(() => {
+                let response = "";
+                const lower = txt.toLowerCase();
+                if(currentLang === 'en') {
+                    if(lower.includes('price') || lower.includes('cost')) response = "Prices vary by location (Makumbura, NSBM Zone, etc). Please use the 'Inquire Now' button for details.";
+                    else if(lower.includes('location')) response = "We are at 358, Maya MW, Makumbura, Pannipitiya.";
+                    else if(lower.includes('phone')) response = "Call us: 0755 229 229";
+                    else response = "Thanks! Please contact us on WhatsApp for more details.";
+                } else {
+                    if(lower.includes('මිල') || lower.includes('ගාස්තු')) response = "මිල ගණන් ප්‍රදේශය අනුව වෙනස් වේ. කරුණාකර විස්තර සඳහා පෝරමය පුරවන්න.";
+                    else if(lower.includes('ලිපිනය') || lower.includes('කොහෙද')) response = "අපගේ ලිපිනය: 358, මායා මාවත, මාකුඹුර, පන්නිපිටිය.";
+                    else if(lower.includes('දුරකථන')) response = "අමතන්න: 0755 229 229";
+                    else response = "ස්තූතියි! වැඩි විස්තර සඳහා WhatsApp හරහා අපව අමතන්න.";
+                }
+                addBotMsg(response);
+            }, 800);
+        }
+
+        function addUserMsg(text) { const div = document.createElement('div'); div.className = 'message user-msg'; div.innerText = text; const body = document.getElementById('chatBody'); body.appendChild(div); body.scrollTop = body.scrollHeight; }
+        function addBotMsg(text) { const div = document.createElement('div'); div.className = 'message bot-msg'; div.innerText = text; const body = document.getElementById('chatBody'); body.appendChild(div); body.scrollTop = body.scrollHeight; }
+		
+        const track = document.getElementById('sliderTrack');
+        const cards = document.querySelectorAll('.slide-card');
+        let currentIndex = 0;
+        let cardWidth = cards[0].offsetWidth;
+        let cardsToShow = window.innerWidth > 992 ? 3 : (window.innerWidth > 600 ? 2 : 1);
+        let maxIndex = cards.length - cardsToShow;
+        let designAutoPlay;
+
+        window.addEventListener('resize', () => {
+            cardWidth = cards[0].offsetWidth;
+            cardsToShow = window.innerWidth > 992 ? 3 : (window.innerWidth > 600 ? 2 : 1);
+            maxIndex = cards.length - cardsToShow;
+            updateSliderPosition();
+        });
+
+        function moveSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) { currentIndex = maxIndex; } else if (currentIndex > maxIndex) { currentIndex = 0; }
+            updateSliderPosition();
+            resetDesignTimer();
+        }
+
+        function updateSliderPosition() {
+            const translateX = -(currentIndex * (100 / cardsToShow));
+            track.style.transform = `translateX(${translateX}%)`;
+        }
+
+        function startDesignAutoPlay() { designAutoPlay = setInterval(() => { moveSlide(1); }, 3500); }
+        function resetDesignTimer() { clearInterval(designAutoPlay); startDesignAutoPlay(); }
+        startDesignAutoPlay();
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+        track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; clearInterval(designAutoPlay); });
+        track.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipe(); startDesignAutoPlay(); });
+        function handleSwipe() { if (touchEndX < touchStartX - 50) moveSlide(1); if (touchEndX > touchStartX + 50) moveSlide(-1); }
+	
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: "smooth" }); }
+
+        function submitWhatsappForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('w-name').value;
+            const phone = document.getElementById('w-phone').value;
+            const location = document.getElementById('w-location').value;
+            const service = document.getElementById('w-service').value;
+            const note = document.getElementById('w-message').value;
+            const message = `*🔔 NEW LAND INQUIRY*%0A__________________________%0A%0A👤 *Name:* ${name}%0A📞 *Phone:* ${phone}%0A📍 *Preferred Area:* ${location}%0A📏 *Perches:* ${service}%0A📝 *Note:* ${note}%0A__________________________%0A%0A*Please contact me regarding this.*`;
+            const url = `https://wa.me/94755229229?text=${message}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
