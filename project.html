@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jet Lands | Premium Project</title>
+    <title>Jet Lands | NSBM Premium Project</title>
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌳</text></svg>">
@@ -21,10 +21,10 @@
            1. VARIABLES & RESET
            ========================================= */
         :root {
-            --primary: #1a472a; /* Main Site Dark Green */
+            --primary: #1a472a; 
             --primary-light: #235c37;
             --primary-dark: #0f2c19;
-            --accent: #d1a128; /* Main Site Gold/Mustard */
+            --accent: #d1a128; 
             --accent-hover: #b58b20;
             --text-dark: #111827;
             --text-gray: #4b5563;
@@ -39,7 +39,7 @@
         
         html, body {
             scroll-behavior: smooth;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden; 
             width: 100%;
         }
         
@@ -109,6 +109,9 @@
         .btn-back:hover { background: var(--primary); transform: translateY(-2px); }
 
         .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             padding: 8px 20px;
             border: 2px solid var(--primary);
             border-radius: 50px;
@@ -147,8 +150,8 @@
         }
 
         .hero-text-side h1 {
-            font-size: 3rem;
-            line-height: 1.2;
+            font-size: 2.8rem;
+            line-height: 1.3;
             margin-bottom: 20px;
             text-align: left;
             font-weight: 700;
@@ -223,12 +226,12 @@
         .poster-slide.active { opacity: 1; z-index: 2; }
         .poster-slide img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
 
-        .poster-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 2; }
+        .poster-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 2; }
 
         .poster-content { position: relative; z-index: 3; text-align: center; padding: 0 20px; max-width: 900px; }
 
         .typing-text {
-            font-family: var(--font-en); color: var(--white); font-size: 2.5rem; font-weight: 700;
+            font-family: var(--font-en); color: var(--white); font-size: 2.2rem; font-weight: 700;
             text-shadow: 0 4px 15px rgba(0,0,0,0.6);
             border-right: 4px solid var(--accent); padding-right: 5px;
             display: inline-block; animation: blinkCursor 0.75s step-end infinite;
@@ -263,6 +266,7 @@
         }
 
         .feature-text { font-weight: 600; color: var(--primary); font-size: 1.1rem; }
+        .feature-sub { font-size: 0.85rem; color: var(--text-gray); margin-top: 5px; display: block; }
 
         /* =========================================
            7. PLOT SLIDER
@@ -288,7 +292,7 @@
         .center-btn { text-align: center; margin-top: 20px; }
 
         /* =========================================
-           8. TEXT BLOCKS & VIDEO
+           8. TEXT BLOCKS 
            ========================================= */
         .text-block {
             max-width: 900px; margin: 0 auto; background: var(--white);
@@ -298,9 +302,7 @@
 
         .text-block h2 { color: var(--primary); margin-bottom: 20px; font-size: 1.8rem; font-weight: 800; }
         .text-block p { text-align: justify; color: var(--text-gray); line-height: 1.8; }
-
-        .video-wrapper { width: 100%; background: #000; }
-        .video-wrapper video { width: 100%; max-height: 80vh; display: block; object-fit: cover; }
+        .highlight-text { background: rgba(209, 161, 40, 0.15); padding: 5px 10px; border-radius: 5px; font-weight: 700; color: var(--primary-dark); }
 
         /* =========================================
            9. GALLERY (MASONRY)
@@ -342,7 +344,7 @@
             .masonry { column-count: 2; }
             .text-block { padding: 30px; }
             .poster-section { height: 50vh; min-height: 300px; }
-            .typing-text { font-size: 1.8rem; }
+            .typing-text { font-size: 1.6rem; }
         }
 
         @media (max-width: 480px) {
@@ -364,27 +366,27 @@
             
             .split-hero { min-height: auto; }
             .hero-text-side { padding: 40px 15px; }
-            .hero-text-side h1 { font-size: 1.8rem; }
-            .hero-text-side p { font-size: 1rem; }
+            .hero-text-side h1 { font-size: 1.6rem; }
+            .hero-text-side p { font-size: 0.95rem; }
             .hero-image-side { height: 40vh; }
             .btn-main { width: 100%; justify-content: center; font-size: 0.9rem; padding: 12px; }
 
             .poster-section { height: 40vh; min-height: 250px; }
-            .typing-text { font-size: 1.3rem; border-right-width: 3px; }
+            .typing-text { font-size: 1.2rem; border-right-width: 3px; }
 
             .section-padding { padding: 50px 10px; }
-            .section-header h2 { font-size: 1.6rem; }
+            .section-header h2 { font-size: 1.5rem; }
             
             .feature-grid { gap: 15px; }
             .feature-card { width: 100%; padding: 20px 15px; }
 
             .text-block { padding: 20px 15px; border-left-width: 3px; border-radius: 10px; }
-            .text-block h2 { font-size: 1.4rem; }
+            .text-block h2 { font-size: 1.3rem; }
 
             .scroll-card { flex: 0 0 100%; }
 
             .cta-section { padding: 50px 10px; }
-            .cta-section h2 { font-size: 1.5rem; }
+            .cta-section h2 { font-size: 1.4rem; }
             .phone-display { font-size: 1.8rem; word-break: break-all; }
         }
     </style>
@@ -397,39 +399,36 @@
             <i class="fas fa-tree"></i> <span>JET LANDS</span>
         </a>
         <div class="nav-right">
-            <!-- BACK BUTTON -->
+            <!-- BACK BUTTON TO MAIN SITE -->
             <a href="index.html" class="btn-back">
                 <i class="fas fa-arrow-left"></i>
                 <span class="lang-en">Back to Home</span>
                 <span class="lang-si">ප්‍රධාන පිටුවට</span>
             </a>
             
-            <!-- LANGUAGE TOGGLE -->
+            <!-- FIXED LANGUAGE TOGGLE BUTTON -->
             <button class="lang-btn" onclick="toggleLanguage()">
                 <i class="fas fa-globe"></i>
-                <span class="lang-en">සිංහල</span>
-                <span class="lang-si">English</span>
+                <span id="langText">සිංහල</span>
             </button>
         </div>
     </nav>
 
     <!-- SPLIT HERO SECTION -->
     <section class="split-hero">
-        <!-- Left Side: Content -->
         <div class="hero-text-side">
             <div class="lang-en">
-                <h1>Do you want to own land in highly residential prime locations?</h1>
-                <p>Don't think twice. Reserve your premium land today before prices rise.</p>
+                <h1>Looking for the perfect land near NSBM Green University?</h1>
+                <p>Located just less than 1km away. Build your dream home or a highly profitable student boarding house. Reserve your premium plot today!</p>
                 <a href="#cta" class="btn-main"><i class="fas fa-map-marked-alt"></i> Reserve Today</a>
             </div>
             <div class="lang-si">
-                <h1>ඉහළම වටිනාකමක් ඇති ප්‍රදේශයකින් ඉඩමක් ගන්න ඔයත් කැමතිද?</h1>
-                <p>දෙපාරක් හිතන්න එපා. මිල ඉහළ යනකන් බලාගෙන ඉන්නේ නැතිව, ඔබගේ අගනා ඉඩම අදම වෙන්කරවාගන්න.</p>
+                <h1>NSBM හරිත සරසවියට පෙනෙන දුරින් ඉඩමක් ගන්න කැමතිද?</h1>
+                <p>සරසවියට 1km කටත් අඩු දුරකින්. පදිංචියට හෝ බෝඩිමක් සාදා ඉහළ මාසික ආදායමක් ලබාගැනීමට කදිමයි. අදම වෙන්කරවාගන්න.</p>
                 <a href="#cta" class="btn-main"><i class="fas fa-map-marked-alt"></i> අදම වෙන්කරවාගන්න</a>
             </div>
         </div>
 
-        <!-- Right Side: Auto Slider -->
         <div class="hero-image-side">
             <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="split-slide-img active" alt="Slider 1">
             <img src="https://images.unsplash.com/photo-1513880989635-6eb491ce7f5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="split-slide-img" alt="Slider 2">
@@ -439,17 +438,17 @@
 
     <!-- AUTO IMAGES WITH TYPING TEXT -->
     <section class="poster-section">
-        <div class="poster-slide active" data-text="A premium land just steps away from prime facilities.">
+        <div class="poster-slide active" data-en="Just less than 1km to NSBM Green University." data-si="NSBM හරිත සරසවියට 1km කටත් වඩා ආසන්නයෙන්.">
             <img src="https://images.unsplash.com/photo-1508344928928-7165b67de128?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Premium Land">
             <div class="poster-overlay"></div>
             <div class="poster-content"><h2 class="typing-text"></h2></div>
         </div>
-        <div class="poster-slide" data-text="The perfect location for living or investment.">
+        <div class="poster-slide" data-en="Ideal for high-income boarding houses." data-si="ඉහළ ආදායමක් ලබන බෝඩිම් සඳහා කදිම ආයෝජනයක්.">
             <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Investment Land">
             <div class="poster-overlay"></div>
             <div class="poster-content"><h2 class="typing-text"></h2></div>
         </div>
-        <div class="poster-slide" data-text="100% Clear deeds with easy bank loan facilities.">
+        <div class="poster-slide" data-en="100% Clear deeds with easy payment plans." data-si="පහසු ගෙවීමේ ක්‍රම සහ 100% ක් නිරවුල් ඔප්පු.">
             <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Clear Deeds">
             <div class="poster-overlay"></div>
             <div class="poster-content"><h2 class="typing-text"></h2></div>
@@ -460,47 +459,83 @@
     <section class="section-padding" style="background: #fff;">
         <div class="section-header">
             <div class="lang-en">
-                <h2>Premium Residential Plots</h2>
+                <h2>Premium Plots Near NSBM</h2>
                 <div class="line"></div>
-                <p>Bordering a beautiful natural environment. With all facilities.</p>
+                <p>Fully developed land with all modern amenities included.</p>
             </div>
             <div class="lang-si">
-                <h2>සුපිරි නේවාසික බිම් කැබලි</h2>
+                <h2>NSBM අසලින්ම අගනා බිම් කොටස්</h2>
                 <div class="line"></div>
-                <p>සුන්දර ස්වභාවික පරිසරයකට මායිම් වුණු සියළු පහසුකම් සහිතයි.</p>
+                <p>සියලු පහසුකම් වලින් සමන්විතව සංවර්ධනය කරන ලද ඉඩමකි.</p>
             </div>
         </div>
 
         <div class="feature-grid">
             <div class="feature-card">
+                <div class="icon-check"><i class="fas fa-graduation-cap"></i></div>
+                <div class="lang-en">
+                    <div class="feature-text">< 1km to NSBM</div>
+                    <span class="feature-sub">Walking distance to University</span>
+                </div>
+                <div class="lang-si">
+                    <div class="feature-text">NSBM එකට 1km ට අඩුයි</div>
+                    <span class="feature-sub">සරසවියට පයින් යන දුරින්</span>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="icon-check"><i class="fas fa-building"></i></div>
+                <div class="lang-en">
+                    <div class="feature-text">Boarding Potential</div>
+                    <span class="feature-sub">High rental demand area</span>
+                </div>
+                <div class="lang-si">
+                    <div class="feature-text">බෝඩිම් සඳහා කදිමයි</div>
+                    <span class="feature-sub">ඉහළ කුලී ආදායමක් ලබාගත හැක</span>
+                </div>
+            </div>
+            <div class="feature-card">
                 <div class="icon-check"><i class="fas fa-faucet"></i></div>
-                <div class="lang-en feature-text">Piped Water</div>
-                <div class="lang-si feature-text">නළ ජලය</div>
+                <div class="lang-en">
+                    <div class="feature-text">Piped Water</div>
+                    <span class="feature-sub">Uninterrupted supply</span>
+                </div>
+                <div class="lang-si">
+                    <div class="feature-text">නළ ජලය</div>
+                    <span class="feature-sub">අඛණ්ඩ ජල සැපයුම</span>
+                </div>
             </div>
             <div class="feature-card">
                 <div class="icon-check"><i class="fas fa-bolt"></i></div>
-                <div class="lang-en feature-text">3-Phase Electricity</div>
-                <div class="lang-si feature-text">තෙකලා විදුලිය</div>
+                <div class="lang-en">
+                    <div class="feature-text">3-Phase Electricity</div>
+                    <span class="feature-sub">Ready to connect</span>
+                </div>
+                <div class="lang-si">
+                    <div class="feature-text">තෙකලා විදුලිය</div>
+                    <span class="feature-sub">සම්බන්ධ කිරීමට සූදානම්</span>
+                </div>
             </div>
             <div class="feature-card">
                 <div class="icon-check"><i class="fas fa-file-signature"></i></div>
-                <div class="lang-en feature-text">Clear Deeds</div>
-                <div class="lang-si feature-text">නිරවුල් ඔප්පු</div>
-            </div>
-            <div class="feature-card">
-                <div class="icon-check"><i class="fas fa-leaf"></i></div>
-                <div class="lang-en feature-text">Peaceful Environment</div>
-                <div class="lang-si feature-text">සාමකාමී වටපිටාව</div>
-            </div>
-            <div class="feature-card">
-                <div class="icon-check"><i class="fas fa-hand-holding-usd"></i></div>
-                <div class="lang-en feature-text">Easy Bank Loans</div>
-                <div class="lang-si feature-text">පහසු බැංකු ණය</div>
+                <div class="lang-en">
+                    <div class="feature-text">Clear Deeds</div>
+                    <span class="feature-sub">Attorney verified</span>
+                </div>
+                <div class="lang-si">
+                    <div class="feature-text">නිරවුල් ඔප්පු</div>
+                    <span class="feature-sub">නීතීඥ තහවුරුව සහිතයි</span>
+                </div>
             </div>
             <div class="feature-card">
                 <div class="icon-check"><i class="fas fa-road"></i></div>
-                <div class="lang-en feature-text">Carpeted Roads</div>
-                <div class="lang-si feature-text">පුළුල් කාපට් මාර්ග</div>
+                <div class="lang-en">
+                    <div class="feature-text">Carpeted Roads</div>
+                    <span class="feature-sub">Wide internal access roads</span>
+                </div>
+                <div class="lang-si">
+                    <div class="feature-text">කාපට් මාර්ග</div>
+                    <span class="feature-sub">පුළුල් ඇතුලත මාර්ග පද්ධතිය</span>
+                </div>
             </div>
         </div>
     </section>
@@ -509,21 +544,21 @@
     <section class="section-padding">
         <div class="text-block">
             <div class="lang-en">
-                <h2>A space for you in the best place for living and investment...</h2>
-                <p>These prime locations can be mentioned as areas that are undergoing very rapid development in Sri Lanka. A number of massive state and private economic projects, including housing schemes, are already underway. Signs are already appearing that in the near future, it will become an economic and social hub. <strong> Did you know that with the attention of local and foreign investors, land prices have risen rapidly within the last 5 years?</strong> Without waiting any longer in the face of rising prices, reserve your land today. This is the best time for investment.</p>
+                <h2>Why is this the perfect investment?</h2>
+                <p>The area surrounding <span class="highlight-text">NSBM Green University and Mahinda Rajapaksha College</span> is currently experiencing rapid development. With thousands of students enrolling every year, there is a massive shortage of quality accommodation. Buying a plot here and building a boarding house guarantees a continuous and high monthly rental income. <br><br> Moreover, as part of the Homagama Tech City development plan, land values in this exact location are skyrocketing. Reserving a plot today secures your financial future effortlessly.</p>
             </div>
             <div class="lang-si">
-                <h2>පදිංචියට, ආයෝජනයට හොඳම තැනකින් ඔබටත් ඉඩක්...</h2>
-                <p>ශ්‍රී ලංකාව තුල ඉතා සීග්‍රයෙන් සංවර්ධනයට භාජනය වන ප්‍රදේශයක් ලෙස මෙම කලාපය හඳුන්වා දිය හැකිය. මේ වන විටත් නිවාස යෝජනා ක්‍රම ඇතුළු රාජ්‍ය සහ පුද්ගලික දැවැන්ත ආර්ථිකමය ව්‍යාපෘති ගණනාවක් මෙම ප්‍රදේශයේ ක්‍රියාත්මක වෙමින් පවතී. නුදුරු අනාගතය තුල ප්‍රධාන ආර්ථික, සමාජීය මරමස්ථානයක් වීමේ ඉඟි මේ වන විටත් පහළවෙමින් ඇත. <strong> දෙස් විදෙස් ආයෝජකයන්ගේ අවධානය යොමුවීමත් සමඟ පසුගිය වසර 5 ඇතුළත ඉඩම් වල මිල ඉතා සීග්‍රයෙන් ඉහළ ගිය බව ඔබ දන්නවාද? </strong> දිනෙන් දින ඉහල යන මිලගණන් හමුවේ තවත් බලා නොසිට ඔබේ ඉඩම අදම වෙන්කරවා ගන්න. මේ ආයෝජනයට හොඳම කාලයයි.</p>
+                <h2>මෙය කදිම ආයෝජනයක් වන්නේ ඇයි?</h2>
+                <p><span class="highlight-text">NSBM හරිත සරසවිය සහ මහින්ද රාජපක්ෂ විද්‍යාලය</span> ආශ්‍රිත ප්‍රදේශය මේ වන විටත් ඉතා සීග්‍රයෙන් දියුණු වෙමින් පවතී. දහස් ගණනක් සිසුන් වාර්ෂිකව මෙහි පැමිණෙන බැවින් නේවාසිකාගාර (Boarding Houses) සඳහා ඇත්තේ ඉතා විශාල ඉල්ලුමකි. මෙතැනින් ඉඩමක් ගෙන බෝඩිමක් සෑදීමෙන් ඔබට කිසිදු කරදරයකින් තොරව ඉහළ මාසික ආදායමක් ලබාගත හැක. <br><br> තවද, හෝමාගම ටෙක් සිටි ව්‍යාපෘතිය හේතුවෙන් මෙම ප්‍රදේශයේ ඉඩම් මිල දිනෙන් දින ශීඝ්‍රයෙන් ඉහළ යයි. අදම ඉඩමක් වෙන්කර ගැනීම ඔබේ අනාගතය වෙනුවෙන් කරන විශිෂ්ටතම ආයෝජනයයි.</p>
             </div>
         </div>
     </section>
 
     <!-- PLOT SLIDER -->
-    <section class="section-padding slider-container">
+    <section class="section-padding slider-container" style="background: #fff;">
         <div class="section-header">
-            <h2 class="lang-en">Available Plots</h2>
-            <h2 class="lang-si">ඉඩම් කොටස්</h2>
+            <h2 class="lang-en">Project Progress</h2>
+            <h2 class="lang-si">ව්‍යාපෘතියේ වත්මන් තත්වය</h2>
             <div class="line"></div>
         </div>
         <div class="scrolling-wrapper" id="scrollContainer">
@@ -536,22 +571,8 @@
             <button class="btn-main" onclick="document.getElementById('gallery').scrollIntoView();">
                 <i class="fas fa-images"></i>
                 <span class="lang-en">View Gallery</span>
-                <span class="lang-si">සියල්ල බලන්න</span>
+                <span class="lang-si">ඡායාරූප බලන්න</span>
             </button>
-        </div>
-    </section>
-
-    <!-- LIFESTYLE & ROI -->
-    <section class="section-padding" style="background: var(--white);">
-        <div class="text-block" style="background: var(--bg-light); border-left-color: var(--primary);">
-            <div class="lang-en">
-                <h2>The best way to invest your money safely.</h2>
-                <p>The value of money decreases over time. But the value of land you buy increases day by day. The value of this prime land will be unimaginable to you in the next 5 to 10 years. Are you a leading businessman? Or a high-level professional like a doctor, lawyer, or engineer? This is the best place to build your dream home on earth.</p>
-            </div>
-            <div class="lang-si">
-                <h2>ඔබේ මුදල් සුරක්ෂිතව ආයෝජනයට හොඳම මාර්ගය.</h2>
-                <p>කාලයත් එක්ක සල්ලි වල වටිනාකම අඩුවෙනවා. ඒත් ඔබ ගන්න ඉඩමක වටිනාකම දවසින් දවස වැඩිවෙනවා. මෙම අගනා ඉඩමේ වටිනාකම තව අවුරුදු 5 කින් 10 කින් ඔබට සිතාගන්නවත් බැරිවෙයි. ඔබ ප්‍රමුඛපෙල ව්‍යාපාරිකයෙක්ද? නැතිනම් වෛද්‍ය, නීතිඥ, ඉංජිනේරු වැනි ඉහළපෙළ වෘත්තීයවේදියෙක්ද? ඔබේ සොඳුරු කැදැල්ල මිහිතලය මත ගොඩනගන්නට මේ හොඳම තැනයි.</p>
-            </div>
         </div>
     </section>
 
@@ -575,11 +596,11 @@
     <section id="cta" class="cta-section">
         <div class="lang-en">
             <h2>Be a proud landowner today.</h2>
-            <p>Reserve your premium land today. Call now.</p>
+            <p>Plots are selling fast! Secure your NSBM adjacent land today. Call now.</p>
         </div>
         <div class="lang-si">
             <h2>අදම අභිමානවත් ඉඩම් හිමියෙකු වන්න.</h2>
-            <p>ඔබේ ඉඩම අදම වෙන්කරවාගන්න. දැන්ම අමතන්න.</p>
+            <p>බිම් කොටස් ඉතා වේගයෙන් අලෙවි වේ! NSBM අසලින් ඔබේ ඉඩම අදම වෙන්කරගන්න. දැන්ම අමතන්න.</p>
         </div>
         <a href="tel:0755229229" class="phone-display">0755 229 229</a>
     </section>
@@ -594,9 +615,28 @@
 
     <!-- SCRIPTS -->
     <script>
-        // Language Toggle Logic
+        // Corrected Language Toggle Logic
+        let isSinhala = false;
         function toggleLanguage() {
-            document.body.classList.toggle('sinhala-mode');
+            isSinhala = !isSinhala;
+            if (isSinhala) {
+                document.body.classList.add('sinhala-mode');
+                document.getElementById('langText').innerText = "English";
+            } else {
+                document.body.classList.remove('sinhala-mode');
+                document.getElementById('langText').innerText = "සිංහල";
+            }
+            
+            // Restart typing effect in the correct language
+            const activeSlide = document.querySelector('.poster-slide.active');
+            if (activeSlide) {
+                clearTimeout(typingTimeout);
+                const textContainer = activeSlide.querySelector('.typing-text');
+                textContainer.innerHTML = "";
+                const langAttr = isSinhala ? 'data-si' : 'data-en';
+                const textToType = activeSlide.getAttribute(langAttr);
+                typeWriter(textContainer, textToType);
+            }
         }
 
         // Auto Slider with Typing Effect
@@ -608,7 +648,7 @@
         function typeWriter(element, text, i = 0) {
             if (i < text.length) {
                 element.innerHTML += text.charAt(i);
-                typingTimeout = setTimeout(() => typeWriter(element, text, i + 1), 60);
+                typingTimeout = setTimeout(() => typeWriter(element, text, i + 1), 50); // Faster typing speed
             }
         }
 
@@ -623,7 +663,9 @@
             nextSlide.classList.add('active');
             
             const textContainer = nextSlide.querySelector('.typing-text');
-            const textToType = nextSlide.getAttribute('data-text');
+            // Check active language for typing text
+            const langAttr = document.body.classList.contains('sinhala-mode') ? 'data-si' : 'data-en';
+            const textToType = nextSlide.getAttribute(langAttr);
             
             clearTimeout(typingTimeout);
             textContainer.innerHTML = ""; 
@@ -633,7 +675,34 @@
         window.addEventListener('load', () => {
              const firstSlide = slides[0];
              const textContainer = firstSlide.querySelector('.typing-text');
-             const textToType = firstSlide.getAttribute('data-text');
+             const textToType = firstSlide.getAttribute('data-en'); // Default to English
              typeWriter(textContainer, textToType);
              
              slideInterval = setInterval(changeSlide, 5000);
+        });
+
+        // Horizontal Scroll Slider
+        const slider = document.getElementById('scrollContainer');
+        function autoScrollSlider() {
+            if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                slider.scrollBy({ left: 340, behavior: 'smooth' });
+            }
+        }
+        setInterval(autoScrollSlider, 3000);
+
+        // Split Hero Slider
+        const splitSlides = document.querySelectorAll('.split-slide-img');
+        let splitIndex = 0;
+
+        if (splitSlides.length > 0) {
+            setInterval(() => {
+                splitSlides[splitIndex].classList.remove('active');
+                splitIndex = (splitIndex + 1) % splitSlides.length;
+                splitSlides[splitIndex].classList.add('active');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
